@@ -42,7 +42,11 @@ $container['parser'] = function () {
 };
 
 $container['generator'] = function () {
-    return new \KiH\Generator('https://s11v.tk/kih');
+    return new \KiH\Generator(
+        'https://s11v.tk/kih',
+        'Кремов и Хрусталёв',
+        'http://www.radiorecord.ru/i/img/rr-logo-podcast.png'
+    );
 };
 
 $app->get('/rss.xml', function (Request $request, Response $response) {
@@ -55,7 +59,9 @@ $app->get('/rss.xml', function (Request $request, Response $response) {
     $response = $response
         ->withHeader('Content-Type', 'text/xml; charset=UTF-8');
 
-    $response->getBody()->write($rss);
+    $response->getBody()->write(
+        $rss->saveXML()
+    );
 
     return $response;
 });

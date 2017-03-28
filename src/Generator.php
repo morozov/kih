@@ -4,54 +4,92 @@ declare(strict_types=1);
 
 namespace KiH;
 
+use DOMDocument;
+use DOMElement;
+
 final class Generator
 {
-    public function __construct(string $namespace)
+    private $baseUrl;
+    private $title;
+    private $logoUrl;
+
+    public function __construct($baseUri, $title, $logoUrl)
     {
-        $this->namespace = $namespace;
+        $this->baseUrl = $baseUri;
+        $this->title = $title;
+        $this->logoUrl = $logoUrl;
     }
 
-    public function generate(array $files) : string
+    public function generate(array $files) : DOMDocument
     {
-        $contents = '<rss xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" version="2.0">
-    <channel>
-        <title>Кремов и Хрусталёв</title>
-        <link>' . $this->encode($this->url('/')) . '</link>
-        <itunes:image href="http://www.radiorecord.ru/i/img/rr-logo-podcast.png"/>
-';
+        $document = new DOMDocument('1.0', 'UTF-8');
+        $rss = $document->createElement('rss');
+        $rss->setAttribute('version', '2.0');
+        $document->appendChild($rss);
+
+        $document->createAttributeNS(
+            'http://www.itunes.com/dtds/podcast-1.0.dtd',
+            'itunes:attr'
+        );
+
+        $channel = $document->createElement('channel');
+        $rss->appendChild($channel);
+
+        $title = $document->createElement('title');
+        $title->appendChild(
+            $document->createTextNode($this->title)
+        );
+        $channel->appendChild($title);
+
+        $link = $document->createElement('link');
+        $link->appendChild(
+            $document->createTextNode($this->baseUrl . '/')
+        );
+        $channel->appendChild($link);
+
+        $image = $document->createElement('itunes:image');
+        $image->setAttribute('href', $this->logoUrl);
+        $channel->appendChild($image);
 
         foreach ($files as $file) {
-            $contents .= '        <item>
-            <title>' . $this->encode($file['audio']['title']) . '</title>
-            <pubDate>' . $this->encode($file['createdDateTime']->format('r')). '</pubDate>
-            <guid isPermaLink="false">' . $this->encode($file['webUrl']) . '</guid>
-            <enclosure
-                url="' . $this->encode($this->url('/media/' . rawurlencode($file['id']))) . '.mp3"
-                length="' . $this->encode($file['audio']['duration']) . '"
-                type="' . $this->encode($file['file']['mimeType']) . '"
-            />
-        </item>
-';
+            $channel->appendChild(
+                $this->generateItem($document, $file)
+            );
         }
 
-        $contents .= '    </channel>
-</rss>
-';
-
-        return $contents;
+        return $document;
     }
 
-    private function encode($value)
+    private function generateItem(DOMDocument $document, array $file) : DOMElement
     {
-        if (!is_string($value)) {
-            return $value;
-        }
+        $item = $document->createElement('item');
 
-        return htmlspecialchars($value, ENT_COMPAT, 'UTF-8');
-    }
+        $title = $document->createElement('title');
+        $title->appendChild(
+            $document->createTextNode($file['audio']['title'])
+        );
+        $item->appendChild($title);
 
-    private function url($url)
-    {
-        return $this->namespace . $url;
+        $pubDate = $document->createElement('pubDate');
+        $pubDate->appendChild(
+            $document->createTextNode($file['createdDateTime']->format('r'))
+        );
+        $item->appendChild($pubDate);
+
+        $guid = $document->createElement('guid');
+        $guid->setAttribute('isPermaLink', 'false');
+        $guid->appendChild(
+            $document->createTextNode($file['webUrl'])
+        );
+        $item->appendChild($guid);
+
+        $enclosure = $document->createElement('enclosure');
+        $enclosure->setAttribute('url', $this->baseUrl . '/media/'
+            . rawurlencode($file['id'] . '.mp3'));
+        $enclosure->setAttribute('length', (string) $file['audio']['duration']);
+        $enclosure->setAttribute('type', $file['file']['mimeType']);
+        $item->appendChild($enclosure);
+
+        return $item;
     }
 }
