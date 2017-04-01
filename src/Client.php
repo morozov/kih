@@ -6,6 +6,10 @@ namespace KiH;
 
 use GuzzleHttp\Client as HttpClient;
 use Psr\Http\Message\StreamInterface;
+use function array_map;
+use function array_merge;
+use function http_build_query;
+use function implode;
 
 final class Client
 {
@@ -25,28 +29,35 @@ final class Client
 
     public function getFolder() : StreamInterface
     {
-        $url = self::API . '/shares/u!' . base64_encode($this->share) . '/root/children?'
-            . http_build_query([
-                'select' => implode(',', [
-                    'audio',
-                    'createdDateTime',
-                    'file',
-                    'id',
-                    'size',
-                    'webUrl',
-                ]),
-                'orderby' => 'lastModifiedDateTime desc',
-                'top' => 10,
-            ]);
-
-        return $this->client
-            ->request('GET', $url)
-            ->getBody();
+        return $this->request(['root', 'children'], [
+            'select' => implode(',', [
+                'audio',
+                'createdDateTime',
+                'file',
+                'id',
+                'size',
+                'webUrl',
+            ]),
+            'orderby' => 'lastModifiedDateTime desc',
+            'top' => 10,
+        ]);
     }
 
     public function getItem(string $id) : StreamInterface
     {
-        $url = self::API . '/shares/u!' . base64_encode($this->share) . '/items/' . rawurlencode($id);
+        return $this->request(['items', $id]);
+    }
+
+    private function request(array $path, array $query = []) : StreamInterface
+    {
+        $url = self::API . '/' . implode('/', array_map('rawurlencode', array_merge([
+            'shares',
+            'u!' . base64_encode($this->share),
+        ], $path)));
+
+        if ($query) {
+            $url .= '?' . http_build_query($query);
+        }
 
         return $this->client
             ->request('GET', $url)

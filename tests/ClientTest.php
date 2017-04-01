@@ -22,7 +22,7 @@ class ClientTest extends TestCase
             $this->once()
         )
             ->method('request')
-            ->with('GET', 'https://api.onedrive.com/v1.0/shares/u!aHR0cDovL2V4YW1wbGUuY29t/root/children?select=audio%2CcreatedDateTime%2Cfile%2Cid%2Csize%2CwebUrl&orderby=lastModifiedDateTime+desc&top=10')
+            ->with('GET', 'https://api.onedrive.com/v1.0/shares/u%21aHR0cDovL2V4YW1wbGUuY29t/root/children?select=audio%2CcreatedDateTime%2Cfile%2Cid%2Csize%2CwebUrl&orderby=lastModifiedDateTime+desc&top=10')
             ->willReturn($this->createConfiguredMock(MessageInterface::class, [
                 'getBody' => $this->createMock(StreamInterface::class)
             ]));
