@@ -3,21 +3,19 @@
 use PHPUnit\Framework\TestCase;
 
 namespace PHPSTORM_META {
-    $STATIC_METHOD_TYPES = [
-        TestCase::createConfiguredMock('') => [
-            '' == '@|PHPUnit_Framework_MockObject_MockObject',
-        ],
-        TestCase::createMock('') => [
-            '' == '@|PHPUnit_Framework_MockObject_MockObject',
-        ],
-        TestCase::createPartialMock('') => [
-            '' == '@|PHPUnit_Framework_MockObject_MockObject',
-        ],
-        TestCase::getMock('') => [
-            '' == '@|PHPUnit_Framework_MockObject_MockObject',
-        ],
-        TestCase::getMockForAbstractClass('') => [
-            '' == '@|PHPUnit_Framework_MockObject_MockObject',
-        ],
-    ];
+    override(TestCase::createConfiguredMock(0), map([
+        '' => '@|PHPUnit_Framework_MockObject_MockObject',
+    ]));
+    override(TestCase::createMock(0), map([
+        '' => '@|PHPUnit_Framework_MockObject_MockObject',
+    ]));
+    override(TestCase::createPartialMock(0), map([
+        '' => '@|PHPUnit_Framework_MockObject_MockObject',
+    ]));
+    override(TestCase::getMock(0), map([
+        '' => '@|PHPUnit_Framework_MockObject_MockObject',
+    ]));
+    override(TestCase::getMockForAbstractClass(0), map([
+        '' => '@|PHPUnit_Framework_MockObject_MockObject',
+    ]));
 }
