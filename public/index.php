@@ -7,9 +7,14 @@ use \Psr\Http\Message\ResponseInterface as Response;
 use \Slim\App;
 
 if (php_sapi_name() == 'cli-server') {
-    $info = parse_url($_SERVER['REQUEST_URI']);
-    if (file_exists(__DIR__ . $info['path'])) {
-        return false;
+    $path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+
+    if ($path !== '/') {
+        $path = __DIR__ . $path;
+
+        if ($path !== __FILE__ && file_exists($path)) {
+            return false;
+        }
     }
 
     // @link http://stackoverflow.com/questions/24336725/slim-framework-cannot-interpret-routes-with-dot
@@ -23,6 +28,8 @@ $app = new App([
         'displayErrorDetails' => true,
     ],
 ]);
+
+$baseUri = 'https://s11v.tk/kih';
 
 $container = $app->getContainer();
 $container['client'] = function () {
@@ -41,14 +48,17 @@ $container['parser'] = function () {
     return new \KiH\Parser();
 };
 
-$container['generator'] = function () {
+$container['generator'] = function () use ($baseUri) {
     return new \KiH\Generator(
-        'https://s11v.tk/kih',
+        $baseUri,
         'Кремов и Хрусталёв',
         'http://www.radiorecord.ru/i/img/rr-logo-podcast.png'
     );
 };
 
+$app->get('/', function (Request $request, Response $response) use ($baseUri) {
+    return $response->withHeader('Location', $baseUri . '/rss.xml');
+});
 $app->get('/rss.xml', function (Request $request, Response $response) {
     $rss = $this->generator->generate(
         $this->parser->parseFolder(
