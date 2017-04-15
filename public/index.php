@@ -2,9 +2,14 @@
 
 declare(strict_types=1);
 
-use \Psr\Http\Message\ServerRequestInterface as Request;
-use \Psr\Http\Message\ResponseInterface as Response;
-use \Slim\App;
+use KiH\Client;
+use KiH\Parser;
+use KiH\Generator;
+use KiH\App\FeedAction;
+use KiH\App\IndexAction;
+use KiH\App\MediaAction;
+use Psr\Container\ContainerInterface as Container;
+use Slim\App;
 
 if (php_sapi_name() == 'cli-server') {
     $path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
@@ -32,7 +37,8 @@ $app = new App([
 $baseUri = 'https://s11v.tk/kih';
 
 $container = $app->getContainer();
-$container['client'] = function () {
+
+$container[Client::class] = function () {
     return new \KiH\Client(
         new \GuzzleHttp\Client(),
         'https://onedrive.live.com/redir.aspx?' . http_build_query([
@@ -44,45 +50,38 @@ $container['client'] = function () {
     );
 };
 
-$container['parser'] = function () {
-    return new \KiH\Parser();
+$container[Parser::class] = function () {
+    return new Parser();
 };
 
-$container['generator'] = function () use ($baseUri) {
-    return new \KiH\Generator(
+$container[Generator::class] = function () use ($baseUri) {
+    return new Generator(
         $baseUri,
         'Кремов и Хрусталёв',
         'http://www.radiorecord.ru/i/img/rr-logo-podcast.png'
     );
 };
 
-$app->get('/', function (Request $request, Response $response) use ($baseUri) {
-    return $response->withHeader('Location', $baseUri . '/rss.xml');
-});
-$app->get('/rss.xml', function (Request $request, Response $response) {
-    $rss = $this->generator->generate(
-        $this->parser->parseFolder(
-            (string) $this->client->getFolder()
-        )
+$container[IndexAction::class] = function () use ($baseUri) {
+    return new IndexAction($baseUri);
+};
+
+$container[FeedAction::class] = function (Container $container) {
+    return new FeedAction(
+        $container->get(Client::class),
+        $container->get(Parser::class),
+        $container->get(Generator::class)
     );
+};
 
-    $response = $response
-        ->withHeader('Content-Type', 'text/xml; charset=UTF-8');
-
-    $response->getBody()->write(
-        $rss->saveXML()
+$container[MediaAction::class] = function (Container $container) {
+    return new MediaAction(
+        $container->get(Client::class),
+        $container->get(Parser::class)
     );
+};
 
-    return $response;
-});
-$app->get('/media/{id}.mp3', function (Request $request, Response $response) {
-    $item = $this->parser->parseItem(
-        (string) $this->client->getItem(
-            $request->getAttribute('id')
-        )
-    );
-
-    return $response
-        ->withHeader('Location', $item['@content.downloadUrl']);
-});
+$app->get('/', IndexAction::class);
+$app->get('/rss.xml', FeedAction::class);
+$app->get('/media/{id}.mp3', MediaAction::class);
 $app->run();
