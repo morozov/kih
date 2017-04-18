@@ -10,14 +10,12 @@ use DOMElement;
 final class Generator
 {
     private $baseUrl;
-    private $title;
-    private $logoUrl;
+    private $settings;
 
-    public function __construct($baseUri, $title, $logoUrl)
+    public function __construct($baseUri, array $settings)
     {
         $this->baseUrl = $baseUri;
-        $this->title = $title;
-        $this->logoUrl = $logoUrl;
+        $this->settings = $settings;
     }
 
     public function generate(array $files) : DOMDocument
@@ -37,7 +35,7 @@ final class Generator
 
         $title = $document->createElement('title');
         $title->appendChild(
-            $document->createTextNode($this->title)
+            $document->createTextNode($this->settings['title'])
         );
         $channel->appendChild($title);
 
@@ -48,7 +46,7 @@ final class Generator
         $channel->appendChild($link);
 
         $image = $document->createElement('itunes:image');
-        $image->setAttribute('href', $this->logoUrl);
+        $image->setAttribute('href', $this->settings['logo']);
         $channel->appendChild($image);
 
         foreach ($files as $file) {

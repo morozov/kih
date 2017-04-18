@@ -13,15 +13,17 @@ use function implode;
 
 final class Client
 {
-    private const API = 'https://api.onedrive.com/v1.0';
+    private const SHARE_API = 'https://onedrive.live.com/redir.aspx';
+
+    private const REST_API = 'https://api.onedrive.com/v1.0';
 
     /** @var HttpClient */
     private $client;
 
-    /** @var string */
+    /** @var array */
     private $share;
 
-    public function __construct(HttpClient $client, string $share)
+    public function __construct(HttpClient $client, array $share)
     {
         $this->client = $client;
         $this->share = $share;
@@ -50,9 +52,11 @@ final class Client
 
     private function request(array $path, array $query = []) : StreamInterface
     {
-        $url = self::API . '/' . implode('/', array_map('rawurlencode', array_merge([
+        $url = self::REST_API . '/' . implode('/', array_map('rawurlencode', array_merge([
             'shares',
-            'u!' . base64_encode($this->share),
+            'u!' . base64_encode(
+                self::SHARE_API . '?' . http_build_query($this->share)
+            ),
         ], $path)));
 
         if ($query) {

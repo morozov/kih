@@ -28,25 +28,16 @@ if (php_sapi_name() == 'cli-server') {
 
 require __DIR__ . '/../vendor/autoload.php';
 
-$app = new App([
-    'settings' => [
-        'displayErrorDetails' => true,
-    ],
-]);
+$app = new App(require __DIR__ . '/../etc/config.php');
 
 $baseUri = 'https://s11v.tk/kih';
 
 $container = $app->getContainer();
 
-$container[Client::class] = function () {
+$container[Client::class] = function (Container $container) {
     return new \KiH\Client(
         new \GuzzleHttp\Client(),
-        'https://onedrive.live.com/redir.aspx?' . http_build_query([
-            'cid' => '0b6c46ff0a72f8db',
-            'resid' => 'B6C46FF0A72F8DB!196510',
-            'parId' => 'B6C46FF0A72F8DB!116',
-            'authkey' => '!AB17lqCz5De3HEE',
-        ])
+        $container->get('settings')['share']
     );
 };
 
@@ -54,11 +45,10 @@ $container[Parser::class] = function () {
     return new Parser();
 };
 
-$container[Generator::class] = function () use ($baseUri) {
+$container[Generator::class] = function (Container $container) use ($baseUri) {
     return new Generator(
         $baseUri,
-        'Кремов и Хрусталёв',
-        'http://www.radiorecord.ru/i/img/rr-logo-podcast.png'
+        $container->get('settings')['feed']
     );
 };
 
