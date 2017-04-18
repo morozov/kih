@@ -6,15 +6,17 @@ namespace KiH;
 
 use DOMDocument;
 use DOMElement;
+use Slim\Interfaces\RouterInterface;
 
 final class Generator
 {
-    private $baseUrl;
+    /** @var RouterInterface $router */
+    private $router;
     private $settings;
 
-    public function __construct($baseUri, array $settings)
+    public function __construct(RouterInterface $router, array $settings)
     {
-        $this->baseUrl = $baseUri;
+        $this->router = $router;
         $this->settings = $settings;
     }
 
@@ -41,7 +43,9 @@ final class Generator
 
         $link = $document->createElement('link');
         $link->appendChild(
-            $document->createTextNode($this->baseUrl . '/')
+            $document->createTextNode(
+                $this->router->pathFor('index')
+            )
         );
         $channel->appendChild($link);
 
@@ -82,8 +86,10 @@ final class Generator
         $item->appendChild($guid);
 
         $enclosure = $document->createElement('enclosure');
-        $enclosure->setAttribute('url', $this->baseUrl . '/media/'
-            . rawurlencode($file['id'] . '.mp3'));
+        $enclosure->setAttribute(
+            'url',
+            $this->router->pathFor('media', $file)
+        );
         $enclosure->setAttribute('length', (string) $file['audio']['duration']);
         $enclosure->setAttribute('type', $file['file']['mimeType']);
         $item->appendChild($enclosure);

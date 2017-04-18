@@ -13,5 +13,6 @@ return [
             'title' => 'Кремов и Хрусталёв',
             'logo' => 'http://www.radiorecord.ru/i/img/rr-logo-podcast.png',
         ],
+        'baseUri' => 'https://s11v.tk/kih',
     ],
 ];

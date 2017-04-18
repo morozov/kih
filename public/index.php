@@ -8,6 +8,7 @@ use KiH\Generator;
 use KiH\App\FeedAction;
 use KiH\App\IndexAction;
 use KiH\App\MediaAction;
+use KiH\Middleware\BasePath;
 use Psr\Container\ContainerInterface as Container;
 use Slim\App;
 
@@ -30,8 +31,6 @@ require __DIR__ . '/../vendor/autoload.php';
 
 $app = new App(require __DIR__ . '/../etc/config.php');
 
-$baseUri = 'https://s11v.tk/kih';
-
 $container = $app->getContainer();
 
 $container[Client::class] = function (Container $container) {
@@ -45,15 +44,17 @@ $container[Parser::class] = function () {
     return new Parser();
 };
 
-$container[Generator::class] = function (Container $container) use ($baseUri) {
+$container[Generator::class] = function (Container $container) {
     return new Generator(
-        $baseUri,
+        $container->get('router'),
         $container->get('settings')['feed']
     );
 };
 
-$container[IndexAction::class] = function () use ($baseUri) {
-    return new IndexAction($baseUri);
+$container[IndexAction::class] = function (Container $container) {
+    return new IndexAction(
+        $container->get('router')
+    );
 };
 
 $container[FeedAction::class] = function (Container $container) {
@@ -71,7 +72,18 @@ $container[MediaAction::class] = function (Container $container) {
     );
 };
 
-$app->get('/', IndexAction::class);
-$app->get('/rss.xml', FeedAction::class);
-$app->get('/media/{id}.mp3', MediaAction::class);
-$app->run();
+$container[BasePath::class] = function (Container $container) {
+    return new BasePath(
+        $container->get('router'),
+        $container->get('settings')['baseUri']
+    );
+};
+
+$app->get('/', IndexAction::class)
+    ->setName('index');
+$app->get('/rss.xml', FeedAction::class)
+    ->setName('feed');
+$app->get('/media/{id}.mp3', MediaAction::class)
+    ->setName('media');
+$app->add($container->get(BasePath::class))
+    ->run();

@@ -6,19 +6,23 @@ namespace KiH\App;
 
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
+use Slim\Interfaces\RouterInterface;
 
 class IndexAction
 {
-    /** @var string */
-    private $baseUri;
+    /** @var RouterInterface */
+    private $router;
 
-    public function __construct(string $baseUri)
+    public function __construct(RouterInterface $router)
     {
-        $this->baseUri = $baseUri;
+        $this->router = $router;
     }
 
     public function __invoke(Request $request, Response $response)
     {
-        return $response->withHeader('Location', $this->baseUri . '/rss.xml');
+        return $response->withHeader(
+            'Location',
+            $this->router->pathFor('feed')
+        );
     }
 }
