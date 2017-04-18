@@ -2,9 +2,10 @@
 
 namespace KiH\Middleware;
 
-use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
+use Psr\Http\Message\ServerRequestInterface as Request;
 use Slim\Router;
+use function rtrim;
 
 class BasePath
 {
@@ -14,7 +15,7 @@ class BasePath
     /** @var string */
     private $baseUri;
 
-    public function __construct(Router $router, string $baseUri)
+    public function __construct(Router $router, ?string $baseUri)
     {
         $this->router = $router;
         $this->baseUri = $baseUri;
@@ -22,7 +23,13 @@ class BasePath
 
     public function __invoke(Request $request, Response $response, callable $next)
     {
-        $this->router->setBasePath($this->baseUri);
+        if ($this->baseUri) {
+            $basePath = $this->baseUri;
+        } else {
+            $basePath = rtrim($request->getUri()->withPath('/'), '/');
+        }
+
+        $this->router->setBasePath($basePath);
 
         return $next($request, $response);
     }
