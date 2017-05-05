@@ -7,4 +7,6 @@ install:
 test:
 	phpunit
 coverage:
-	phpunit --coverage-html=coverage && gnome-www-browser coverage/index.html
+	$(eval TMPDIR=$(shell mktemp -d))
+	phpunit --coverage-html=$(TMPDIR)
+	gnome-www-browser $(TMPDIR)/index.html
