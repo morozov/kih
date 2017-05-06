@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace KiH\App;
+namespace KiH\Action;
 
 use KiH\Client;
 use KiH\Generator;
@@ -10,7 +10,7 @@ use KiH\Parser;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
 
-class FeedAction
+class Feed
 {
     /** @var Client */
     private $client;

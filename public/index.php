@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
+use KiH\Action\Feed;
+use KiH\Action\Index;
+use KiH\Action\Media;
 use KiH\Client;
 use KiH\Parser;
 use KiH\Generator;
-use KiH\App\FeedAction;
-use KiH\App\IndexAction;
-use KiH\App\MediaAction;
 use KiH\Middleware\BasePath;
 use Psr\Container\ContainerInterface as Container;
 use Slim\App;
@@ -51,22 +51,22 @@ $container[Generator::class] = function (Container $container) {
     );
 };
 
-$container[IndexAction::class] = function (Container $container) {
-    return new IndexAction(
+$container[Index::class] = function (Container $container) {
+    return new Index(
         $container->get('router')
     );
 };
 
-$container[FeedAction::class] = function (Container $container) {
-    return new FeedAction(
+$container[Feed::class] = function (Container $container) {
+    return new Feed(
         $container->get(Client::class),
         $container->get(Parser::class),
         $container->get(Generator::class)
     );
 };
 
-$container[MediaAction::class] = function (Container $container) {
-    return new MediaAction(
+$container[Media::class] = function (Container $container) {
+    return new Media(
         $container->get(Client::class),
         $container->get(Parser::class)
     );
@@ -79,11 +79,11 @@ $container[BasePath::class] = function (Container $container) {
     );
 };
 
-$app->get('/', IndexAction::class)
+$app->get('/', Index::class)
     ->setName('index');
-$app->get('/rss.xml', FeedAction::class)
+$app->get('/rss.xml', Feed::class)
     ->setName('feed');
-$app->get('/media/{id}.mp3', MediaAction::class)
+$app->get('/media/{id}.mp3', Media::class)
     ->setName('media');
 $app->add($container->get(BasePath::class))
     ->run();

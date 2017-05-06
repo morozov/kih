@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace KiH\App;
+namespace KiH\Action;
 
 use KiH\Client;
 use KiH\Parser;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
 
-class MediaAction
+class Media
 {
     /** @var Client */
     private $client;
