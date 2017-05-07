@@ -5,13 +5,13 @@ declare(strict_types=1);
 namespace KiH\Tests;
 
 use GuzzleHttp\Client as HttpClient;
-use KiH\Client;
+use KiH\Client\OneDrive as Client;
 use KiH\Exception;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\MessageInterface;
 use Psr\Http\Message\StreamInterface;
 
-class ClientTest extends TestCase
+class OneDriveTest extends TestCase
 {
     /**
      * @test

@@ -33,7 +33,7 @@ $app = new App(require __DIR__ . '/../etc/config.php');
 $container = $app->getContainer();
 
 $container[Client::class] = function (Container $container) {
-    return new \KiH\Client(
+    return new \KiH\Client\OneDrive(
         new \GuzzleHttp\Client(),
         $container->get('settings')['share']
     );
