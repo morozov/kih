@@ -13,16 +13,25 @@ class Index
     /** @var RouterInterface */
     private $router;
 
-    public function __construct(RouterInterface $router)
+    /** @var string */
+    private $redirectTo;
+
+    public function __construct(RouterInterface $router, string $redirectTo)
     {
         $this->router = $router;
+        $this->redirectTo = $redirectTo;
     }
 
+    /**
+     * @param Request $request
+     * @param Response $response
+     * @return Response
+     */
     public function __invoke(Request $request, Response $response)
     {
         return $response->withHeader(
             'Location',
-            $this->router->pathFor('feed')
+            $this->router->pathFor($this->redirectTo)
         );
     }
 }

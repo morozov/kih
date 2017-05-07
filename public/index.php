@@ -53,7 +53,8 @@ $container[Generator::class] = function (Container $container) {
 
 $container[Index::class] = function (Container $container) {
     return new Index(
-        $container->get('router')
+        $container->get('router'),
+        'feed'
     );
 };
 
