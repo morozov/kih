@@ -6,10 +6,6 @@ namespace KiH;
 
 use GuzzleHttp\Client as HttpClient;
 use Psr\Http\Message\StreamInterface;
-use function array_map;
-use function array_merge;
-use function http_build_query;
-use function implode;
 
 final class Client
 {
@@ -29,25 +25,39 @@ final class Client
         $this->share = $share;
     }
 
-    public function getFolder() : StreamInterface
+    public function getFolder() : array
     {
-        return $this->request(['root', 'children'], [
-            'select' => implode(',', [
-                'audio',
-                'createdDateTime',
-                'file',
-                'id',
-                'size',
-                'webUrl',
-            ]),
-            'orderby' => 'lastModifiedDateTime desc',
-            'top' => 10,
-        ]);
+        $data = $this->decode(
+            (string) $this->request(['root', 'children'], [
+                'select' => implode(',', [
+                    'audio',
+                    'createdDateTime',
+                    'file',
+                    'id',
+                    'size',
+                    'webUrl',
+                ]),
+                'orderby' => 'lastModifiedDateTime desc',
+                'top' => 10,
+            ])
+        );
+
+        if (!isset($data['value'])) {
+            throw new Exception('The folder representation does not contain the "value" element');
+        }
+
+        return array_map(function (array $file) {
+            $file['createdDateTime'] = new \DateTime($file['createdDateTime']);
+
+            return $file;
+        }, $data['value']);
     }
 
-    public function getItem(string $id) : StreamInterface
+    public function getItem(string $id) : array
     {
-        return $this->request(['items', $id]);
+        return $this->decode(
+            (string) $this->request(['items', $id])
+        );
     }
 
     private function request(array $path, array $query = []) : StreamInterface
@@ -66,5 +76,16 @@ final class Client
         return $this->client
             ->request('GET', $url)
             ->getBody();
+    }
+
+    private function decode(string $json) : array
+    {
+        $data = json_decode($json, true);
+
+        if (json_last_error() !== JSON_ERROR_NONE) {
+            throw new Exception('Cannot decode API response: ' . json_last_error_msg());
+        }
+
+        return $data;
     }
 }

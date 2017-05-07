@@ -6,7 +6,6 @@ use KiH\Action\Feed;
 use KiH\Action\Index;
 use KiH\Action\Media;
 use KiH\Client;
-use KiH\Parser;
 use KiH\Generator;
 use KiH\Middleware\BasePath;
 use Psr\Container\ContainerInterface as Container;
@@ -40,10 +39,6 @@ $container[Client::class] = function (Container $container) {
     );
 };
 
-$container[Parser::class] = function () {
-    return new Parser();
-};
-
 $container[Generator::class] = function (Container $container) {
     return new Generator(
         $container->get('router'),
@@ -61,15 +56,13 @@ $container[Index::class] = function (Container $container) {
 $container[Feed::class] = function (Container $container) {
     return new Feed(
         $container->get(Client::class),
-        $container->get(Parser::class),
         $container->get(Generator::class)
     );
 };
 
 $container[Media::class] = function (Container $container) {
     return new Media(
-        $container->get(Client::class),
-        $container->get(Parser::class)
+        $container->get(Client::class)
     );
 };
 
