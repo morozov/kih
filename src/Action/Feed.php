@@ -23,7 +23,7 @@ class Feed
         $this->generator = $generator;
     }
 
-    public function __invoke(Request $request, Response $response)
+    public function __invoke(Request $request, Response $response) : Response
     {
         $response = $response
             ->withHeader('Content-Type', 'text/xml; charset=UTF-8');

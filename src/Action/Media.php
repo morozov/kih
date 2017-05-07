@@ -18,7 +18,7 @@ class Media
         $this->client = $client;
     }
 
-    public function __invoke(Request $request, Response $response)
+    public function __invoke(Request $request, Response $response) : Response
     {
         return $response->withHeader('Location', $this->client->getMedia(
             $request->getAttribute('id')
