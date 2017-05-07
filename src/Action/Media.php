@@ -20,10 +20,8 @@ class Media
 
     public function __invoke(Request $request, Response $response)
     {
-        $item = $this->client->getItem(
+        return $response->withHeader('Location', $this->client->getMedia(
             $request->getAttribute('id')
-        );
-
-        return $response->withHeader('Location', $item['@content.downloadUrl']);
+        )->getUrl());
     }
 }

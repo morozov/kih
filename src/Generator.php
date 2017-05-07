@@ -6,6 +6,8 @@ namespace KiH;
 
 use DOMDocument;
 use DOMElement;
+use KiH\Entity\File;
+use KiH\Entity\Folder;
 use Slim\Interfaces\RouterInterface;
 
 final class Generator
@@ -20,7 +22,7 @@ final class Generator
         $this->settings = $settings;
     }
 
-    public function generate(array $files) : DOMDocument
+    public function generate(Folder $folder) : DOMDocument
     {
         $document = new DOMDocument('1.0', 'UTF-8');
         $rss = $document->createElement('rss');
@@ -53,7 +55,7 @@ final class Generator
         $image->setAttribute('href', $this->settings['logo']);
         $channel->appendChild($image);
 
-        foreach ($files as $file) {
+        foreach ($folder as $file) {
             $channel->appendChild(
                 $this->generateItem($document, $file)
             );
@@ -62,36 +64,36 @@ final class Generator
         return $document;
     }
 
-    private function generateItem(DOMDocument $document, array $file) : DOMElement
+    private function generateItem(DOMDocument $document, File $file) : DOMElement
     {
         $item = $document->createElement('item');
 
         $title = $document->createElement('title');
         $title->appendChild(
-            $document->createTextNode($file['audio']['title'])
+            $document->createTextNode($file->getTitle())
         );
         $item->appendChild($title);
 
         $pubDate = $document->createElement('pubDate');
         $pubDate->appendChild(
-            $document->createTextNode($file['createdDateTime']->format('r'))
+            $document->createTextNode($file->getCreatedAt()->format('r'))
         );
         $item->appendChild($pubDate);
 
         $guid = $document->createElement('guid');
         $guid->setAttribute('isPermaLink', 'false');
         $guid->appendChild(
-            $document->createTextNode($file['webUrl'])
+            $document->createTextNode($file->getUrl())
         );
         $item->appendChild($guid);
 
         $enclosure = $document->createElement('enclosure');
         $enclosure->setAttribute(
             'url',
-            $this->router->pathFor('media', $file)
+            $this->router->pathFor('media', ['id' => $file->getId()])
         );
-        $enclosure->setAttribute('length', (string) $file['audio']['duration']);
-        $enclosure->setAttribute('type', $file['file']['mimeType']);
+        $enclosure->setAttribute('length', (string) $file->getDuration());
+        $enclosure->setAttribute('type', $file->getMimeType());
         $item->appendChild($enclosure);
 
         return $item;

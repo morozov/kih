@@ -42,7 +42,7 @@ class ClientTest extends TestCase
 
         (new Client($httpClient, [
             'foo' => 'bar',
-        ]))->getItem('baz');
+        ]))->getMedia('baz');
     }
 
     /**
