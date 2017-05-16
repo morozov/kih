@@ -18,6 +18,7 @@ class RssTest extends TestCase
      */
     public function generate()
     {
+        /** @var RouterInterface|\PHPUnit_Framework_MockObject_MockObject $router */
         $router = $this->getMockBuilder(RouterInterface::class)
             ->setMethods(['pathFor'])
             ->getMockForAbstractClass();

@@ -55,6 +55,7 @@ class OneDriveTest extends TestCase
      */
     public function parseFailure(string $fixture)
     {
+        /** @var HttpClient|\PHPUnit_Framework_MockObject_MockObject $httpClient */
         $httpClient = $this->createMock(HttpClient::class);
         $mocker = $httpClient->expects(
             $this->once()

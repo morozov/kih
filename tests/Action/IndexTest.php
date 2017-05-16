@@ -17,6 +17,7 @@ class IndexTest extends TestCase
      */
     public function invoke()
     {
+        /** @var RouterInterface|\PHPUnit_Framework_MockObject_MockObject $router */
         $router = $this->createMock(RouterInterface::class);
         $router->expects(
             $this->once()

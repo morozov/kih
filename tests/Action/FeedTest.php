@@ -25,6 +25,7 @@ class FeedTest extends TestCase
         $entity = new Entity([]);
         $document = new DOMDocument();
 
+        /** @var Client|\PHPUnit_Framework_MockObject_MockObject $client */
         $client = $this->getMockBuilder(Client::class)
             ->setMethods(['getFolder'])
             ->getMockForAbstractClass();
@@ -33,6 +34,7 @@ class FeedTest extends TestCase
         )->method('getFolder')
             ->willReturn($entity);
 
+        /** @var Generator|\PHPUnit_Framework_MockObject_MockObject $generator */
         $generator = $this->getMockBuilder(Generator::class)
             ->setMethods(['generate'])
             ->getMockForAbstractClass();

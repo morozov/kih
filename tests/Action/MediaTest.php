@@ -18,6 +18,7 @@ class MediaTest extends TestCase
      */
     public function invoke()
     {
+        /** @var Request|\PHPUnit_Framework_MockObject_MockObject $request */
         $request = $this->getMockBuilder(Request::class)
             ->setMethods(['getAttribute'])
             ->getMockForAbstractClass();
@@ -27,6 +28,7 @@ class MediaTest extends TestCase
             ->with('id')
             ->willReturn('B6C46FF0A72F8DB!703491');
 
+        /** @var Client|\PHPUnit_Framework_MockObject_MockObject $client */
         $client = $this->getMockBuilder(Client::class)
             ->setMethods(['getMedia'])
             ->getMockForAbstractClass();
