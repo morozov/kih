@@ -5,8 +5,11 @@ serve:
 install:
 	composer install
 test:
-	phpunit
+	vendor/bin/phpunit --color
+	vendor/bin/phpcs --standard=PSR2 -p --colors src tests
+	vendor/bin/phpstan analyse -l 7 src
+	vendor/bin/phpstan analyse -l 4 tests
 coverage:
 	$(eval TMPDIR=$(shell mktemp -d))
-	phpunit --coverage-html=$(TMPDIR)
+	vendor/bin/phpunit --coverage-html=$(TMPDIR)
 	gnome-www-browser $(TMPDIR)/index.html

@@ -11,7 +11,7 @@ class BasePath
     /** @var Router */
     private $router;
 
-    /** @var string */
+    /** @var string|null */
     private $baseUri;
 
     public function __construct(Router $router, ?string $baseUri)

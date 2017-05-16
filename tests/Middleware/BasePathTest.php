@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace KiH\Tests\Generator;
+namespace KiH\Tests\Middleware;
 
 use KiH\Middleware\BasePath;
 use PHPUnit\Framework\TestCase;

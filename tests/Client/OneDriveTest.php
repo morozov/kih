@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace KiH\Tests;
+namespace KiH\Tests\Client;
 
 use GuzzleHttp\Client as HttpClient;
 use KiH\Client\OneDrive as Client;
@@ -20,7 +20,9 @@ class OneDriveTest extends TestCase
     {
         $httpClient = $this->createHttpClientMock(
             'GET',
+// @codingStandardsIgnoreStart
             'https://api.onedrive.com/v1.0/shares/u%21aHR0cHM6Ly9vbmVkcml2ZS5saXZlLmNvbS9yZWRpci5hc3B4P2Zvbz1iYXI%3D/root/children?select=audio%2CcreatedDateTime%2Cfile%2Cid%2Csize%2CwebUrl&orderby=lastModifiedDateTime+desc&top=10',
+// @codingStandardsIgnoreEnd
             $this->getFixture('success/folder.json')
         );
 
@@ -36,7 +38,9 @@ class OneDriveTest extends TestCase
     {
         $httpClient = $this->createHttpClientMock(
             'GET',
+// @codingStandardsIgnoreStart
             'https://api.onedrive.com/v1.0/shares/u%21aHR0cHM6Ly9vbmVkcml2ZS5saXZlLmNvbS9yZWRpci5hc3B4P2Zvbz1iYXI%3D/items/baz',
+// @codingStandardsIgnoreEnd
             $this->getFixture('success/item.json')
         );
 

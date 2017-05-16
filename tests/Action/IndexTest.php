@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace KiH\Tests;
+namespace KiH\Tests\Action;
 
 use KiH\Action\Index;
 use PHPUnit\Framework\TestCase;
