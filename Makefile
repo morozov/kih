@@ -1,5 +1,3 @@
-.PHONY: coverage
-
 serve:
 	php -S localhost:8000 public/index.php
 install:
