@@ -9,9 +9,10 @@ use KiH\Client\OneDrive;
 use KiH\Generator;
 use KiH\Generator\Rss;
 use KiH\Middleware\BasePath;
-use Psr\Container\ContainerInterface as Container;
+use Slim\App;
+use Slim\Container;
 
-return [
+return new Container(array_merge([
     Client::class => function (Container $container) : Client {
         return new OneDrive(
             new HttpClient(),
@@ -47,4 +48,16 @@ return [
             $container->get('settings')['baseUri']
         );
     },
-];
+    App::class => function (Container $container) : App {
+        $app = new App($container);
+        $app->get('/', Index::class)
+            ->setName('index');
+        $app->get('/rss.xml', Feed::class)
+            ->setName('feed');
+        $app->get('/media/{id}.mp3', Media::class)
+            ->setName('media');
+        $app->add($container->get(BasePath::class));
+
+        return $app;
+    },
+], require __DIR__ . '/../etc/config.php'));

@@ -1,6 +1,7 @@
 <?php
 
 use PHPUnit\Framework\TestCase;
+use Psr\Container\ContainerInterface;
 
 namespace PHPSTORM_META {
     override(TestCase::createConfiguredMock(0), map([
@@ -17,5 +18,8 @@ namespace PHPSTORM_META {
     ]));
     override(TestCase::getMockForAbstractClass(0), map([
         '' => '@|PHPUnit_Framework_MockObject_MockObject',
+    ]));
+    override(ContainerInterface::get(0), map([
+        '' => '@',
     ]));
 }
