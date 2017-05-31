@@ -67,7 +67,7 @@ final class OneDrive implements Client
             ),
         ], $path)));
 
-        if ($query) {
+        if (count($query) > 0) {
             $url .= '?' . http_build_query($query);
         }
 

@@ -22,7 +22,7 @@ class BasePath
 
     public function __invoke(Request $request, Response $response, callable $next) : Response
     {
-        if ($this->baseUri) {
+        if ($this->baseUri !== null) {
             $basePath = $this->baseUri;
         } else {
             $basePath = rtrim($request->getUri()->withPath('/'), '/');
