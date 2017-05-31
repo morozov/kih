@@ -1,0 +1,14 @@
+language: php
+php:
+  - 7.1
+  - nightly
+before_script:
+  - composer install
+script:
+  - vendor/bin/phpunit --color
+  - vendor/bin/phpcs --standard=PSR2 -p --colors src tests
+  - vendor/bin/phpstan analyse -l 7 src
+  - vendor/bin/phpstan analyse -c phpstan.tests.neon -l 5 tests
+after_script:
+  - wget https://scrutinizer-ci.com/ocular.phar
+  - php ocular.phar code-coverage:upload --format=php-clover coverage.clover
