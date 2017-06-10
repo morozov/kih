@@ -4,7 +4,7 @@ install:
 	composer install
 test:
 	vendor/bin/phpunit --color
-	vendor/bin/phpcs --standard=PSR2 -p --colors src tests
+	vendor/bin/phpcs --standard=PSR2 -p --colors src public tests
 	vendor/bin/phpstan analyse -l 7 src
 	vendor/bin/phpstan analyse -l 5 tests
 coverage:
