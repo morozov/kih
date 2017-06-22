@@ -15,6 +15,10 @@ final class Rss implements Generator
 {
     /** @var RouterInterface $router */
     private $router;
+
+    /**
+     * @var array
+     */
     private $settings;
 
     public function __construct(RouterInterface $router, array $settings)

@@ -9,6 +9,7 @@ script:
   - vendor/bin/phpcs --standard=PSR2 -p --colors src public tests
   - vendor/bin/phpstan analyse -l 7 src
   - vendor/bin/phpstan analyse -l 5 tests
+  - vendor/bin/psalm
 after_script:
   - wget https://scrutinizer-ci.com/ocular.phar
   - php ocular.phar code-coverage:upload --format=php-clover coverage.clover

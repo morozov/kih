@@ -8,11 +8,34 @@ use DateTime;
 
 final class File
 {
+    /**
+     * @var string
+     */
     private $id;
+
+    /**
+     * @var string
+     */
     private $title;
+
+    /**
+     * @var DateTime
+     */
     private $createdAt;
+
+    /**
+     * @var string
+     */
     private $url;
+
+    /**
+     * @var int
+     */
     private $duration;
+
+    /**
+     * @var string
+     */
     private $mimeType;
 
     public function __construct(
