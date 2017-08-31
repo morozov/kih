@@ -9,6 +9,9 @@ return [
             'parId' => 'B6C46FF0A72F8DB!116',
             'authkey' => '!AB17lqCz5De3HEE',
         ],
+        'yandex_disk' => [
+            'public_key' => 'https://yadi.sk/d/yNLm0qGR3LfRjD',
+        ],
         'feed' => [
             'title' => 'Кремов и Хрусталёв',
             'logo' => 'http://www.radiorecord.ru/i/img/rr-logo-podcast.png',

@@ -5,18 +5,18 @@ use KiH\Action\Feed;
 use KiH\Action\Index;
 use KiH\Action\Media;
 use KiH\Client;
-use KiH\Client\OneDrive;
 use KiH\Generator;
 use KiH\Generator\Rss;
 use KiH\Middleware\BasePath;
+use KiH\YandexDisk\Client as YandexDiskClient;
 use Slim\App;
 use Slim\Container;
 
 return new Container(array_merge([
     Client::class => function (Container $container) : Client {
-        return new OneDrive(
+        return new YandexDiskClient(
             new HttpClient(),
-            $container->get('settings')['share']
+            $container->get('settings')['yandex_disk']['public_key']
         );
     },
     Generator::class => function (Container $container) : Generator {

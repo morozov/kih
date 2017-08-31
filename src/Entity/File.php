@@ -26,10 +26,10 @@ final class File
     /**
      * @var string
      */
-    private $url;
+    private $guid;
 
     /**
-     * @var int
+     * @var ?int
      */
     private $duration;
 
@@ -42,14 +42,14 @@ final class File
         string $id,
         string $title,
         DateTime $createdAt,
-        string $url,
-        int $duration,
+        string $guid,
+        ?int $duration,
         string $mimeType
     ) {
         $this->id = $id;
         $this->title = $title;
         $this->createdAt = $createdAt;
-        $this->url = $url;
+        $this->guid = $guid;
         $this->duration = $duration;
         $this->mimeType = $mimeType;
     }
@@ -81,12 +81,12 @@ final class File
         return $this->createdAt;
     }
 
-    public function getUrl(): string
+    public function getGuid(): string
     {
-        return $this->url;
+        return $this->guid;
     }
 
-    public function getDuration(): int
+    public function getDuration() : ?int
     {
         return $this->duration;
     }

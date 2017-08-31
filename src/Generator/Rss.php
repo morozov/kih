@@ -88,7 +88,7 @@ final class Rss implements Generator
         $guid = $document->createElement('guid');
         $guid->setAttribute('isPermaLink', 'false');
         $guid->appendChild(
-            $document->createTextNode($file->getUrl())
+            $document->createTextNode($file->getGuid())
         );
         $item->appendChild($guid);
 
@@ -97,7 +97,13 @@ final class Rss implements Generator
             'url',
             $this->router->pathFor('media', ['id' => $file->getId()])
         );
-        $enclosure->setAttribute('length', (string) $file->getDuration());
+
+        $duration = $file->getDuration();
+
+        if ($duration !== null) {
+            $enclosure->setAttribute('length', (string) $duration);
+        }
+
         $enclosure->setAttribute('type', $file->getMimeType());
         $item->appendChild($enclosure);
 
