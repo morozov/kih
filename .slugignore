@@ -1,0 +1,9 @@
+/.gitignore
+/.phpstorm.meta.php
+/.scrutinizer.yml
+/.travis.yml
+/Makefile
+/README.md
+/phpunit.xml
+/psalm.xml
+/tests
