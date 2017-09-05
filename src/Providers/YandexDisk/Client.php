@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace KiH\YandexDisk;
+namespace KiH\Providers\YandexDisk;
 
 use DateTime;
 use GuzzleHttp\Client as HttpClient;

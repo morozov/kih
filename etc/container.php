@@ -8,7 +8,7 @@ use KiH\Client;
 use KiH\Generator;
 use KiH\Generator\Rss;
 use KiH\Middleware\BasePath;
-use KiH\YandexDisk\Client as YandexDiskClient;
+use KiH\Providers\YandexDisk\Client as YandexDiskClient;
 use Slim\App;
 use Slim\Container;
 

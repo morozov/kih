@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace KiH\Tests\Client;
+namespace KiH\Tests\Providers\OneDrive;
 
 use GuzzleHttp\Client as HttpClient;
-use KiH\Client\OneDrive as Client;
+use KiH\Providers\OneDrive\Client;
 use KiH\Exception;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\MessageInterface;
 use Psr\Http\Message\StreamInterface;
 
-class OneDriveTest extends TestCase
+class ClientTest extends TestCase
 {
     /**
      * @test
@@ -108,6 +108,6 @@ class OneDriveTest extends TestCase
 
     private function getFixture(string $file)
     {
-        return file_get_contents(__DIR__ . '/fixtures/' . $file);
+        return file_get_contents(__DIR__ . '/Client/fixtures/' . $file);
     }
 }

@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace KiH\Client;
+namespace KiH\Providers\OneDrive;
 
 use GuzzleHttp\Client as HttpClient;
-use KiH\Client;
+use KiH\Client as ClientInterface;
 use KiH\Entity\Folder;
 use KiH\Entity\Media;
 use KiH\Exception;
 use Psr\Http\Message\StreamInterface;
 
-final class OneDrive implements Client
+final class Client implements ClientInterface
 {
     private const SHARE_API = 'https://onedrive.live.com/redir.aspx';
 
