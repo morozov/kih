@@ -14,12 +14,30 @@ class BasePath
     /** @var string|null */
     private $baseUri;
 
-    public function __construct(Router $router, ?string $baseUri)
+    /**
+     * Constructor
+     *
+     * @param Router $router
+     * @param string|null $baseUri
+     *
+     * @suppress PhanTypeMismatchProperty
+     */
+    public function __construct(Router $router, string $baseUri = null)
     {
         $this->router = $router;
         $this->baseUri = $baseUri;
     }
 
+    /**
+     * Runs the middleware
+     *
+     * @param Request $request
+     * @param Response $response
+     * @param callable $next
+     * @return Response
+     *
+     * @suppress PhanTypeMismatchArgument
+     */
     public function __invoke(Request $request, Response $response, callable $next) : Response
     {
         if ($this->baseUri !== null) {
