@@ -10,5 +10,8 @@ checks:
     php:
         code_rating: true
         duplication: true
+filter:
+    paths:
+        - 'src/*'
 tools:
     external_code_coverage: true
