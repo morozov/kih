@@ -67,7 +67,7 @@ final class Client implements ClientInterface
             ),
         ], $path)));
 
-        if (count($query) > 0) {
+        if (count($query)) {
             $url .= '?' . http_build_query($query);
         }
 

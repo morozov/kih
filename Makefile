@@ -3,11 +3,12 @@ install:
 serve:
 	php -S localhost:8000 -t public public/index.php
 test:
-	vendor/bin/phpunit --color
 	vendor/bin/phpcs --standard=PSR2 -p --colors src public tests
+	vendor/bin/phpunit --color
 	vendor/bin/phpstan analyse -l 7 src
 	vendor/bin/phpstan analyse -l 5 tests
 	vendor/bin/psalm
+	if php -m | grep -i xdebug ; then vendor/bin/infection --min-covered-msi=100 ; fi
 coverage:
 	$(eval TMPDIR=$(shell mktemp -d))
 	vendor/bin/phpunit --coverage-html=$(TMPDIR)

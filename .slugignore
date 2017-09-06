@@ -4,6 +4,7 @@
 /.travis.yml
 /Makefile
 /README.md
+/infection.json.dist
 /phpunit.xml
 /psalm.xml
 /tests
