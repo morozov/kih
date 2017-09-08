@@ -8,8 +8,8 @@ use DateTime;
 use GuzzleHttp\Client as HttpClient;
 use IntlDateFormatter;
 use KiH\Client as ClientInterface;
-use KiH\Entity\File;
-use KiH\Entity\Folder;
+use KiH\Entity\Item;
+use KiH\Entity\Feed;
 use KiH\Entity\Media;
 use KiH\Exception;
 use Psr\Http\Message\StreamInterface;
@@ -45,9 +45,9 @@ final class Client implements ClientInterface
         );
     }
 
-    public function getFolder() : Folder
+    public function getFeed() : Feed
     {
-        return $this->createFolder(
+        return $this->createFeed(
             $this->decode(
                 $this->request(['public', 'resources'], [
                     'path' => $this->getFolderPath(new DateTime()),
@@ -102,26 +102,29 @@ final class Client implements ClientInterface
         return $data;
     }
 
-    private function createFile(array $data) : File
+    private function createItem(array $data) : Item
     {
-        return new File(
+        return new Item(
             $this->getIdByFileName($data['name']),
+            null,
             pathinfo($data['name'], PATHINFO_FILENAME),
             new DateTime($data['created']),
             $data['resource_id'],
             null,
-            $data['mime_type']
+            $data['mime_type'],
+            null,
+            null
         );
     }
 
-    private function createFolder(array $data) : Folder
+    private function createFeed(array $data) : Feed
     {
         if (!isset($data['_embedded']['items'])) {
             throw new Exception('The folder representation does not contain the "_embedded.items" element');
         }
 
-        return new Folder(array_map(function (array $file) : File {
-            return $this->createFile($file);
+        return new Feed(array_map(function (array $file) : Item {
+            return $this->createItem($file);
         }, $data['_embedded']['items']));
     }
 

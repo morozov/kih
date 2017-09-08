@@ -9,5 +9,11 @@
                 <file name="src/Generator/Rss.php"/>
             </errorLevel>
         </InvalidScalarArgument>
+        <PossiblyNullArgument>
+            <!-- @see https://github.com/vimeo/psalm/issues/210 -->
+            <errorLevel type="suppress">
+                <file name="src/Generator/Rss.php"/>
+            </errorLevel>
+        </PossiblyNullArgument>
     </issueHandlers>
 </psalm>

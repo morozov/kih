@@ -8,15 +8,18 @@ use KiH\Client;
 use KiH\Generator;
 use KiH\Generator\Rss;
 use KiH\Middleware\BasePath;
-use KiH\Providers\YandexDisk\Client as YandexDiskClient;
+use KiH\Providers\Vk\Client as VkClient;
 use Slim\App;
 use Slim\Container;
 
 return new Container(array_merge([
     Client::class => function (Container $container) : Client {
-        return new YandexDiskClient(
+        $settings = $container->get('settings')['vk'];
+
+        return new VkClient(
             new HttpClient(),
-            $container->get('settings')['yandex_disk']['public_key']
+            $settings['group'],
+            $settings['access_token']
         );
     },
     Generator::class => function (Container $container) : Generator {

@@ -4,12 +4,21 @@ declare(strict_types=1);
 
 namespace KiH;
 
-use KiH\Entity\Folder;
+use KiH\Entity\Feed;
 use KiH\Entity\Media;
 
 interface Client
 {
-    public function getFolder() : Folder;
+    /**
+     * @return Feed
+     * @throws Exception
+     */
+    public function getFeed() : Feed;
 
+    /**
+     * @param string $id
+     * @return Media
+     * @throws Exception
+     */
     public function getMedia(string $id) : Media;
 }

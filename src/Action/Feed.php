@@ -30,7 +30,7 @@ class Feed
 
         $response->getBody()->write(
             $this->generator->generate(
-                $this->client->getFolder()
+                $this->client->getFeed()
             )->saveXML()
         );
 

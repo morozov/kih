@@ -6,7 +6,7 @@ namespace KiH\Providers\OneDrive;
 
 use GuzzleHttp\Client as HttpClient;
 use KiH\Client as ClientInterface;
-use KiH\Entity\Folder;
+use KiH\Entity\Feed;
 use KiH\Entity\Media;
 use KiH\Exception;
 use Psr\Http\Message\StreamInterface;
@@ -29,9 +29,9 @@ final class Client implements ClientInterface
         $this->share = $share;
     }
 
-    public function getFolder() : Folder
+    public function getFeed() : Feed
     {
-        return Folder::fromApiResponse(
+        return Feed::fromApiResponse(
             $this->decode(
                 $this->request(['root', 'children'], [
                     'select' => implode(',', [

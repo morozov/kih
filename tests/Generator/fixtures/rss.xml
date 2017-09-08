@@ -1,2 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<rss xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" version="2.0"><channel><title>Test Title</title><link>http://example.com/index.php?page=index</link><itunes:image href="http://example.com/logo.png"/><item><title>Test Episode</title><pubDate>Fri, 05 May 2017 19:15:33 +0000</pubDate><guid isPermaLink="false">https://1drv.ms/u/s!Atv4cgr_RmwLqvgDHXuWoLPkN7ccQQ</guid><enclosure url="http://example.com/index.php?page=media&amp;id=B6C46FF0A72F8DB%21703491" length="3379032" type="audio/mpeg"/></item></channel></rss>
+<rss xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" version="2.0">
+    <channel>
+        <title>Test Title</title>
+        <link>http://example.com/index.php?page=index</link>
+        <itunes:image href="http://example.com/logo.png"/>
+        <item>
+            <title>Test Episode</title>
+            <pubDate>Fri, 05 May 2017 19:15:33 +0000</pubDate>
+            <guid isPermaLink="false">https://1drv.ms/u/s!Atv4cgr_RmwLqvgDHXuWoLPkN7ccQQ</guid>
+            <enclosure url="http://example.com/index.php?page=media&amp;id=B6C46FF0A72F8DB%21703491" length="3379032"
+                       type="audio/mpeg"/>
+            <itunes:image href="http://example.com/image.jpg"/>
+            <description>Hello, &lt;b&gt;world&lt;/b&gt;!</description>
+        </item>
+    </channel>
+</rss>

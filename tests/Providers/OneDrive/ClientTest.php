@@ -16,7 +16,7 @@ class ClientTest extends TestCase
     /**
      * @test
      */
-    public function getFolder()
+    public function getFeed()
     {
         $httpClient = $this->createHttpClientMock(
             'GET',
@@ -28,7 +28,7 @@ class ClientTest extends TestCase
 
         (new Client($httpClient, [
             'foo' => 'bar',
-        ]))->getFolder();
+        ]))->getFeed();
     }
 
     /**
@@ -64,7 +64,7 @@ class ClientTest extends TestCase
         $this->expectResponse($mocker, $this->getFixture('failure/folder/' . $fixture));
 
         $this->expectException(Exception::class);
-        (new Client($httpClient, []))->getFolder();
+        (new Client($httpClient, []))->getFeed();
     }
 
     public static function failureProvider()

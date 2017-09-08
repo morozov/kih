@@ -6,8 +6,8 @@ namespace KiH\Generator;
 
 use DOMDocument;
 use DOMElement;
-use KiH\Entity\File;
-use KiH\Entity\Folder;
+use KiH\Entity\Item;
+use KiH\Entity\Feed;
 use KiH\Generator;
 use Slim\Interfaces\RouterInterface;
 
@@ -27,7 +27,7 @@ final class Rss implements Generator
         $this->settings = $settings;
     }
 
-    public function generate(Folder $folder) : DOMDocument
+    public function generate(Feed $feed) : DOMDocument
     {
         $document = new DOMDocument('1.0', 'UTF-8');
         $rss = $document->createElement('rss');
@@ -60,7 +60,7 @@ final class Rss implements Generator
         $image->setAttribute('href', $this->settings['logo']);
         $channel->appendChild($image);
 
-        foreach ($folder as $file) {
+        foreach ($feed as $file) {
             $channel->appendChild(
                 $this->generateItem($document, $file)
             );
@@ -69,7 +69,7 @@ final class Rss implements Generator
         return $document;
     }
 
-    private function generateItem(DOMDocument $document, File $file) : DOMElement
+    private function generateItem(DOMDocument $document, Item $file) : DOMElement
     {
         $item = $document->createElement('item');
 
@@ -92,11 +92,12 @@ final class Rss implements Generator
         );
         $item->appendChild($guid);
 
+        $url = $file->getUrl() ?? $this->router->pathFor('media', [
+            'id' => $file->getId(),
+        ]);
+
         $enclosure = $document->createElement('enclosure');
-        $enclosure->setAttribute(
-            'url',
-            $this->router->pathFor('media', ['id' => $file->getId()])
-        );
+        $enclosure->setAttribute('url', $url);
 
         $duration = $file->getDuration();
 
@@ -106,6 +107,24 @@ final class Rss implements Generator
 
         $enclosure->setAttribute('type', $file->getMimeType());
         $item->appendChild($enclosure);
+
+        $imageUrl = $file->getImageUrl();
+
+        if ($imageUrl !== null) {
+            $image = $document->createElement('itunes:image');
+            $image->setAttribute('href', $imageUrl);
+            $item->appendChild($image);
+        }
+
+        $description = $file->getDescription();
+
+        if ($description !== null) {
+            $node = $document->createElement('description');
+            $node->appendChild(
+                $document->createTextNode($description)
+            );
+            $item->appendChild($node);
+        }
 
         return $item;
     }

@@ -7,7 +7,7 @@ namespace KiH\Tests\Action;
 use DOMDocument;
 use KiH\Action\Feed as Action;
 use KiH\Client;
-use KiH\Entity\Folder as Entity;
+use KiH\Entity\Feed as Entity;
 use KiH\Generator;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ServerRequestInterface as Request;
@@ -27,11 +27,11 @@ class FeedTest extends TestCase
 
         /** @var Client|\PHPUnit_Framework_MockObject_MockObject $client */
         $client = $this->getMockBuilder(Client::class)
-            ->setMethods(['getFolder'])
+            ->setMethods(['getFeed'])
             ->getMockForAbstractClass();
         $client->expects(
             $this->once()
-        )->method('getFolder')
+        )->method('getFeed')
             ->willReturn($entity);
 
         /** @var Generator|\PHPUnit_Framework_MockObject_MockObject $generator */
