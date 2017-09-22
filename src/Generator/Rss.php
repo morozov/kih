@@ -92,39 +92,19 @@ final class Rss implements Generator
         );
         $item->appendChild($guid);
 
-        $url = $file->getUrl() ?? $this->router->pathFor('media', [
-            'id' => $file->getId(),
-        ]);
-
         $enclosure = $document->createElement('enclosure');
-        $enclosure->setAttribute('url', $url);
+        $enclosure->setAttribute('url', $file->getUrl());
 
-        $duration = $file->getDuration();
-
-        if ($duration !== null) {
-            $enclosure->setAttribute('length', (string) $duration);
-        }
+        $enclosure->setAttribute('length', (string) $file->getDuration());
 
         $enclosure->setAttribute('type', $file->getMimeType());
         $item->appendChild($enclosure);
 
-        $imageUrl = $file->getImageUrl();
-
-        if ($imageUrl !== null) {
-            $image = $document->createElement('itunes:image');
-            $image->setAttribute('href', $imageUrl);
-            $item->appendChild($image);
-        }
-
-        $description = $file->getDescription();
-
-        if ($description !== null) {
-            $node = $document->createElement('description');
-            $node->appendChild(
-                $document->createTextNode($description)
-            );
-            $item->appendChild($node);
-        }
+        $description = $document->createElement('description');
+        $description->appendChild(
+            $document->createTextNode($file->getDescription())
+        );
+        $item->appendChild($description);
 
         return $item;
     }

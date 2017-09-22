@@ -1,0 +1,77 @@
+{
+  "response": {
+    "count": 1082,
+    "items": [
+      {
+        "id": 308269,
+        "from_id": -6149482,
+        "owner_id": -6149482,
+        "date": 1506021240,
+        "marked_as_ads": 0,
+        "post_type": "post",
+        "text": "Аудиозапись эфира от 21 сентября 2017 (четверг) \n \nАрхив аудиозаписей с возможностью загрузки: https:\/\/vk.cc\/6X3JkI",
+        "attachments": [
+          {
+            "type": "photo",
+            "photo": {
+              "id": 456244381,
+              "album_id": -7,
+              "owner_id": -6149482,
+              "user_id": 100,
+              "photo_75": "https:\/\/pp.userapi.com\/c836322\/v836322614\/5b92c\/6Gi3xvk_BLo.jpg",
+              "photo_130": "https:\/\/pp.userapi.com\/c836322\/v836322614\/5b92d\/UtA4JqSjb-8.jpg",
+              "photo_604": "https:\/\/pp.userapi.com\/c836322\/v836322614\/5b92e\/bCeVdKFvNo8.jpg",
+              "photo_807": "https:\/\/pp.userapi.com\/c836322\/v836322614\/5b92f\/0pi31_k3wcc.jpg",
+              "photo_1280": "https:\/\/pp.userapi.com\/c836322\/v836322614\/5b930\/RSOOdOs2-2g.jpg",
+              "photo_2560": "https:\/\/pp.userapi.com\/c836322\/v836322614\/5b931\/TtpMHIV5Rho.jpg",
+              "width": 1600,
+              "height": 909,
+              "text": "Original: https:\/\/3.bp.blogspot.com\/-BujD9a1pGqI\/WQb6R4WEcEI\/AAAAAAAAIuk\/6jovUIUjscsKDXDSA35OHLkgDwckazUTgCLcB\/s1600\/power-of-makeup-transformation-nikki-tutorials-social.png",
+              "date": 1506021240,
+              "access_key": "c9406e1db50fae63e4"
+            }
+          },
+          {
+            "type": "audio",
+            "audio": {
+              "id": 456241259,
+              "owner_id": 2000209538,
+              "artist": "Кремов и Хрусталёв",
+              "title": "Эфир от 21 сентября 2017",
+              "duration": 3500,
+              "date": 1506021165,
+              "url": "https:\/\/cs9-18v4.userapi.com\/p7\/4eff52f01a3876.mp3?extra=D1RrASTFkGtw1iSphK8_p3hWuClIPWH4m5r0HQPTzp-pFIdHoL2z1Xec0iJE3LE_Qkyvy5Xf7knrimelZjopt9bGdIYh2p40Yz1uWsGxImo3cKL7imYtIdFwJtmAILhTEjE7ORQEFELcoYA",
+              "lyrics_id": 405457289,
+              "album_id": 2,
+              "genre_id": 5,
+              "is_licensed": true,
+              "access_key": "1913d46d153ac5c457",
+              "is_hq": false
+            }
+          }
+        ],
+        "post_source": {
+          "type": "vk"
+        },
+        "comments": {
+          "count": 3,
+          "groups_can_post": true,
+          "can_post": 1
+        },
+        "likes": {
+          "count": 33,
+          "user_likes": 0,
+          "can_like": 1,
+          "can_publish": 1
+        },
+        "reposts": {
+          "count": 4,
+          "user_reposted": 0
+        },
+        "views": {
+          "count": 5827
+        }
+      }
+    ]
+  }
+}

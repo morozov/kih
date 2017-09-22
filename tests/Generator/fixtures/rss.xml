@@ -8,9 +8,7 @@
             <title>Test Episode</title>
             <pubDate>Fri, 05 May 2017 19:15:33 +0000</pubDate>
             <guid isPermaLink="false">https://1drv.ms/u/s!Atv4cgr_RmwLqvgDHXuWoLPkN7ccQQ</guid>
-            <enclosure url="http://example.com/index.php?page=media&amp;id=B6C46FF0A72F8DB%21703491" length="3379032"
-                       type="audio/mpeg"/>
-            <itunes:image href="http://example.com/image.jpg"/>
+            <enclosure url="http://example.com/audio.mp3" length="3379032" type="audio/mpeg"/>
             <description>Hello, &lt;b&gt;world&lt;/b&gt;!</description>
         </item>
     </channel>

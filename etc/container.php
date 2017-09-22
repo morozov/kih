@@ -3,7 +3,6 @@
 use GuzzleHttp\Client as HttpClient;
 use KiH\Action\Feed;
 use KiH\Action\Index;
-use KiH\Action\Media;
 use KiH\Client;
 use KiH\Generator;
 use KiH\Generator\Rss;
@@ -40,11 +39,6 @@ return new Container(array_merge([
             $container->get(Generator::class)
         );
     },
-    Media::class => function (Container $container) : Media {
-        return new Media(
-            $container->get(Client::class)
-        );
-    },
     BasePath::class => function (Container $container) : BasePath {
         return new BasePath(
             $container->get('router'),
@@ -57,8 +51,6 @@ return new Container(array_merge([
             ->setName('index');
         $app->get('/rss.xml', Feed::class)
             ->setName('feed');
-        $app->get('/media/{id}.mp3', Media::class)
-            ->setName('media');
         $app->add($container->get(BasePath::class));
 
         return $app;

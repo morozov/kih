@@ -2,10 +2,13 @@
 
 declare(strict_types=1);
 
-namespace KiH\Tests\Providers\OneDrive;
+namespace KiH\Tests\Providers\Vk;
 
+use DateTime;
 use GuzzleHttp\Client as HttpClient;
-use KiH\Providers\OneDrive\Client;
+use KiH\Providers\Vk\Client;
+use KiH\Entity\Feed;
+use KiH\Entity\Item;
 use KiH\Exception;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\MessageInterface;
@@ -18,35 +21,29 @@ class ClientTest extends TestCase
      */
     public function getFeed()
     {
+// @codingStandardsIgnoreStart
         $httpClient = $this->createHttpClientMock(
             'GET',
-// @codingStandardsIgnoreStart
-            'https://api.onedrive.com/v1.0/shares/u%21aHR0cHM6Ly9vbmVkcml2ZS5saXZlLmNvbS9yZWRpci5hc3B4P2Zvbz1iYXI%3D/root/children?select=audio%2CcreatedDateTime%2Cfile%2Cid%2Csize%2CwebUrl&orderby=lastModifiedDateTime+desc&top=10',
-// @codingStandardsIgnoreEnd
-            $this->getFixture('success/folder.json')
+            'https://api.vk.com/method/wall.search?domain=kremhrust&query=%D0%90%D1%83%D0%B4%D0%B8%D0%BE%D0%B7%D0%B0%D0%BF%D0%B8%D1%81%D1%8C+%D1%8D%D1%84%D0%B8%D1%80%D0%B0&owners_only=1&count=10&access_token=the-token&v=5.68',
+            $this->getFixture('success/feed.json')
         );
 
-        (new Client($httpClient, [
-            'foo' => 'bar',
-        ]))->getFeed();
-    }
-
-    /**
-     * @test
-     */
-    public function getItem()
-    {
-        $httpClient = $this->createHttpClientMock(
-            'GET',
-// @codingStandardsIgnoreStart
-            'https://api.onedrive.com/v1.0/shares/u%21aHR0cHM6Ly9vbmVkcml2ZS5saXZlLmNvbS9yZWRpci5hc3B4P2Zvbz1iYXI%3D/items/baz',
+        $this->assertEquals(new Feed([
+            new Item(
+                'https://cs9-18v4.userapi.com/p7/4eff52f01a3876.mp3?extra=D1RrASTFkGtw1iSphK8_p3hWuClIPWH4m5r0HQPTzp-pFIdHoL2z1Xec0iJE3LE_Qkyvy5Xf7knrimelZjopt9bGdIYh2p40Yz1uWsGxImo3cKL7imYtIdFwJtmAILhTEjE7ORQEFELcoYA',
+                'Эфир от 21 сентября 2017',
+                new DateTime('2017-09-21T19:14:00.000000+0000'),
+                '308269',
+                3500,
+                'audio/mpeg',
+            <<<EOF
+Аудиозапись эфира от 21 сентября 2017 (четверг) 
+ 
+Архив аудиозаписей с возможностью загрузки: https://vk.cc/6X3JkI
+EOF
+            )
+        ]), (new Client($httpClient, 'kremhrust', 'the-token'))->getFeed());
 // @codingStandardsIgnoreEnd
-            $this->getFixture('success/item.json')
-        );
-
-        (new Client($httpClient, [
-            'foo' => 'bar',
-        ]))->getMedia('baz');
     }
 
     /**
@@ -64,7 +61,7 @@ class ClientTest extends TestCase
         $this->expectResponse($mocker, $this->getFixture('failure/folder/' . $fixture));
 
         $this->expectException(Exception::class);
-        (new Client($httpClient, []))->getFeed();
+        (new Client($httpClient, 'kremhrust', 'the-token'))->getFeed();
     }
 
     public static function failureProvider()
@@ -75,6 +72,35 @@ class ClientTest extends TestCase
             ],
             'no-value' => [
                 'no-value.json',
+            ],
+        ];
+    }
+
+    /**
+     * @test
+     * @dataProvider noAudioProvider
+     */
+    public function noAudio(string $fixture)
+    {
+        /** @var HttpClient|\PHPUnit_Framework_MockObject_MockObject $httpClient */
+        $httpClient = $this->createMock(HttpClient::class);
+        $mocker = $httpClient->expects(
+            $this->once()
+        )->method('request');
+
+        $this->expectResponse($mocker, $this->getFixture('failure/folder/' . $fixture));
+
+        $this->assertEquals(new Feed([]), (new Client($httpClient, 'kremhrust', 'the-token'))->getFeed());
+    }
+
+    public static function noAudioProvider()
+    {
+        return [
+            'no-attachments' => [
+                'no-attachments.json',
+            ],
+            'no-audio' => [
+                'no-audio.json',
             ],
         ];
     }

@@ -5,16 +5,12 @@ declare(strict_types=1);
 namespace KiH\Providers\Vk;
 
 use DateTime;
-use DomainException;
-use function explode;
 use GuzzleHttp\Client as HttpClient;
 use KiH\Client as ClientInterface;
 use KiH\Entity\Item;
 use KiH\Entity\Feed;
-use KiH\Entity\Media;
 use KiH\Exception;
 use Psr\Http\Message\StreamInterface;
-use function strstr;
 
 final class Client implements ClientInterface
 {
@@ -56,11 +52,6 @@ final class Client implements ClientInterface
                 ])
             )
         );
-    }
-
-    public function getMedia(string $id) : Media
-    {
-        throw new DomainException('Not applicable');
     }
 
     private function call(string $method, array $params) : StreamInterface
@@ -105,17 +96,13 @@ final class Client implements ClientInterface
             return null;
         }
 
-        $photo = $this->findAttachment($data['attachments'], 'photo');
-
         return new Item(
-            null,
             $audio['url'],
             $audio['title'],
             new DateTime('@' . $data['date']),
             (string) $data['id'],
             $audio['duration'],
             'audio/mpeg',
-            $photo ? $photo['photo_604'] : null,
             $data['text']
         );
     }
