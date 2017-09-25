@@ -1,6 +1,7 @@
 language: php
 php:
   - 7.1
+  - 7.2
   - nightly
 before_script:
   - if [[ $(phpenv version-name) == "nightly" ]]; then composer remove --dev etsy/phan; else pecl install ast; fi
