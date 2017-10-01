@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "a945afcbe4e673fd4d9a45035fe42e2e",
+    "content-hash": "33326983f8b083eb4d949fd69c2fcffd",
     "packages": [
         {
             "name": "container-interop/container-interop",
@@ -795,64 +795,6 @@
                 "instantiate"
             ],
             "time": "2017-07-22T11:58:36+00:00"
-        },
-        {
-            "name": "etsy/phan",
-            "version": "0.9.6",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/phan/phan.git",
-                "reference": "f54b4cd4206f68ed53bbc95910351fba8b6c9ada"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/phan/phan/zipball/f54b4cd4206f68ed53bbc95910351fba8b6c9ada",
-                "reference": "f54b4cd4206f68ed53bbc95910351fba8b6c9ada",
-                "shasum": ""
-            },
-            "require": {
-                "ext-ast": "^0.1.5",
-                "nikic/php-parser": "~3.1.1",
-                "php": "~7.1.0 || ~7.2.0",
-                "symfony/console": "~2.3|~3.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "^6.3.0"
-            },
-            "bin": [
-                "phan",
-                "phan_client",
-                "tocheckstyle"
-            ],
-            "type": "project",
-            "autoload": {
-                "psr-4": {
-                    "Phan\\": "src/Phan"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Rasmus Lerdorf"
-                },
-                {
-                    "name": "Andrew S. Morrison"
-                },
-                {
-                    "name": "Tyson Andre"
-                }
-            ],
-            "description": "A static analyzer for PHP",
-            "keywords": [
-                "analyzer",
-                "php",
-                "static"
-            ],
-            "abandoned": "phan/phan",
-            "time": "2017-09-24T19:13:44+00:00"
         },
         {
             "name": "infection/infection",
@@ -1761,6 +1703,63 @@
                 "update"
             ],
             "time": "2017-07-12T22:42:45+00:00"
+        },
+        {
+            "name": "phan/phan",
+            "version": "0.10.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/phan/phan.git",
+                "reference": "f54b4cd4206f68ed53bbc95910351fba8b6c9ada"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/phan/phan/zipball/f54b4cd4206f68ed53bbc95910351fba8b6c9ada",
+                "reference": "f54b4cd4206f68ed53bbc95910351fba8b6c9ada",
+                "shasum": ""
+            },
+            "require": {
+                "ext-ast": "^0.1.5",
+                "nikic/php-parser": "~3.1.1",
+                "php": "~7.1.0 || ~7.2.0",
+                "symfony/console": "~2.3|~3.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^6.3.0"
+            },
+            "bin": [
+                "phan",
+                "phan_client",
+                "tocheckstyle"
+            ],
+            "type": "project",
+            "autoload": {
+                "psr-4": {
+                    "Phan\\": "src/Phan"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Rasmus Lerdorf"
+                },
+                {
+                    "name": "Andrew S. Morrison"
+                },
+                {
+                    "name": "Tyson Andre"
+                }
+            ],
+            "description": "A static analyzer for PHP",
+            "keywords": [
+                "analyzer",
+                "php",
+                "static"
+            ],
+            "time": "2017-09-24T19:13:44+00:00"
         },
         {
             "name": "phar-io/manifest",

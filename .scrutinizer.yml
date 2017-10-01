@@ -11,7 +11,7 @@ checks:
         code_rating: true
         duplication: true
         excluded_dependencies:
-            - etsy/phan
+            - phan/phan
 filter:
     paths:
         - 'src/*'

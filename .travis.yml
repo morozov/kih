@@ -4,7 +4,7 @@ php:
   - 7.2
   - nightly
 before_script:
-  - if [[ $(phpenv version-name) == "nightly" ]]; then composer remove --dev etsy/phan; else pecl install ast; fi
+  - if [[ $(phpenv version-name) == "nightly" ]]; then composer remove --dev phan/phan; else pecl install ast; fi
   - make install
 script:
   - make test
