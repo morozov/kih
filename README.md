@@ -15,8 +15,9 @@ A pet project. Takes a public OneDrive or Яндекс.Диск share as input a
 
 ## APIs
 
-1. [Microsoft OneDrive](https://dev.onedrive.com/)
-2. [Яндекс.Диск](https://tech.yandex.com/disk/)
+1. ~~[Microsoft OneDrive](https://dev.onedrive.com/)~~ (no longer supported)
+2. ~~[Яндекс.Диск](https://tech.yandex.com/disk/)~~ (no longer supported)
+3. [ВКонтакте](https://vk.com/dev/manuals)
 
 ## Testing
 
@@ -27,7 +28,7 @@ A pet project. Takes a public OneDrive or Яндекс.Диск share as input a
 
 1. [PHPStan](https://github.com/phpstan/phpstan)
 2. [Vimeo Psalm](https://getpsalm.org/)
-3. [Etsy Phan](https://github.com/phan/phan)
+3. [Phan](https://github.com/phan/phan)
 
 ## Continuous Integration
 
