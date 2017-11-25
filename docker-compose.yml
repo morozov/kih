@@ -1,0 +1,17 @@
+nginx:
+    image: nginx
+    ports:
+        - '8000:80'
+    volumes:
+        - ./docker/nginx/conf.d:/etc/nginx/conf.d
+        - .:/usr/share/nginx:ro
+    links:
+        - php-fpm
+php-fpm:
+    image: php:7.1-fpm
+    ports:
+        - '9000:9000'
+    volumes:
+        - .:/usr/share/nginx:ro
+    environment:
+        - VK_ACCESS_TOKEN=${VK_ACCESS_TOKEN}
