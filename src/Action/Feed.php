@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace KiH\Action;
 
+use DateTimeZone;
 use KiH\Client;
+use KiH\Entity\Item;
 use KiH\Generator;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
@@ -28,10 +30,21 @@ class Feed
         $response = $response
             ->withHeader('Content-Type', 'text/xml; charset=UTF-8');
 
+        $feed = $this->client->getFeed();
+
+        /** @var Item $item */
+        foreach ($feed as $item) {
+            $date = clone $item->getCreatedAt();
+            $date->setTimezone(new DateTimeZone('UTC'));
+            $date->modify('+1 day');
+
+            $response = $response
+                ->withHeader('Expires', $date->format('D, d M Y H:i:s \G\M\T'));
+            break;
+        }
+
         $response->getBody()->write(
-            $this->generator->generate(
-                $this->client->getFeed()
-            )->saveXML()
+            $this->generator->generate($feed)->saveXML()
         );
 
         return $response;

@@ -6,6 +6,7 @@
     <issueHandlers>
         <InvalidScalarArgument>
             <errorLevel type="suppress">
+                <file name="src/Action/Feed.php"/>
                 <file name="src/Generator/Rss.php"/>
             </errorLevel>
         </InvalidScalarArgument>
