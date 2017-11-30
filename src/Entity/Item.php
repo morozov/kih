@@ -11,7 +11,7 @@ final class Item
     /**
      * @var string
      */
-    private $url;
+    private $id;
 
     /**
      * @var string
@@ -44,7 +44,7 @@ final class Item
     private $description;
 
     public function __construct(
-        string $url,
+        string $id,
         string $title,
         DateTime $createdAt,
         string $guid,
@@ -52,7 +52,7 @@ final class Item
         string $mimeType,
         string $description
     ) {
-        $this->url = $url;
+        $this->id = $id;
         $this->title = $title;
         $this->createdAt = $createdAt;
         $this->guid = $guid;
@@ -61,9 +61,9 @@ final class Item
         $this->description = $description;
     }
 
-    public function getUrl() : string
+    public function getId() : string
     {
-        return $this->url;
+        return $this->id;
     }
 
     public function getTitle(): string

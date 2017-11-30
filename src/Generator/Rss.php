@@ -92,8 +92,12 @@ final class Rss implements Generator
         );
         $item->appendChild($guid);
 
+        $url = $this->router->pathFor('media', [
+            'id' => $file->getId(),
+        ]);
+
         $enclosure = $document->createElement('enclosure');
-        $enclosure->setAttribute('url', $file->getUrl());
+        $enclosure->setAttribute('url', $url);
 
         $enclosure->setAttribute('length', (string) $file->getDuration());
 

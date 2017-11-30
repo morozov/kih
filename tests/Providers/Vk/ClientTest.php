@@ -30,10 +30,10 @@ class ClientTest extends TestCase
 
         $this->assertEquals(new Feed([
             new Item(
-                'https://cs9-18v4.userapi.com/p7/4eff52f01a3876.mp3?extra=D1RrASTFkGtw1iSphK8_p3hWuClIPWH4m5r0HQPTzp-pFIdHoL2z1Xec0iJE3LE_Qkyvy5Xf7knrimelZjopt9bGdIYh2p40Yz1uWsGxImo3cKL7imYtIdFwJtmAILhTEjE7ORQEFELcoYA',
+                '2000209538_456241259',
                 'Эфир от 21 сентября 2017',
                 new DateTime('2017-09-21T19:14:00.000000+0000'),
-                '308269',
+                '2000209538_456241259',
                 3500,
                 'audio/mpeg',
             <<<EOF

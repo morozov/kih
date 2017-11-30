@@ -9,6 +9,7 @@ use GuzzleHttp\Client as HttpClient;
 use KiH\Client as ClientInterface;
 use KiH\Entity\Item;
 use KiH\Entity\Feed;
+use KiH\Entity\Media;
 use KiH\Exception;
 use Psr\Http\Message\StreamInterface;
 
@@ -49,6 +50,17 @@ final class Client implements ClientInterface
                     'query' => 'Аудиозапись эфира',
                     'owners_only' => true,
                     'count' => 10,
+                ])
+            )
+        );
+    }
+
+    public function getMedia(string $id) : Media
+    {
+        return $this->createMedia(
+            $this->decode(
+                $this->call('audio.getById', [
+                    'audios' => $id,
                 ])
             )
         );
@@ -96,11 +108,13 @@ final class Client implements ClientInterface
             return null;
         }
 
+        $id = sprintf('%s_%s', $audio['owner_id'], $audio['id']);
+
         return new Item(
-            $audio['url'],
+            $id,
             $audio['title'],
             new DateTime('@' . $data['date']),
-            (string) $data['id'],
+            $id,
             $audio['duration'],
             'audio/mpeg',
             $data['text']
@@ -120,6 +134,15 @@ final class Client implements ClientInterface
                 }, $data['response']['items'])
             )
         );
+    }
+
+    private function createMedia(array $data) : Media
+    {
+        if (!isset($data['response'][0]['url'])) {
+            throw new Exception('The response does not contain the "response.0.url" element');
+        }
+
+        return new Media($data['response'][0]['url']);
     }
 
     private function findAttachment(array $data, string $type) : ?array

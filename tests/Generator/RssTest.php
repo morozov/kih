@@ -32,7 +32,7 @@ class RssTest extends TestCase
 
         $folder = new Feed([
             new Item(
-                'http://example.com/audio.mp3',
+                'B6C46FF0A72F8DB!703491',
                 'Test Episode',
                 new DateTime('2017-05-05T19:15:33.14Z'),
                 'https://1drv.ms/u/s!Atv4cgr_RmwLqvgDHXuWoLPkN7ccQQ',
