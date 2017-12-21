@@ -5,7 +5,7 @@ endif
 install:
 	composer install
 serve:
-	php -S localhost:8000 -t public public/index.php
+	php -S localhost:8000 -t public index.php
 test:
 	vendor/bin/phpcs --standard=PSR2 -p --colors src public tests
 	vendor/bin/phpunit --color $(PHPUNIT_FLAGS)
