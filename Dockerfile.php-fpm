@@ -1,0 +1,5 @@
+FROM php:7.2-fpm
+COPY etc/ /usr/share/nginx/etc
+COPY src/ /usr/share/nginx/src
+COPY vendor/ /usr/share/nginx/vendor
+COPY public/index.php /usr/share/nginx/html/
