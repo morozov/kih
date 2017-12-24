@@ -1,10 +1,10 @@
 nginx:
-    image: kih-nginx
+    image: morozov/kih-nginx
     ports:
         - '8000:80'
     links:
         - php-fpm
 php-fpm:
-    image: kih-php-fpm
+    image: morozov/kih-php-fpm
     environment:
         - VK_ACCESS_TOKEN=${VK_ACCESS_TOKEN}
