@@ -1,26 +1,27 @@
 {
   "name": "morozov/kih",
+  "description": "RSS generator for Шоу Кремова и Хрусталёва",
+  "license": "MIT",
   "authors": [
     {
       "name": "Sergei Morozov",
       "email": "morozov@tut.by"
     }
   ],
-  "license": "MIT",
   "require": {
-    "slim/slim": "^3.0",
-    "guzzlehttp/guzzle": "^6",
     "php": "^7.1",
     "ext-intl": "*",
-    "ext-mbstring": "*"
+    "ext-mbstring": "*",
+    "guzzlehttp/guzzle": "^6",
+    "slim/slim": "^3.0"
   },
   "require-dev": {
+    "infection/infection": "^0.6.0",
+    "phan/phan": "^0.10.0",
+    "phpstan/phpstan": "^0.9",
     "phpunit/phpunit": "^6.5",
     "squizlabs/php_codesniffer": "^3.0",
-    "phpstan/phpstan": "^0.9",
-    "vimeo/psalm": "^0.3.46",
-    "phan/phan": "^0.10.0",
-    "infection/infection": "^0.6.0"
+    "vimeo/psalm": "^0.3.46"
   },
   "autoload": {
     "psr-4": {
