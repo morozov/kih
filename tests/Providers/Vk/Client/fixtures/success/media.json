@@ -1,0 +1,19 @@
+{
+  "response": [
+    {
+      "id": 456241126,
+      "owner_id": 2000003614,
+      "artist": "Кремов и Хрусталёв",
+      "title": "Эфир от 21 февраля 2018",
+      "duration": 3675,
+      "date": 1519240114,
+      "url": "https:\/\/cs9-7v4.vkuseraudio.net\/p17\/a8b2cfb8ae3359.mp3?extra=W4PQNJGOG68l6GIUdT4wioaCBzBSGaYVYHxivvLuhmGC77JP5N53SdDDL7XCXp7OWyoD3uBwKNKSH8Hh68xJD-TYl9VHJPejM6v20uS1zFlz1-T-6h6k3dbfgznbyVcsTm6qV9Pibwr_Cw",
+      "lyrics_id": 418800681,
+      "genre_id": 5,
+      "is_licensed": true,
+      "is_hq": false,
+      "track_genre_id": 7,
+      "access_key": "c9406e1db50fae63e4"
+    }
+  ]
+}
