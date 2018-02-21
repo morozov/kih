@@ -12,7 +12,7 @@ test:
 	vendor/bin/phpstan analyse -l 7 src tests
 	vendor/bin/psalm
 	if [ -e vendor/bin/phan ] ; then vendor/bin/phan --progress-bar --color ; fi
-	if php -m | grep -i xdebug ; then vendor/bin/infection --min-covered-msi=100 ; fi
+	if php -m | grep -i xdebug ; then vendor/bin/infection --min-msi=100 ; fi
 coverage:
 	$(eval TMPDIR=$(shell mktemp -d))
 	vendor/bin/phpunit --coverage-html=$(TMPDIR)

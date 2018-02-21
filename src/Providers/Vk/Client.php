@@ -48,7 +48,7 @@ final class Client implements ClientInterface
                 $this->call('wall.search', [
                     'domain' => $this->groupName,
                     'query' => 'Аудиозапись эфира',
-                    'owners_only' => true,
+                    'owners_only' => 1,
                     'count' => 10,
                 ])
             )
