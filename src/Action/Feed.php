@@ -6,7 +6,6 @@ namespace KiH\Action;
 
 use DateTimeZone;
 use KiH\Client;
-use KiH\Entity\Item;
 use KiH\Generator;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
@@ -32,7 +31,6 @@ class Feed
 
         $feed = $this->client->getFeed();
 
-        /** @var Item $item */
         foreach ($feed as $item) {
             $date = clone $item->getCreatedAt();
             $date->setTimezone(new DateTimeZone('UTC'));

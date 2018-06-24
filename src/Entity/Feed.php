@@ -22,6 +22,9 @@ final class Feed implements IteratorAggregate
         }, $files);
     }
 
+    /**
+     * @return Iterator|Item[]
+     */
     public function getIterator() : Iterator
     {
         return new ArrayIterator($this->files);

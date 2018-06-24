@@ -43,7 +43,7 @@ class BasePath
         if ($this->baseUri !== null) {
             $basePath = $this->baseUri;
         } else {
-            $basePath = rtrim((string) $request->getUri()->withPath('/'), '/');
+            $basePath = rtrim($request->getUri()->withPath('/'), '/');
         }
 
         $this->router->setBasePath($basePath);

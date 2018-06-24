@@ -1,20 +1,22 @@
 <?xml version="1.0"?>
-<psalm stopOnFirstError="false">
+<psalm
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="https://getpsalm.org/schema/config"
+    xsi:noNamespaceSchemaLocation="vendor/vimeo/psalm/config.xsd"
+>
     <projectFiles>
         <directory name="src"/>
     </projectFiles>
     <issueHandlers>
-        <InvalidScalarArgument>
+        <ImplicitToStringCast>
             <errorLevel type="suppress">
-                <file name="src/Action/Feed.php"/>
-                <file name="src/Generator/Rss.php"/>
+                <file name="src/Middleware/BasePath.php"/>
             </errorLevel>
-        </InvalidScalarArgument>
-        <PossiblyNullArgument>
-            <!-- @see https://github.com/vimeo/psalm/issues/210 -->
+        </ImplicitToStringCast>
+        <MismatchingDocblockReturnType>
             <errorLevel type="suppress">
-                <file name="src/Generator/Rss.php"/>
+                <file name="src/Entity/Feed.php"/>
             </errorLevel>
-        </PossiblyNullArgument>
+        </MismatchingDocblockReturnType>
     </issueHandlers>
 </psalm>

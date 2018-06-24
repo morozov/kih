@@ -19,7 +19,6 @@ class BasePathTest extends TestCase
      */
     public function withBaseUri()
     {
-        /** @var Request|\PHPUnit_Framework_MockObject_MockObject $request */
         $request = $this->createMock(Request::class);
         $baseUri = 'http://example.com/api';
         $router = $this->getRouter($baseUri);
@@ -32,7 +31,6 @@ class BasePathTest extends TestCase
      */
     public function withoutBaseUri()
     {
-        /** @var Request|\PHPUnit_Framework_MockObject_MockObject $request */
         $request = $this->createMock(Request::class);
         $request->expects($this->once())
             ->method('getUri')
@@ -57,6 +55,7 @@ class BasePathTest extends TestCase
         $response = $this->createMock(Response::class);
         $nextResponse = $this->createMock(Response::class);
 
+        /** @var callable&\PHPUnit\Framework\MockObject\MockObject $next */
         $next = $this->createPartialMock(stdClass::class, ['__invoke']);
         $next->expects($this->once())
             ->method('__invoke')

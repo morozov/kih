@@ -11,4 +11,7 @@ return [
         'vendor',
     ],
     'skip_slow_php_options_warning' => true,
+    'suppress_issue_types' => [
+        'PhanTypeMismatchDeclaredReturn',
+    ],
 ];
