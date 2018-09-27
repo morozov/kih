@@ -1,9 +1,10 @@
 <?php
 
-use PHPUnit\Framework\TestCase;
-use Psr\Container\ContainerInterface;
+namespace PHPSTORM_META
+{
+    use PHPUnit\Framework\TestCase;
+    use Psr\Container\ContainerInterface;
 
-namespace PHPSTORM_META {
     override(TestCase::createConfiguredMock(0), map([
         '' => '@|PHPUnit_Framework_MockObject_MockObject',
     ]));
