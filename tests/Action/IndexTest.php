@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace KiH\Tests\Action;
 
 use KiH\Action\Index;
+use PHPUnit\Framework\MockObject\MockObject as MockObject;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Slim\Http\Response;
@@ -17,7 +18,7 @@ class IndexTest extends TestCase
      */
     public function invoke()
     {
-        /** @var RouterInterface|\PHPUnit_Framework_MockObject_MockObject $router */
+        /** @var RouterInterface|MockObject $router */
         $router = $this->createMock(RouterInterface::class);
         $router->expects(
             $this->once()

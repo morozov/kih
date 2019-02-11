@@ -8,6 +8,7 @@ use DateTime;
 use KiH\Entity\Item;
 use KiH\Entity\Feed;
 use KiH\Generator\Rss;
+use PHPUnit\Framework\MockObject\MockObject as MockObject;
 use PHPUnit\Framework\TestCase;
 use Slim\Interfaces\RouterInterface;
 
@@ -18,7 +19,7 @@ class RssTest extends TestCase
      */
     public function generate()
     {
-        /** @var RouterInterface|\PHPUnit_Framework_MockObject_MockObject $router */
+        /** @var RouterInterface|MockObject $router */
         $router = $this->getMockBuilder(RouterInterface::class)
             ->setMethods(['pathFor'])
             ->getMockForAbstractClass();

@@ -12,6 +12,7 @@ use KiH\Client;
 use KiH\Entity\Feed as Entity;
 use KiH\Entity\Item;
 use KiH\Generator;
+use PHPUnit\Framework\MockObject\MockObject as MockObject;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Slim\Http\Response;
@@ -47,7 +48,7 @@ class FeedTest extends TestCase
         ]);
         $document = new DOMDocument();
 
-        /** @var Client|\PHPUnit_Framework_MockObject_MockObject $client */
+        /** @var Client|MockObject $client */
         $client = $this->getMockBuilder(Client::class)
             ->setMethods(['getFeed'])
             ->getMockForAbstractClass();
@@ -56,7 +57,7 @@ class FeedTest extends TestCase
         )->method('getFeed')
             ->willReturn($entity);
 
-        /** @var Generator|\PHPUnit_Framework_MockObject_MockObject $generator */
+        /** @var Generator|MockObject $generator */
         $generator = $this->getMockBuilder(Generator::class)
             ->setMethods(['generate'])
             ->getMockForAbstractClass();

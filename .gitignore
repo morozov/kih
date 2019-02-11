@@ -1,2 +1,3 @@
-infection.log
-vendor
+/.phpunit.result.cache
+/infection.log
+/vendor

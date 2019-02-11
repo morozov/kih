@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace KiH\Tests\Middleware;
 
 use KiH\Middleware\BasePath;
+use PHPUnit\Framework\MockObject\MockObject as MockObject;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
@@ -55,7 +56,7 @@ class BasePathTest extends TestCase
         $response = $this->createMock(Response::class);
         $nextResponse = $this->createMock(Response::class);
 
-        /** @var callable&\PHPUnit\Framework\MockObject\MockObject $next */
+        /** @var callable&MockObject $next */
         $next = $this->createPartialMock(stdClass::class, ['__invoke']);
         $next->expects($this->once())
             ->method('__invoke')

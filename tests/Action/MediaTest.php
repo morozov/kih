@@ -7,6 +7,7 @@ namespace KiH\Tests\Action;
 use KiH\Action\Media as Action;
 use KiH\Client;
 use KiH\Entity\Media as Entity;
+use PHPUnit\Framework\MockObject\MockObject as MockObject;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Slim\Http\Response;
@@ -18,7 +19,7 @@ class MediaTest extends TestCase
      */
     public function invoke()
     {
-        /** @var Request|\PHPUnit_Framework_MockObject_MockObject $request */
+        /** @var Request|MockObject $request */
         $request = $this->getMockBuilder(Request::class)
             ->setMethods(['getAttribute'])
             ->getMockForAbstractClass();
@@ -28,7 +29,7 @@ class MediaTest extends TestCase
             ->with('id')
             ->willReturn('B6C46FF0A72F8DB!703491');
 
-        /** @var Client|\PHPUnit_Framework_MockObject_MockObject $client */
+        /** @var Client|MockObject $client */
         $client = $this->getMockBuilder(Client::class)
             ->setMethods(['getMedia'])
             ->getMockForAbstractClass();
