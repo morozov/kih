@@ -4,7 +4,7 @@ cache:
     - $HOME/.composer/cache
 php:
   - 7.2
-  - nightly
+  - 7.3
 before_script:
   - if [[ $(phpenv version-name) == "nightly" ]]; then composer remove --dev phan/phan; else pecl install ast; fi
   - make install
