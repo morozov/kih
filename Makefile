@@ -7,7 +7,7 @@ install:
 serve:
 	php -S localhost:8000 -t public index.php
 test:
-	vendor/bin/phpcs --standard=PSR2 -p --colors src public tests
+	vendor/bin/phpcs
 	vendor/bin/phpunit --color $(PHPUNIT_FLAGS)
 	vendor/bin/phpstan analyse -l 7 -c phpstan.neon src tests
 	vendor/bin/psalm

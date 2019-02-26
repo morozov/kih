@@ -1,23 +1,23 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace KiH\Tests\Generator;
 
 use DateTime;
-use KiH\Entity\Item;
 use KiH\Entity\Feed;
+use KiH\Entity\Item;
 use KiH\Generator\Rss;
-use PHPUnit\Framework\MockObject\MockObject as MockObject;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Slim\Interfaces\RouterInterface;
+use function array_merge;
+use function http_build_query;
 
 class RssTest extends TestCase
 {
     /**
      * @test
      */
-    public function generate()
+    public function generate() : void
     {
         /** @var RouterInterface|MockObject $router */
         $router = $this->getMockBuilder(RouterInterface::class)
@@ -26,7 +26,7 @@ class RssTest extends TestCase
         $router->expects(
             $this->any()
         )->method('pathFor')
-            ->willReturnCallback(function (string $name, array $params) {
+            ->willReturnCallback(static function (string $name, array $params) {
                 return 'http://example.com/index.php?'
                     . http_build_query(array_merge(['page' => $name], $params));
             });
@@ -40,7 +40,7 @@ class RssTest extends TestCase
                 3379032,
                 'audio/mpeg',
                 'Hello, <b>world</b>!'
-            )
+            ),
         ]);
 
         $rss = new Rss($router, [

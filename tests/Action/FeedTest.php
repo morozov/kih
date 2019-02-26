@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace KiH\Tests\Action;
 
@@ -12,21 +10,22 @@ use KiH\Client;
 use KiH\Entity\Feed as Entity;
 use KiH\Entity\Item;
 use KiH\Generator;
-use PHPUnit\Framework\MockObject\MockObject as MockObject;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Slim\Http\Response;
+use const PHP_EOL;
 
 class FeedTest extends TestCase
 {
     /**
      * @test
      */
-    public function invoke()
+    public function invoke() : void
     {
         $request = $this->createMock(Request::class);
 
-        $entity = new Entity([
+        $entity   = new Entity([
             new Item(
                 '',
                 '',

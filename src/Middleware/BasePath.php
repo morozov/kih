@@ -1,10 +1,11 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace KiH\Middleware;
 
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Slim\Router;
+use function rtrim;
 
 class BasePath
 {
@@ -17,24 +18,16 @@ class BasePath
     /**
      * Constructor
      *
-     * @param Router $router
-     * @param string|null $baseUri
-     *
      * @suppress PhanTypeMismatchProperty
      */
-    public function __construct(Router $router, string $baseUri = null)
+    public function __construct(Router $router, ?string $baseUri = null)
     {
-        $this->router = $router;
+        $this->router  = $router;
         $this->baseUri = $baseUri;
     }
 
     /**
      * Runs the middleware
-     *
-     * @param Request $request
-     * @param Response $response
-     * @param callable $next
-     * @return Response
      *
      * @suppress PhanTypeMismatchArgument
      */
@@ -43,7 +36,7 @@ class BasePath
         if ($this->baseUri !== null) {
             $basePath = $this->baseUri;
         } else {
-            $basePath = rtrim($request->getUri()->withPath('/'), '/');
+            $basePath = rtrim((string) $request->getUri()->withPath('/'), '/');
         }
 
         $this->router->setBasePath($basePath);

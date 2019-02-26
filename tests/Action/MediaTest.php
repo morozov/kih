@@ -1,13 +1,11 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace KiH\Tests\Action;
 
 use KiH\Action\Media as Action;
 use KiH\Client;
 use KiH\Entity\Media as Entity;
-use PHPUnit\Framework\MockObject\MockObject as MockObject;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Slim\Http\Response;
@@ -17,7 +15,7 @@ class MediaTest extends TestCase
     /**
      * @test
      */
-    public function invoke()
+    public function invoke() : void
     {
         /** @var Request|MockObject $request */
         $request = $this->getMockBuilder(Request::class)

@@ -1,12 +1,11 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace KiH\Entity;
 
 use ArrayIterator;
 use Iterator;
 use IteratorAggregate;
+use function array_map;
 
 final class Feed implements IteratorAggregate
 {
@@ -15,9 +14,12 @@ final class Feed implements IteratorAggregate
      */
     private $files;
 
+    /**
+     * @param Item[] $files
+     */
     public function __construct(array $files)
     {
-        $this->files = array_map(function (Item $file) : Item {
+        $this->files = array_map(static function (Item $file) : Item {
             return $file;
         }, $files);
     }

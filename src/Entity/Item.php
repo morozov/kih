@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace KiH\Entity;
 
@@ -52,12 +50,12 @@ final class Item
         string $mimeType,
         string $description
     ) {
-        $this->id = $id;
-        $this->title = $title;
-        $this->createdAt = $createdAt;
-        $this->guid = $guid;
-        $this->duration = $duration;
-        $this->mimeType = $mimeType;
+        $this->id          = $id;
+        $this->title       = $title;
+        $this->createdAt   = $createdAt;
+        $this->guid        = $guid;
+        $this->duration    = $duration;
+        $this->mimeType    = $mimeType;
         $this->description = $description;
     }
 
@@ -66,17 +64,17 @@ final class Item
         return $this->id;
     }
 
-    public function getTitle(): string
+    public function getTitle() : string
     {
         return $this->title;
     }
 
-    public function getCreatedAt(): DateTime
+    public function getCreatedAt() : DateTime
     {
         return $this->createdAt;
     }
 
-    public function getGuid(): string
+    public function getGuid() : string
     {
         return $this->guid;
     }
@@ -86,7 +84,7 @@ final class Item
         return $this->duration;
     }
 
-    public function getMimeType(): string
+    public function getMimeType() : string
     {
         return $this->mimeType;
     }

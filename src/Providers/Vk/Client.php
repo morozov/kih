@@ -1,17 +1,25 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace KiH\Providers\Vk;
 
 use DateTime;
 use GuzzleHttp\Client as HttpClient;
 use KiH\Client as ClientInterface;
-use KiH\Entity\Item;
 use KiH\Entity\Feed;
+use KiH\Entity\Item;
 use KiH\Entity\Media;
 use KiH\Exception;
 use Psr\Http\Message\StreamInterface;
+use const JSON_ERROR_NONE;
+use function array_filter;
+use function array_map;
+use function array_merge;
+use function http_build_query;
+use function json_decode;
+use function json_last_error;
+use function json_last_error_msg;
+use function rawurlencode;
+use function sprintf;
 
 final class Client implements ClientInterface
 {
@@ -36,8 +44,8 @@ final class Client implements ClientInterface
 
     public function __construct(HttpClient $client, string $groupName, string $accessToken)
     {
-        $this->client = $client;
-        $this->groupName = $groupName;
+        $this->client      = $client;
+        $this->groupName   = $groupName;
         $this->accessToken = $accessToken;
     }
 
@@ -66,6 +74,9 @@ final class Client implements ClientInterface
         );
     }
 
+    /**
+     * @param mixed[] $params Query parameters
+     */
     private function call(string $method, array $params) : StreamInterface
     {
         $url = sprintf(
@@ -85,6 +96,11 @@ final class Client implements ClientInterface
             ->getBody();
     }
 
+    /**
+     * @return mixed[]
+     *
+     * @throws Exception
+     */
     private function decode(StreamInterface $response) : array
     {
         $data = json_decode((string) $response, true);
@@ -96,15 +112,18 @@ final class Client implements ClientInterface
         return $data;
     }
 
+    /**
+     * @param mixed[] $data
+     */
     private function createItem(array $data) : ?Item
     {
-        if (!isset($data['attachments'])) {
+        if (! isset($data['attachments'])) {
             return null;
         }
 
         $audio = $this->findAttachment($data['attachments'], 'audio');
 
-        if (!$audio) {
+        if (! $audio) {
             return null;
         }
 
@@ -121,9 +140,14 @@ final class Client implements ClientInterface
         );
     }
 
+    /**
+     * @param mixed[] $data
+     *
+     * @throws Exception
+     */
     private function createFeed(array $data) : Feed
     {
-        if (!isset($data['response']['items'])) {
+        if (! isset($data['response']['items'])) {
             throw new Exception('The response does not contain the "response.items" element');
         }
 
@@ -136,15 +160,25 @@ final class Client implements ClientInterface
         );
     }
 
+    /**
+     * @param mixed[] $data
+     *
+     * @throws Exception
+     */
     private function createMedia(array $data) : Media
     {
-        if (!isset($data['response'][0]['url'])) {
+        if (! isset($data['response'][0]['url'])) {
             throw new Exception('The response does not contain the "response.0.url" element');
         }
 
         return new Media($data['response'][0]['url']);
     }
 
+    /**
+     * @param mixed[] $data
+     *
+     * @return mixed[]|null
+     */
     private function findAttachment(array $data, string $type) : ?array
     {
         foreach ($data as $attachment) {

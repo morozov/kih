@@ -1,26 +1,29 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace KiH\Tests\Providers\Vk;
 
 use DateTime;
 use GuzzleHttp\Client as HttpClient;
-use KiH\Entity\Media;
-use KiH\Providers\Vk\Client;
 use KiH\Entity\Feed;
 use KiH\Entity\Item;
+use KiH\Entity\Media;
 use KiH\Exception;
+use KiH\Providers\Vk\Client;
+use PHPUnit\Framework\MockObject\Builder\InvocationMocker;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\MessageInterface;
 use Psr\Http\Message\StreamInterface;
+use function assert;
+use function file_get_contents;
+use function is_string;
 
 class ClientTest extends TestCase
 {
     /**
      * @test
      */
-    public function getFeed()
+    public function getFeed() : void
     {
 // @codingStandardsIgnoreStart
         $httpClient = $this->createHttpClientMock(
@@ -43,7 +46,7 @@ class ClientTest extends TestCase
  
 Архив аудиозаписей с возможностью загрузки: https://vk.cc/6X3JkI
 EOF
-            )
+            ),
         ]), $this->getClient($httpClient)->getFeed());
     }
 
@@ -51,16 +54,19 @@ EOF
      * @test
      * @dataProvider feedFailureProvider
      */
-    public function feedParseFailure(string $fixture)
+    public function feedParseFailure(string $fixture) : void
     {
-        /** @var HttpClient|\PHPUnit_Framework_MockObject_MockObject $httpClient */
+        /** @var HttpClient|MockObject $httpClient */
         $httpClient = $this->createHttpClientMockFromFixture('failure/folder/' . $fixture);
 
         $this->expectException(Exception::class);
         $this->getClient($httpClient)->getFeed();
     }
 
-    public static function feedFailureProvider()
+    /**
+     * @return mixed[][]
+     */
+    public static function feedFailureProvider() : iterable
     {
         return [
             'invalid-syntax' => [
@@ -76,15 +82,18 @@ EOF
      * @test
      * @dataProvider noAudioProvider
      */
-    public function noAudio(string $fixture)
+    public function noAudio(string $fixture) : void
     {
-        /** @var HttpClient|\PHPUnit_Framework_MockObject_MockObject $httpClient */
+        /** @var HttpClient|MockObject $httpClient */
         $httpClient = $this->createHttpClientMockFromFixture('failure/folder/' . $fixture);
 
         $this->assertEquals(new Feed([]), $this->getClient($httpClient)->getFeed());
     }
 
-    public static function noAudioProvider()
+    /**
+     * @return mixed[][]
+     */
+    public static function noAudioProvider() : iterable
     {
         return [
             'no-attachments' => [
@@ -99,7 +108,7 @@ EOF
     /**
      * @test
      */
-    public function getMedia()
+    public function getMedia() : void
     {
 // @codingStandardsIgnoreStart
         $httpClient = $this->createHttpClientMock(
@@ -119,16 +128,19 @@ EOF
      * @test
      * @dataProvider mediaFailureProvider
      */
-    public function mediaParseFailure(string $fixture)
+    public function mediaParseFailure(string $fixture) : void
     {
-        /** @var HttpClient|\PHPUnit_Framework_MockObject_MockObject $httpClient */
+        /** @var HttpClient|MockObject $httpClient */
         $httpClient = $this->createHttpClientMockFromFixture('failure/media/' . $fixture);
 
         $this->expectException(Exception::class);
         $this->getClient($httpClient)->getMedia('2000003614_456241126');
     }
 
-    public static function mediaFailureProvider()
+    /**
+     * @return mixed[][]
+     */
+    public static function mediaFailureProvider() : iterable
     {
         return [
             'no-value' => [
@@ -137,15 +149,15 @@ EOF
         ];
     }
 
-    private function getClient(HttpClient $httpClient)
+    private function getClient(HttpClient $httpClient) : Client
     {
         return new Client($httpClient, 'kremhrust', 'the-token');
     }
 
-    private function createHttpClientMock(string $method, string $url, string $response)
+    private function createHttpClientMock(string $method, string $url, string $response) : HttpClient
     {
         $httpClient = $this->createMock(HttpClient::class);
-        $mocker = $httpClient->expects(
+        $mocker     = $httpClient->expects(
             $this->once()
         )->method('request');
 
@@ -155,10 +167,10 @@ EOF
         return $httpClient;
     }
 
-    private function createHttpClientMockFromFixture(string $fixture)
+    private function createHttpClientMockFromFixture(string $fixture) : HttpClient
     {
         $httpClient = $this->createMock(HttpClient::class);
-        $mocker = $httpClient->expects(
+        $mocker     = $httpClient->expects(
             $this->once()
         )->method('request');
 
@@ -167,22 +179,25 @@ EOF
         return $httpClient;
     }
 
-    private function expectRequest($mocker, string $method, string $url)
+    private function expectRequest(InvocationMocker $mocker, string $method, string $url) : InvocationMocker
     {
         return $mocker->with($method, $url);
     }
 
-    private function expectResponse($mocker, string $response)
+    private function expectResponse(InvocationMocker $mocker, string $response) : InvocationMocker
     {
         return $mocker->willReturn($this->createConfiguredMock(MessageInterface::class, [
             'getBody' => $this->createConfiguredMock(StreamInterface::class, [
                 '__toString' => $response,
-            ])
+            ]),
         ]));
     }
 
-    private function getFixture(string $file)
+    private function getFixture(string $file) : string
     {
-        return file_get_contents(__DIR__ . '/Client/fixtures/' . $file);
+        $fixture = file_get_contents(__DIR__ . '/Client/fixtures/' . $file);
+        assert(is_string($fixture));
+
+        return $fixture;
     }
 }

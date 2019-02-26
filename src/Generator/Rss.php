@@ -1,13 +1,11 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace KiH\Generator;
 
 use DOMDocument;
 use DOMElement;
-use KiH\Entity\Item;
 use KiH\Entity\Feed;
+use KiH\Entity\Item;
 use KiH\Generator;
 use Slim\Interfaces\RouterInterface;
 
@@ -17,20 +15,23 @@ final class Rss implements Generator
     private $router;
 
     /**
-     * @var array
+     * @var string[]
      */
     private $settings;
 
+    /**
+     * @param string[] $settings
+     */
     public function __construct(RouterInterface $router, array $settings)
     {
-        $this->router = $router;
+        $this->router   = $router;
         $this->settings = $settings;
     }
 
     public function generate(Feed $feed) : DOMDocument
     {
         $document = new DOMDocument('1.0', 'UTF-8');
-        $rss = $document->createElement('rss');
+        $rss      = $document->createElement('rss');
         $rss->setAttribute('version', '2.0');
         $document->appendChild($rss);
 
