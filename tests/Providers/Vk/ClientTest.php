@@ -28,7 +28,7 @@ class ClientTest extends TestCase
 // @codingStandardsIgnoreStart
         $httpClient = $this->createHttpClientMock(
             'GET',
-            'https://api.vk.com/method/wall.search?domain=kremhrust&query=%D0%90%D1%83%D0%B4%D0%B8%D0%BE%D0%B7%D0%B0%D0%BF%D0%B8%D1%81%D1%8C+%D1%8D%D1%84%D0%B8%D1%80%D0%B0&owners_only=1&count=10&access_token=the-token&v=5.68',
+            'https://api.vk.com/method/wall.search?domain=kremhrust&query=%D0%AD%D1%84%D0%B8%D1%80&owners_only=1&count=10&access_token=the-token&v=5.68',
             $this->getFixture('success/feed.json')
         );
 // @codingStandardsIgnoreEnd

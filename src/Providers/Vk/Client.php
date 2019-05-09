@@ -55,7 +55,7 @@ final class Client implements ClientInterface
             $this->decode(
                 $this->call('wall.search', [
                     'domain' => $this->groupName,
-                    'query' => 'Аудиозапись эфира',
+                    'query' => 'Эфир',
                     'owners_only' => 1,
                     'count' => 10,
                 ])
