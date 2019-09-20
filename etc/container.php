@@ -10,11 +10,14 @@ use KiH\Generator\Rss;
 use KiH\Middleware\BasePath;
 use KiH\Providers\Vk\Client as VkClient;
 use Slim\App;
-use Slim\Container;
+use Slim\Psr7\Factory\ResponseFactory;
+use UltraLite\Container\Container;
 
-return new Container(array_merge([
-    Client::class => static function (Container $container) : Client {
-        $settings = $container->get('settings')['vk'];
+$settings = require __DIR__ . '/../etc/config.php';
+
+return new Container([
+    Client::class => static function () use ($settings) : Client {
+        $settings = $settings['vk'];
 
         return new VkClient(
             new HttpClient(),
@@ -22,15 +25,19 @@ return new Container(array_merge([
             $settings['access_token']
         );
     },
-    Generator::class => static function (Container $container) : Generator {
+    Generator::class => static function (Container $container) use ($settings) : Generator {
+        $app = $container->get(App::class);
+
         return new Rss(
-            $container->get('router'),
-            $container->get('settings')['feed']
+            $app->getRouteCollector()->getRouteParser(),
+            $settings['feed']
         );
     },
     Index::class => static function (Container $container) : Index {
+        $app = $container->get(App::class);
+
         return new Index(
-            $container->get('router'),
+            $app->getRouteCollector()->getRouteParser(),
             'feed'
         );
     },
@@ -45,22 +52,23 @@ return new Container(array_merge([
             $container->get(Client::class)
         );
     },
-    BasePath::class => static function (Container $container) : BasePath {
-        return new BasePath(
-            $container->get('router'),
-            $container->get('settings')['baseUri']
+    App::class => static function (Container $container) use ($settings) : App {
+        $app = new App(
+            new ResponseFactory(),
+            $container
         );
-    },
-    App::class => static function (Container $container) : App {
-        $app = new App($container);
         $app->get('/', Index::class)
             ->setName('index');
         $app->get('/rss.xml', Feed::class)
             ->setName('feed');
         $app->get('/media/{id}.mp3', Media::class)
             ->setName('media');
-        $app->add($container->get(BasePath::class));
+
+        $app->add(new BasePath(
+            $app->getRouteCollector(),
+            $settings['baseUri']
+        ));
 
         return $app;
     },
-], require __DIR__ . '/../etc/config.php'));
+]);

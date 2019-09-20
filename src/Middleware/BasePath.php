@@ -2,17 +2,18 @@
 
 namespace KiH\Middleware;
 
-use Psr\Http\Message\ResponseInterface as Response;
-use Psr\Http\Message\ServerRequestInterface as Request;
-use Slim\Router;
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface;
+use Psr\Http\Server\RequestHandlerInterface;
+use Slim\Interfaces\RouteCollectorInterface;
 use function rtrim;
 
 class BasePath
 {
-    /** @var Router */
-    private $router;
+    /** @var RouteCollectorInterface */
+    private $routeCollector;
 
-    /** @var string|null */
+    /** @var string */
     private $baseUri;
 
     /**
@@ -20,27 +21,27 @@ class BasePath
      *
      * @suppress PhanTypeMismatchProperty
      */
-    public function __construct(Router $router, ?string $baseUri = null)
+    public function __construct(RouteCollectorInterface $routeCollector, string $baseUri = '')
     {
-        $this->router  = $router;
-        $this->baseUri = $baseUri;
+        $this->routeCollector = $routeCollector;
+        $this->baseUri        = $baseUri;
     }
 
     /**
      * Runs the middleware
-     *
-     * @suppress PhanTypeMismatchArgument
      */
-    public function __invoke(Request $request, Response $response, callable $next) : Response
+    public function __invoke(ServerRequestInterface $request, RequestHandlerInterface $next) : ResponseInterface
     {
-        if ($this->baseUri !== null) {
+        if ($this->baseUri !== '') {
             $basePath = $this->baseUri;
         } else {
-            $basePath = rtrim((string) $request->getUri()->withPath('/'), '/');
+            $basePath = (string) $request->getUri()->withPath('/');
         }
 
-        $this->router->setBasePath($basePath);
+        $this->routeCollector->setBasePath(
+            rtrim($basePath, '/')
+        );
 
-        return $next($request, $response);
+        return $next->handle($request);
     }
 }

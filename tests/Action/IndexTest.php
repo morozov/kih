@@ -2,12 +2,12 @@
 
 namespace KiH\Tests\Action;
 
+use GuzzleHttp\Psr7\Response;
 use KiH\Action\Index;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ServerRequestInterface as Request;
-use Slim\Http\Response;
-use Slim\Interfaces\RouterInterface;
+use Slim\Interfaces\RouteParserInterface;
 
 class IndexTest extends TestCase
 {
@@ -16,12 +16,12 @@ class IndexTest extends TestCase
      */
     public function invoke() : void
     {
-        /** @var RouterInterface|MockObject $router */
-        $router = $this->createMock(RouterInterface::class);
+        /** @var RouteParserInterface|MockObject $router */
+        $router = $this->createMock(RouteParserInterface::class);
         $router->expects(
             $this->once()
         )
-            ->method('pathFor')
+            ->method('urlFor')
             ->with('route-name')
             ->willReturn('/new/location');
 

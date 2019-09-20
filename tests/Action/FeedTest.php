@@ -5,6 +5,7 @@ namespace KiH\Tests\Action;
 use DateTime;
 use DateTimeZone;
 use DOMDocument;
+use GuzzleHttp\Psr7\Response;
 use KiH\Action\Feed as Action;
 use KiH\Client;
 use KiH\Entity\Feed as Entity;
@@ -13,7 +14,6 @@ use KiH\Generator;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ServerRequestInterface as Request;
-use Slim\Http\Response;
 use const PHP_EOL;
 
 class FeedTest extends TestCase

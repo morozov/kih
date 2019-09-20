@@ -7,12 +7,12 @@ use DOMElement;
 use KiH\Entity\Feed;
 use KiH\Entity\Item;
 use KiH\Generator;
-use Slim\Interfaces\RouterInterface;
+use Slim\Interfaces\RouteParserInterface;
 
 final class Rss implements Generator
 {
-    /** @var RouterInterface $router */
-    private $router;
+    /** @var RouteParserInterface $routeParser */
+    private $routeParser;
 
     /**
      * @var string[]
@@ -22,10 +22,10 @@ final class Rss implements Generator
     /**
      * @param string[] $settings
      */
-    public function __construct(RouterInterface $router, array $settings)
+    public function __construct(RouteParserInterface $routeParser, array $settings)
     {
-        $this->router   = $router;
-        $this->settings = $settings;
+        $this->routeParser = $routeParser;
+        $this->settings    = $settings;
     }
 
     public function generate(Feed $feed) : DOMDocument
@@ -52,7 +52,7 @@ final class Rss implements Generator
         $link = $document->createElement('link');
         $link->appendChild(
             $document->createTextNode(
-                $this->router->pathFor('index')
+                $this->routeParser->urlFor('index')
             )
         );
         $channel->appendChild($link);
@@ -93,7 +93,7 @@ final class Rss implements Generator
         );
         $item->appendChild($guid);
 
-        $url = $this->router->pathFor('media', [
+        $url = $this->routeParser->urlFor('media', [
             'id' => $file->getId(),
         ]);
 

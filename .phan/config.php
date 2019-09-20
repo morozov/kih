@@ -5,6 +5,7 @@ return [
         'src',
         'vendor/guzzlehttp/guzzle/src',
         'vendor/psr/http-message/src',
+        'vendor/psr/http-server-handler/src',
         'vendor/slim/slim',
     ],
     'exclude_analysis_directory_list' => [

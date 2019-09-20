@@ -2,14 +2,14 @@
 
 namespace KiH\Tests\Middleware;
 
+use GuzzleHttp\Psr7\Uri;
 use KiH\Middleware\BasePath;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
-use Slim\Http\Uri;
-use Slim\Router;
-use stdClass;
+use Psr\Http\Server\RequestHandlerInterface;
+use Slim\Interfaces\RouteCollectorInterface;
 
 class BasePathTest extends TestCase
 {
@@ -33,15 +33,15 @@ class BasePathTest extends TestCase
         $request = $this->createMock(Request::class);
         $request->expects($this->once())
             ->method('getUri')
-            ->willReturn(Uri::createFromString('http://example.com/rss.xml'));
+            ->willReturn(new Uri('http://example.com/rss.xml'));
         $router     = $this->getRouter('http://example.com');
-        $middleware = new BasePath($router, null);
+        $middleware = new BasePath($router);
         $this->assertMiddlewareWorks($middleware, $request);
     }
 
-    private function getRouter(string $expected) : Router
+    private function getRouter(string $expected) : RouteCollectorInterface
     {
-        $router = $this->createPartialMock(Router::class, ['setBasePath']);
+        $router = $this->createMock(RouteCollectorInterface::class);
         $router->expects($this->once())
             ->method('setBasePath')
             ->with($expected);
@@ -51,19 +51,18 @@ class BasePathTest extends TestCase
 
     private function assertMiddlewareWorks(BasePath $middleware, Request $request) : void
     {
-        $response     = $this->createMock(Response::class);
-        $nextResponse = $this->createMock(Response::class);
+        $response = $this->createMock(Response::class);
 
-        /** @var callable|MockObject $next */
-        $next = $this->createPartialMock(stdClass::class, ['__invoke']);
+        /** @var RequestHandlerInterface|MockObject $next */
+        $next = $this->createMock(RequestHandlerInterface::class);
         $next->expects($this->once())
-            ->method('__invoke')
-            ->with($request, $response)
-            ->willReturn($nextResponse);
+            ->method('handle')
+            ->with($request)
+            ->willReturn($response);
 
         $this->assertSame(
-            $nextResponse,
-            $middleware($request, $response, $next)
+            $response,
+            $middleware($request, $next)
         );
     }
 }

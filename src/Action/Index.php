@@ -4,27 +4,27 @@ namespace KiH\Action;
 
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
-use Slim\Interfaces\RouterInterface;
+use Slim\Interfaces\RouteParserInterface;
 
 class Index
 {
-    /** @var RouterInterface */
-    private $router;
+    /** @var RouteParserInterface */
+    private $routeParser;
 
     /** @var string */
     private $redirectTo;
 
-    public function __construct(RouterInterface $router, string $redirectTo)
+    public function __construct(RouteParserInterface $routeParser, string $redirectTo)
     {
-        $this->router     = $router;
-        $this->redirectTo = $redirectTo;
+        $this->routeParser = $routeParser;
+        $this->redirectTo  = $redirectTo;
     }
 
     public function __invoke(Request $request, Response $response) : Response
     {
         return $response->withHeader(
             'Location',
-            $this->router->pathFor($this->redirectTo)
+            $this->routeParser->urlFor($this->redirectTo)
         );
     }
 }

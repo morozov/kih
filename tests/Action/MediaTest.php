@@ -2,13 +2,13 @@
 
 namespace KiH\Tests\Action;
 
+use GuzzleHttp\Psr7\Response;
 use KiH\Action\Media as Action;
 use KiH\Client;
 use KiH\Entity\Media as Entity;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ServerRequestInterface as Request;
-use Slim\Http\Response;
 
 class MediaTest extends TestCase
 {

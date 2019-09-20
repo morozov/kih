@@ -18,7 +18,9 @@
     "ext-dom": "*",
     "ext-json": "*",
     "guzzlehttp/guzzle": "^6.3",
-    "slim/slim": "^3.0"
+    "slim/psr7": "^0.5",
+    "slim/slim": "^4.2",
+    "ultra-lite/container": "^6.2"
   },
   "require-dev": {
     "doctrine/coding-standard": "^6.0",
