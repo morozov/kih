@@ -8,11 +8,11 @@
         <directory name="src"/>
     </projectFiles>
     <issueHandlers>
-        <ImplicitToStringCast>
+        <ImplementedReturnTypeMismatch>
             <errorLevel type="suppress">
-                <file name="src/Middleware/BasePath.php"/>
+                <file name="src/Entity/Feed.php"/>
             </errorLevel>
-        </ImplicitToStringCast>
+        </ImplementedReturnTypeMismatch>
         <MismatchingDocblockReturnType>
             <errorLevel type="suppress">
                 <file name="src/Entity/Feed.php"/>
