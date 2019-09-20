@@ -9,7 +9,7 @@ serve:
 test:
 	vendor/bin/phpcs
 	vendor/bin/phpunit --color $(PHPUNIT_FLAGS)
-	vendor/bin/phpstan analyse -l 7 -c phpstan.neon src tests
+	vendor/bin/phpstan analyse
 	vendor/bin/psalm
 	if [ -e vendor/bin/phan ] ; then vendor/bin/phan --progress-bar --color ; fi
 	if php -m | grep -i xdebug ; then vendor/bin/infection --min-msi=100 ; fi
