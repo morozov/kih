@@ -19,7 +19,7 @@
     "ext-intl": "*",
     "ext-json": "*",
     "ext-mbstring": "*",
-    "guzzlehttp/guzzle": "^6",
+    "guzzlehttp/guzzle": "^6.3",
     "slim/slim": "^3.0"
   },
   "require-dev": {
