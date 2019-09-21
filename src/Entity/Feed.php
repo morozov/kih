@@ -5,7 +5,6 @@ namespace KiH\Entity;
 use ArrayIterator;
 use Iterator;
 use IteratorAggregate;
-use function array_map;
 
 final class Feed implements IteratorAggregate
 {
@@ -19,9 +18,7 @@ final class Feed implements IteratorAggregate
      */
     public function __construct(array $files)
     {
-        $this->files = array_map(static function (Item $file) : Item {
-            return $file;
-        }, $files);
+        $this->files = $files;
     }
 
     /**
