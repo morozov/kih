@@ -3,6 +3,7 @@
     <arg name="basepath" value="."/>
     <arg name="colors"/>
     <arg value="ps"/>
+    <arg name="cache" value=".phpcs.cache"/>
 
     <file>src</file>
     <file>tests</file>
