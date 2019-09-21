@@ -5,6 +5,7 @@
     <arg value="ps"/>
     <arg name="cache" value=".phpcs.cache"/>
 
+    <file>etc</file>
     <file>src</file>
     <file>tests</file>
 

@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 use GuzzleHttp\Client as HttpClient;
 use KiH\Action\Feed;
@@ -13,7 +13,7 @@ use Slim\App;
 use Slim\Container;
 
 return new Container(array_merge([
-    Client::class => function (Container $container) : Client {
+    Client::class => static function (Container $container) : Client {
         $settings = $container->get('settings')['vk'];
 
         return new VkClient(
@@ -22,36 +22,36 @@ return new Container(array_merge([
             $settings['access_token']
         );
     },
-    Generator::class => function (Container $container) : Generator {
+    Generator::class => static function (Container $container) : Generator {
         return new Rss(
             $container->get('router'),
             $container->get('settings')['feed']
         );
     },
-    Index::class => function (Container $container) : Index {
+    Index::class => static function (Container $container) : Index {
         return new Index(
             $container->get('router'),
             'feed'
         );
     },
-    Feed::class => function (Container $container) : Feed {
+    Feed::class => static function (Container $container) : Feed {
         return new Feed(
             $container->get(Client::class),
             $container->get(Generator::class)
         );
     },
-    Media::class => function (Container $container) : Media {
+    Media::class => static function (Container $container) : Media {
         return new Media(
             $container->get(Client::class)
         );
     },
-    BasePath::class => function (Container $container) : BasePath {
+    BasePath::class => static function (Container $container) : BasePath {
         return new BasePath(
             $container->get('router'),
             $container->get('settings')['baseUri']
         );
     },
-    App::class => function (Container $container) : App {
+    App::class => static function (Container $container) : App {
         $app = new App($container);
         $app->get('/', Index::class)
             ->setName('index');
