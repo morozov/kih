@@ -16,9 +16,7 @@
   "require": {
     "php": "^7.2",
     "ext-dom": "*",
-    "ext-intl": "*",
     "ext-json": "*",
-    "ext-mbstring": "*",
     "guzzlehttp/guzzle": "^6.3",
     "slim/slim": "^3.0"
   },
