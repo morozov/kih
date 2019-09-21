@@ -1,10 +1,20 @@
-nginx:
-    image: morozov/kih-nginx
-    ports:
-        - '8000:80'
-    links:
-        - php-fpm
-php-fpm:
-    image: morozov/kih-php-fpm
-    environment:
-        - VK_ACCESS_TOKEN=${VK_ACCESS_TOKEN}
+version: "3"
+services:
+    nginx:
+        image: nginx
+        ports:
+            - '8000:80'
+        volumes:
+            - ./docker/nginx/conf.d:/etc/nginx/conf.d:ro
+            - ./public:/usr/share/nginx/html:ro
+        links:
+            - php-fpm
+    php-fpm:
+        image: php:7.3-fpm
+        volumes:
+            - ./etc:/usr/share/nginx/etc:ro
+            - ./src:/usr/share/nginx/src:ro
+            - ./vendor:/usr/share/nginx/vendor:ro
+            - ./public/index.php:/usr/share/nginx/html/index.php:ro
+        environment:
+            - VK_ACCESS_TOKEN=${VK_ACCESS_TOKEN}
