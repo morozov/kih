@@ -10,7 +10,7 @@
   ],
   "config" : {
     "platform": {
-      "php": "7.2.15"
+      "php": "7.2.999"
     }
   },
   "require": {
