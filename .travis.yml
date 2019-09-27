@@ -10,9 +10,6 @@ jobs:
     include:
       - stage: Static Analysis
         php: 7.3
-        script: vendor/bin/phpcs
-      - stage: Static Analysis
-        php: 7.3
         script: vendor/bin/phpstan a
       - stage: Static Analysis
         php: 7.3
@@ -24,10 +21,16 @@ jobs:
 
       - stage: Testing
         php: 7.2
-        script: vendor/bin/phpunit --coverage-clover=coverage.clover
+        script:
+          - vendor/bin/phpunit --coverage-clover=coverage.clover
+          - wget https://scrutinizer-ci.com/ocular.phar
+          - php ocular.phar code-coverage:upload --format=php-clover coverage.clover
       - stage: Testing
         php: 7.3
-        script: vendor/bin/phpunit --coverage-clover=coverage.clover
+        script:
+          - vendor/bin/phpunit --coverage-clover=coverage.clover
+          - wget https://scrutinizer-ci.com/ocular.phar
+          - php ocular.phar code-coverage:upload --format=php-clover coverage.clover
 
       - stage: Mutation Testing
         php: 7.2
