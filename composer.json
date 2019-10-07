@@ -18,7 +18,7 @@
     "ext-dom": "*",
     "ext-json": "*",
     "guzzlehttp/guzzle": "^6.3",
-    "slim/psr7": "^0.5",
+    "slim/psr7": "^0.6",
     "slim/slim": "^4.2",
     "ultra-lite/container": "^6.2"
   },
