@@ -9,6 +9,10 @@ install:
 jobs:
     include:
       - stage: Static Analysis
+        env: PHP_CodeSniffer
+        php: 7.3
+        script: vendor/bin/phpcs
+      - stage: Static Analysis
         env: PHPStan
         php: 7.3
         script: vendor/bin/phpstan a
