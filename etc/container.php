@@ -7,7 +7,6 @@ use KiH\Action\Media;
 use KiH\Client;
 use KiH\Generator;
 use KiH\Generator\Rss;
-use KiH\Middleware\BasePath;
 use KiH\Providers\Vk\Client as VkClient;
 use Slim\App;
 use Slim\Psr7\Factory\ResponseFactory;
@@ -52,7 +51,7 @@ return new Container([
             $container->get(Client::class)
         );
     },
-    App::class => static function (Container $container) use ($settings) : App {
+    App::class => static function (Container $container) : App {
         $app = new App(
             new ResponseFactory(),
             $container
@@ -63,11 +62,6 @@ return new Container([
             ->setName('feed');
         $app->get('/media/{id}.mp3', Media::class)
             ->setName('media');
-
-        $app->add(new BasePath(
-            $app->getRouteCollector(),
-            $settings['baseUri']
-        ));
 
         return $app;
     },

@@ -8,6 +8,7 @@ use KiH\Entity\Item;
 use KiH\Generator\Rss;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
+use Psr\Http\Message\UriInterface;
 use Slim\Interfaces\RouteParserInterface;
 use function array_merge;
 use function http_build_query;
@@ -23,8 +24,8 @@ class RssTest extends TestCase
         $router = $this->createMock(RouteParserInterface::class);
         $router->expects(
             $this->any()
-        )->method('urlFor')
-            ->willReturnCallback(static function (string $name, array $params) {
+        )->method('fullUrlFor')
+            ->willReturnCallback(static function (UriInterface $requestUri, string $name, array $params) {
                 return 'http://example.com/index.php?'
                     . http_build_query(array_merge(['page' => $name], $params));
             });
@@ -48,7 +49,7 @@ class RssTest extends TestCase
 
         $this->assertXmlStringEqualsXmlFile(
             __DIR__ . '/fixtures/rss.xml',
-            $rss->generate($folder)
+            $rss->generate($folder, $this->createMock(UriInterface::class))
         );
     }
 }

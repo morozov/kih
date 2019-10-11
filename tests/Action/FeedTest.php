@@ -14,6 +14,7 @@ use KiH\Generator;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ServerRequestInterface as Request;
+use Psr\Http\Message\UriInterface;
 use const PHP_EOL;
 
 class FeedTest extends TestCase
@@ -24,6 +25,8 @@ class FeedTest extends TestCase
     public function invoke() : void
     {
         $request = $this->createMock(Request::class);
+        $request->method('getUri')
+            ->willReturn($this->createMock(UriInterface::class));
 
         $entity   = new Entity([
             new Item(

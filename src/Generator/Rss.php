@@ -7,6 +7,7 @@ use DOMElement;
 use KiH\Entity\Feed;
 use KiH\Entity\Item;
 use KiH\Generator;
+use Psr\Http\Message\UriInterface;
 use Slim\Interfaces\RouteParserInterface;
 
 final class Rss implements Generator
@@ -28,7 +29,7 @@ final class Rss implements Generator
         $this->settings    = $settings;
     }
 
-    public function generate(Feed $feed) : DOMDocument
+    public function generate(Feed $feed, UriInterface $requestUri) : DOMDocument
     {
         $document = new DOMDocument('1.0', 'UTF-8');
         $rss      = $document->createElement('rss');
@@ -52,7 +53,7 @@ final class Rss implements Generator
         $link = $document->createElement('link');
         $link->appendChild(
             $document->createTextNode(
-                $this->routeParser->urlFor('index')
+                $this->routeParser->fullUrlFor($requestUri, 'index')
             )
         );
         $channel->appendChild($link);
@@ -63,14 +64,14 @@ final class Rss implements Generator
 
         foreach ($feed as $file) {
             $channel->appendChild(
-                $this->generateItem($document, $file)
+                $this->generateItem($document, $file, $requestUri)
             );
         }
 
         return $document;
     }
 
-    private function generateItem(DOMDocument $document, Item $file) : DOMElement
+    private function generateItem(DOMDocument $document, Item $file, UriInterface $requestUri) : DOMElement
     {
         $item = $document->createElement('item');
 
@@ -93,7 +94,7 @@ final class Rss implements Generator
         );
         $item->appendChild($guid);
 
-        $url = $this->routeParser->urlFor('media', [
+        $url = $this->routeParser->fullUrlFor($requestUri, 'media', [
             'id' => $file->getId(),
         ]);
 

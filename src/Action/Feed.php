@@ -40,7 +40,7 @@ class Feed
         }
 
         $response->getBody()->write(
-            $this->generator->generate($feed)->saveXML()
+            $this->generator->generate($feed, $request->getUri())->saveXML()
         );
 
         return $response;
