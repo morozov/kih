@@ -9,23 +9,28 @@ install:
 jobs:
     include:
       - stage: Static Analysis
+        env: PHPStan
         php: 7.3
         script: vendor/bin/phpstan a
       - stage: Static Analysis
+        env: Psalm
         php: 7.3
         script: vendor/bin/psalm
       - stage: Static Analysis
+        env: Phan
         php: 7.3
         before_install: pecl install ast
         script: vendor/bin/phan --progress-bar --color
 
       - stage: Testing
+        env: PHPUnit
         php: 7.2
         script:
           - vendor/bin/phpunit --coverage-clover=coverage.clover
           - wget https://scrutinizer-ci.com/ocular.phar
           - php ocular.phar code-coverage:upload --format=php-clover coverage.clover
       - stage: Testing
+        env: PHPUnit
         php: 7.3
         script:
           - vendor/bin/phpunit --coverage-clover=coverage.clover
@@ -33,8 +38,10 @@ jobs:
           - php ocular.phar code-coverage:upload --format=php-clover coverage.clover
 
       - stage: Mutation Testing
+        env: Infection
         php: 7.2
         script: vendor/bin/infection --min-msi=100
       - stage: Mutation Testing
+        env: Infection
         php: 7.3
         script: vendor/bin/infection --min-msi=100
