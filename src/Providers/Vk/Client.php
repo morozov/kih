@@ -10,7 +10,6 @@ use KiH\Entity\Item;
 use KiH\Entity\Media;
 use KiH\Exception;
 use Psr\Http\Message\StreamInterface;
-use const JSON_ERROR_NONE;
 use function array_filter;
 use function array_map;
 use function array_merge;
@@ -20,6 +19,7 @@ use function json_last_error;
 use function json_last_error_msg;
 use function rawurlencode;
 use function sprintf;
+use const JSON_ERROR_NONE;
 
 final class Client implements ClientInterface
 {
