@@ -6,6 +6,9 @@ use ArrayIterator;
 use Iterator;
 use IteratorAggregate;
 
+/**
+ * @phpstan-implements IteratorAggregate<Item>
+ */
 final class Feed implements IteratorAggregate
 {
     /**
