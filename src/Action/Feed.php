@@ -7,6 +7,8 @@ use KiH\Client;
 use KiH\Generator;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
+use function assert;
+use function is_string;
 
 class Feed
 {
@@ -38,9 +40,11 @@ class Feed
             break;
         }
 
-        $response->getBody()->write(
-            $this->generator->generate($feed, $request->getUri())->saveXML()
-        );
+        $xml = $this->generator->generate($feed, $request->getUri())
+            ->saveXML();
+        assert(is_string($xml));
+
+        $response->getBody()->write($xml);
 
         return $response;
     }
