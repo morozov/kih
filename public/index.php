@@ -1,14 +1,13 @@
-<?php
+<?php declare(strict_types=1);
 
-declare(strict_types=1);
-
+use Psr\Container\ContainerInterface;
 use Slim\App;
 
 require __DIR__ . '/../vendor/autoload.php';
 
-(function () {
-    /** @var \Psr\Container\ContainerInterface $container */
+(static function () : void {
     $container = require __DIR__ . '/../etc/container.php';
+    assert($container instanceof ContainerInterface);
     $container
         ->get(App::class)
         ->run();

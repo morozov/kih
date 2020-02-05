@@ -10,7 +10,7 @@ services:
         links:
             - php-fpm
     php-fpm:
-        image: php:7.3-fpm
+        image: php:7.4-fpm
         volumes:
             - ./etc:/usr/share/nginx/etc:ro
             - ./src:/usr/share/nginx/src:ro

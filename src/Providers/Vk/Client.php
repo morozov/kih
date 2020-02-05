@@ -27,20 +27,11 @@ final class Client implements ClientInterface
 
     private const API_VERSION = '5.68';
 
-    /**
-     * @var HttpClient
-     */
-    private $client;
+    private HttpClient $client;
 
-    /**
-     * @var string
-     */
-    private $groupName;
+    private string $groupName;
 
-    /**
-     * @var string
-     */
-    private $accessToken;
+    private string $accessToken;
 
     public function __construct(HttpClient $client, string $groupName, string $accessToken)
     {

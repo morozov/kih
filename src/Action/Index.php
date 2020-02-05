@@ -8,11 +8,9 @@ use Slim\Interfaces\RouteParserInterface;
 
 class Index
 {
-    /** @var RouteParserInterface */
-    private $routeParser;
+    private RouteParserInterface $routeParser;
 
-    /** @var string */
-    private $redirectTo;
+    private string $redirectTo;
 
     public function __construct(RouteParserInterface $routeParser, string $redirectTo)
     {

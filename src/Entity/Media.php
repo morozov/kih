@@ -4,10 +4,7 @@ namespace KiH\Entity;
 
 final class Media
 {
-    /**
-     * @var string
-     */
-    private $url;
+    private string $url;
 
     public function __construct(string $url)
     {

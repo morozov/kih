@@ -12,13 +12,12 @@ use Slim\Interfaces\RouteParserInterface;
 
 final class Rss implements Generator
 {
-    /** @var RouteParserInterface $routeParser */
-    private $routeParser;
+    private RouteParserInterface $routeParser;
 
     /**
      * @var string[]
      */
-    private $settings;
+    private array $settings;
 
     /**
      * @param string[] $settings
