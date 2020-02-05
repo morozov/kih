@@ -10,11 +10,9 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 
 class Feed
 {
-    /** @var Client */
-    private $client;
+    private Client $client;
 
-    /** @var Generator */
-    private $generator;
+    private Generator $generator;
 
     public function __construct(Client $client, Generator $generator)
     {

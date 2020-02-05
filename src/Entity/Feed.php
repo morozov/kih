@@ -14,7 +14,7 @@ final class Feed implements IteratorAggregate
     /**
      * @var Item[]
      */
-    private $files;
+    private array $files;
 
     /**
      * @param Item[] $files

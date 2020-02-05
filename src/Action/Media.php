@@ -8,8 +8,7 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 
 class Media
 {
-    /** @var Client */
-    private $client;
+    private Client $client;
 
     public function __construct(Client $client)
     {

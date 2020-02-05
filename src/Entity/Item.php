@@ -6,40 +6,19 @@ use DateTime;
 
 final class Item
 {
-    /**
-     * @var string
-     */
-    private $id;
+    private string $id;
 
-    /**
-     * @var string
-     */
-    private $title;
+    private string $title;
 
-    /**
-     * @var DateTime
-     */
-    private $createdAt;
+    private DateTime $createdAt;
 
-    /**
-     * @var string
-     */
-    private $guid;
+    private string $guid;
 
-    /**
-     * @var int
-     */
-    private $duration;
+    private int $duration;
 
-    /**
-     * @var string
-     */
-    private $mimeType;
+    private string $mimeType;
 
-    /**
-     * @var string
-     */
-    private $description;
+    private string $description;
 
     public function __construct(
         string $id,
