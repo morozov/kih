@@ -8,5 +8,5 @@ use Psr\Http\Message\UriInterface;
 
 interface Generator
 {
-    public function generate(Feed $feed, UriInterface $requestUri) : DOMDocument;
+    public function generate(Feed $feed, UriInterface $requestUri):DOMDocument;
 }
