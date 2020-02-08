@@ -2,7 +2,7 @@
 
 namespace KiH\Providers\Vk;
 
-use DateTime;
+use DateTimeImmutable;
 use GuzzleHttp\Client as HttpClient;
 use KiH\Client as ClientInterface;
 use KiH\Entity\Feed;
@@ -123,7 +123,7 @@ final class Client implements ClientInterface
         return new Item(
             $id,
             $audio['title'],
-            new DateTime('@' . $data['date']),
+            new DateTimeImmutable('@' . $data['date']),
             $id,
             $audio['duration'],
             'audio/mpeg',

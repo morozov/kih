@@ -2,7 +2,7 @@
 
 namespace KiH\Tests\Generator;
 
-use DateTime;
+use DateTimeImmutable;
 use KiH\Entity\Feed;
 use KiH\Entity\Item;
 use KiH\Generator\Rss;
@@ -34,7 +34,7 @@ class RssTest extends TestCase
             new Item(
                 'B6C46FF0A72F8DB!703491',
                 'Test Episode',
-                new DateTime('2017-05-05T19:15:33.14Z'),
+                new DateTimeImmutable('2017-05-05T19:15:33.14Z'),
                 'https://1drv.ms/u/s!Atv4cgr_RmwLqvgDHXuWoLPkN7ccQQ',
                 3379032,
                 'audio/mpeg',
