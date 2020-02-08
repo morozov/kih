@@ -2,7 +2,7 @@
 
 namespace KiH\Tests\Action;
 
-use DateTime;
+use DateTimeImmutable;
 use DateTimeZone;
 use DOMDocument;
 use GuzzleHttp\Psr7\Response;
@@ -32,7 +32,7 @@ class FeedTest extends TestCase
             new Item(
                 '',
                 '',
-                new DateTime('2017-11-27 19:08:30', new DateTimeZone('Europe/Moscow')),
+                new DateTimeImmutable('2017-11-27 19:08:30', new DateTimeZone('Europe/Moscow')),
                 '',
                 0,
                 '',
@@ -41,7 +41,7 @@ class FeedTest extends TestCase
             new Item(
                 '',
                 '',
-                new DateTime('2017-11-23 19:10:20', new DateTimeZone('Europe/Moscow')),
+                new DateTimeImmutable('2017-11-23 19:10:20', new DateTimeZone('Europe/Moscow')),
                 '',
                 0,
                 '',

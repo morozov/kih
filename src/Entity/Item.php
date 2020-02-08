@@ -2,7 +2,7 @@
 
 namespace KiH\Entity;
 
-use DateTime;
+use DateTimeImmutable;
 
 final class Item
 {
@@ -10,7 +10,7 @@ final class Item
 
     private string $title;
 
-    private DateTime $createdAt;
+    private DateTimeImmutable $createdAt;
 
     private string $guid;
 
@@ -23,7 +23,7 @@ final class Item
     public function __construct(
         string $id,
         string $title,
-        DateTime $createdAt,
+        DateTimeImmutable $createdAt,
         string $guid,
         int $duration,
         string $mimeType,
@@ -48,7 +48,7 @@ final class Item
         return $this->title;
     }
 
-    public function getCreatedAt() : DateTime
+    public function getCreatedAt() : DateTimeImmutable
     {
         return $this->createdAt;
     }

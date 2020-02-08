@@ -28,12 +28,13 @@ class Feed
         $feed = $this->client->getFeed();
 
         foreach ($feed as $item) {
-            $date = clone $item->getCreatedAt();
-            $date->setTimezone(new DateTimeZone('UTC'));
-            $date->modify('+1 day');
-
             $response = $response
-                ->withHeader('Expires', $date->format('D, d M Y H:i:s \G\M\T'));
+                ->withHeader(
+                    'Expires',
+                    $item->getCreatedAt()
+                        ->setTimezone(new DateTimeZone('UTC'))
+                        ->modify('+1 day')->format('D, d M Y H:i:s \G\M\T')
+                );
             break;
         }
 

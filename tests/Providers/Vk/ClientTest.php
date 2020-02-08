@@ -2,7 +2,7 @@
 
 namespace KiH\Tests\Providers\Vk;
 
-use DateTime;
+use DateTimeImmutable;
 use GuzzleHttp\Client as HttpClient;
 use KiH\Entity\Feed;
 use KiH\Entity\Item;
@@ -37,7 +37,7 @@ class ClientTest extends TestCase
             new Item(
                 '2000209538_456241259',
                 'Эфир от 21 сентября 2017',
-                new DateTime('2017-09-21T19:14:00.000000+0000'),
+                new DateTimeImmutable('2017-09-21T19:14:00.000000+0000'),
                 '2000209538_456241259',
                 3500,
                 'audio/mpeg',
