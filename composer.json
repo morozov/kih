@@ -23,7 +23,7 @@
     "phan/phan": "^2.4",
     "phpstan/phpstan": "^0.12",
     "phpstan/phpstan-phpunit": "^0.12",
-    "phpunit/phpunit": "^8.5",
+    "phpunit/phpunit": "^9.0",
     "slevomat/coding-standard": "^6.1.5",
     "vimeo/psalm": "^3.8"
   },
