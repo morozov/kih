@@ -1,0 +1,26 @@
+service: kih
+
+provider:
+    name: aws
+    region: us-west-1
+    runtime: provided
+    profile: default
+
+plugins:
+    - ./vendor/bref/bref
+
+functions:
+    rss:
+        handler: public/index.php
+        description: 'KiH RSS Feed'
+        timeout: 28
+        layers:
+            - ${bref:layer.php-74-fpm}
+        events:
+            -   http: 'ANY /'
+            -   http: 'ANY /{proxy+}'
+
+package:
+    exclude:
+        - 'node_modules/**'
+        - 'tests/**'

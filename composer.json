@@ -15,7 +15,8 @@
     "guzzlehttp/guzzle": "^6.5",
     "slim/psr7": "^1.0",
     "slim/slim": "^4.4",
-    "ultra-lite/container": "^6.2"
+    "ultra-lite/container": "^6.2",
+    "bref/bref": "^0.5.15"
   },
   "require-dev": {
     "doctrine/coding-standard": "^7.0.2",
