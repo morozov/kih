@@ -1,5 +1,7 @@
 /.env
 /.phpunit.result.cache
 /.phpcs.cache
+/.serverless
 /infection.log
+/node_modules
 /vendor

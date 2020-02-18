@@ -57,6 +57,8 @@ return new Container([
         );
     },
     App::class => static function (Container $container): App {
+        $_SERVER['HTTPS'] = true;
+
         $app = new App(
             new ResponseFactory(),
             $container

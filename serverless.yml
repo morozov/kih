@@ -1,0 +1,40 @@
+service: kih
+
+provider:
+  name: aws
+  region: us-west-2
+  runtime: provided.al2
+  environment:
+    VK_ACCESS_TOKEN: ${ssm:/kih/vk/access_token}
+
+plugins:
+  - ./vendor/bref/bref
+  - serverless-lift
+
+package:
+  individually: true
+  exclude:
+    - ./**
+
+functions:
+  app:
+    handler: public/index.php
+    timeout: 10
+    layers:
+      - ${bref:layer.php-80-fpm}
+    events:
+      - httpApi: '*'
+    package:
+      include:
+        - etc/**
+        - public/index.php
+        - src/**
+        - vendor/**
+
+constructs:
+  app:
+    type: server-side-website
+    assets:
+      /favicon.ico: public/favicon.ico
+      /robots.txt: public/robots.txt
+      /stylesheet.xsl: public/stylesheet.xsl
