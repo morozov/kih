@@ -5,6 +5,8 @@ namespace KiH\Action;
 use KiH\Client;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
+use function assert;
+use function is_string;
 
 class Media
 {
@@ -17,8 +19,9 @@ class Media
 
     public function __invoke(Request $request, Response $response) : Response
     {
-        return $response->withHeader('Location', $this->client->getMedia(
-            $request->getAttribute('id')
-        )->url);
+        $id = $request->getAttribute('id');
+        assert(is_string($id));
+
+        return $response->withHeader('Location', $this->client->getMedia($id)->url);
     }
 }

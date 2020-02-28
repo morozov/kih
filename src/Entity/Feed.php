@@ -13,12 +13,12 @@ use IteratorAggregate;
 final class Feed implements IteratorAggregate
 {
     /**
-     * @var Item[]
+     * @var array<int,Item>
      */
     private array $files;
 
     /**
-     * @param Item[] $files
+     * @param array<int,Item> $files
      */
     public function __construct(array $files)
     {
@@ -26,7 +26,7 @@ final class Feed implements IteratorAggregate
     }
 
     /**
-     * @return Iterator|Item[]
+     * @return ArrayIterator<int,Item>
      */
     public function getIterator() : Iterator
     {

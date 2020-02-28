@@ -18,7 +18,7 @@ jobs:
       - stage: Static Analysis
         env: Psalm
         php: 7.4
-        script: vendor/bin/psalm
+        script: vendor/bin/psalm --shepherd
       - stage: Static Analysis
         env: Phan
         php: 7.4

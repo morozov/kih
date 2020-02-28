@@ -21,6 +21,13 @@ use function rawurlencode;
 use function sprintf;
 use const JSON_ERROR_NONE;
 
+/**
+ * @psalm-type Audio = array{id: int, owner_id: int, title: string, duration: int, url: string}
+ * @psalm-type Attachment = array{type: string, audio: Audio}
+ * @psalm-type ItemStruct = array{date: string, text:string, attachments: list<Attachment>}
+ * @psalm-type FeedData = array{response: array{items: list<ItemStruct>}}
+ * @psalm-type MediaData = array{response: list<Audio>}
+ */
 final class Client implements ClientInterface
 {
     private const API_URL = 'https://api.vk.com';
@@ -42,27 +49,29 @@ final class Client implements ClientInterface
 
     public function getFeed() : Feed
     {
-        return $this->createFeed(
-            $this->decode(
-                $this->call('wall.search', [
-                    'domain' => $this->groupName,
-                    'query' => 'Эфир',
-                    'owners_only' => 1,
-                    'count' => 10,
-                ])
-            )
+        /** @psalm-var FeedData $data */
+        $data = $this->decode(
+            $this->call('wall.search', [
+                'domain' => $this->groupName,
+                'query' => 'Эфир',
+                'owners_only' => 1,
+                'count' => 10,
+            ])
         );
+
+        return $this->createFeed($data);
     }
 
     public function getMedia(string $id) : Media
     {
-        return $this->createMedia(
-            $this->decode(
-                $this->call('audio.getById', [
-                    'audios' => $id,
-                ])
-            )
+        /** @psalm-var MediaData $data */
+        $data = $this->decode(
+            $this->call('audio.getById', [
+                'audios' => $id,
+            ])
         );
+
+        return $this->createMedia($data);
     }
 
     /**
@@ -88,12 +97,13 @@ final class Client implements ClientInterface
     }
 
     /**
-     * @return mixed[]
+     * @return array<string, mixed>
      *
      * @throws Exception
      */
     private function decode(StreamInterface $response) : array
     {
+        /** @var array<string, mixed> $data */
         $data = json_decode((string) $response, true);
 
         if (json_last_error() !== JSON_ERROR_NONE) {
@@ -104,30 +114,32 @@ final class Client implements ClientInterface
     }
 
     /**
-     * @param mixed[] $data
+     * @param mixed[] $item
+     *
+     * @psalm-param ItemStruct $item
      */
-    private function createItem(array $data) : ?Item
+    private function createItem(array $item) : ?Item
     {
-        if (! isset($data['attachments'])) {
+        if (! isset($item['attachments'])) {
             return null;
         }
 
-        $audio = $this->findAttachment($data['attachments'], 'audio');
+        $audio = $this->findAttachment($item['attachments'], 'audio');
 
         if (! $audio) {
             return null;
         }
 
-        $id = sprintf('%s_%s', $audio['owner_id'], $audio['id']);
+        $id = sprintf('%d_%d', $audio['owner_id'], $audio['id']);
 
         return new Item(
             $id,
             $audio['title'],
-            new DateTimeImmutable('@' . $data['date']),
+            new DateTimeImmutable('@' . $item['date']),
             $id,
             $audio['duration'],
             'audio/mpeg',
-            $data['text']
+            $item['text']
         );
     }
 
@@ -135,6 +147,8 @@ final class Client implements ClientInterface
      * @param mixed[] $data
      *
      * @throws Exception
+     *
+     * @psalm-param FeedData $data
      */
     private function createFeed(array $data) : Feed
     {
@@ -155,6 +169,8 @@ final class Client implements ClientInterface
      * @param mixed[] $data
      *
      * @throws Exception
+     *
+     * @psalm-param MediaData $data
      */
     private function createMedia(array $data) : Media
     {
@@ -168,7 +184,11 @@ final class Client implements ClientInterface
     /**
      * @param mixed[] $data
      *
-     * @return mixed[]|null
+     * @return array<string,mixed>|null
+     *
+     * @psalm-param list<Attachment> $data
+     * @psalm-param 'audio' $type
+     * @psalm-return Audio|null
      */
     private function findAttachment(array $data, string $type) : ?array
     {
