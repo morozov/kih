@@ -19,6 +19,6 @@ class Media
     {
         return $response->withHeader('Location', $this->client->getMedia(
             $request->getAttribute('id')
-        )->getUrl());
+        )->url);
     }
 }

@@ -4,21 +4,24 @@ namespace KiH\Entity;
 
 use DateTimeImmutable;
 
+/**
+ * @psalm-immutable
+ */
 final class Item
 {
-    private string $id;
+    public string $id;
 
-    private string $title;
+    public string $title;
 
-    private DateTimeImmutable $createdAt;
+    public DateTimeImmutable $createdAt;
 
-    private string $guid;
+    public string $guid;
 
-    private int $duration;
+    public int $duration;
 
-    private string $mimeType;
+    public string $mimeType;
 
-    private string $description;
+    public string $description;
 
     public function __construct(
         string $id,
@@ -36,40 +39,5 @@ final class Item
         $this->duration    = $duration;
         $this->mimeType    = $mimeType;
         $this->description = $description;
-    }
-
-    public function getId() : string
-    {
-        return $this->id;
-    }
-
-    public function getTitle() : string
-    {
-        return $this->title;
-    }
-
-    public function getCreatedAt() : DateTimeImmutable
-    {
-        return $this->createdAt;
-    }
-
-    public function getGuid() : string
-    {
-        return $this->guid;
-    }
-
-    public function getDuration() : int
-    {
-        return $this->duration;
-    }
-
-    public function getMimeType() : string
-    {
-        return $this->mimeType;
-    }
-
-    public function getDescription() : string
-    {
-        return $this->description;
     }
 }

@@ -70,47 +70,47 @@ final class Rss implements Generator
         return $document;
     }
 
-    private function generateItem(DOMDocument $document, Item $file, UriInterface $requestUri) : DOMElement
+    private function generateItem(DOMDocument $document, Item $item, UriInterface $requestUri) : DOMElement
     {
-        $item = $document->createElement('item');
+        $element = $document->createElement('item');
 
         $title = $document->createElement('title');
         $title->appendChild(
-            $document->createTextNode($file->getTitle())
+            $document->createTextNode($item->title)
         );
-        $item->appendChild($title);
+        $element->appendChild($title);
 
         $pubDate = $document->createElement('pubDate');
         $pubDate->appendChild(
-            $document->createTextNode($file->getCreatedAt()->format('r'))
+            $document->createTextNode($item->createdAt->format('r'))
         );
-        $item->appendChild($pubDate);
+        $element->appendChild($pubDate);
 
         $guid = $document->createElement('guid');
         $guid->setAttribute('isPermaLink', 'false');
         $guid->appendChild(
-            $document->createTextNode($file->getGuid())
+            $document->createTextNode($item->guid)
         );
-        $item->appendChild($guid);
+        $element->appendChild($guid);
 
         $url = $this->routeParser->fullUrlFor($requestUri, 'media', [
-            'id' => $file->getId(),
+            'id' => $item->id,
         ]);
 
         $enclosure = $document->createElement('enclosure');
         $enclosure->setAttribute('url', $url);
 
-        $enclosure->setAttribute('length', (string) $file->getDuration());
+        $enclosure->setAttribute('length', (string) $item->duration);
 
-        $enclosure->setAttribute('type', $file->getMimeType());
-        $item->appendChild($enclosure);
+        $enclosure->setAttribute('type', $item->mimeType);
+        $element->appendChild($enclosure);
 
         $description = $document->createElement('description');
         $description->appendChild(
-            $document->createTextNode($file->getDescription())
+            $document->createTextNode($item->description)
         );
-        $item->appendChild($description);
+        $element->appendChild($description);
 
-        return $item;
+        return $element;
     }
 }

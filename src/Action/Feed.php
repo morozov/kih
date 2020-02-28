@@ -33,7 +33,7 @@ class Feed
             $response = $response
                 ->withHeader(
                     'Expires',
-                    $item->getCreatedAt()
+                    $item->createdAt
                         ->setTimezone(new DateTimeZone('UTC'))
                         ->modify('+1 day')->format('D, d M Y H:i:s \G\M\T')
                 );

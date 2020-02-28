@@ -8,6 +8,7 @@ use IteratorAggregate;
 
 /**
  * @phpstan-implements IteratorAggregate<Item>
+ * @psalm-immutable
  */
 final class Feed implements IteratorAggregate
 {
