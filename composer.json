@@ -25,7 +25,7 @@
     "phpstan/phpstan-phpunit": "^0.12",
     "phpunit/phpunit": "^9.0",
     "slevomat/coding-standard": "^6.1.5",
-    "vimeo/psalm": "^3.9"
+    "vimeo/psalm": "^3.10"
   },
   "config": {
     "platform": {
