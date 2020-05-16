@@ -1,5 +1,6 @@
 # Шоу Кремова и Хрусталёва
 
+[![PHP Version](https://img.shields.io/badge/php-%5E7.4-blue.svg)](https://packagist.org/packages/morozov/kih)
 [![Code Coverage](https://coveralls.io/repos/github/morozov/kih/badge.svg?branch=master)](https://coveralls.io/github/morozov/kih?branch=master)
 [![Build Status](https://travis-ci.org/morozov/kih.png)](https://travis-ci.org/morozov/kih)
 
@@ -7,10 +8,9 @@ A pet project. Takes a public OneDrive or Яндекс.Диск share as input a
 
 ## Web Application
 
-1. PHP 7.1
-2. [Slim Framework](https://www.slimframework.com/)
-3. [PSR-7](http://www.php-fig.org/psr/psr-7/) actions and middlewares
-4. [PSR-11](http://www.php-fig.org/psr/psr-11/) compatible container
+1. [Slim Framework](https://www.slimframework.com/)
+2. [PSR-7](http://www.php-fig.org/psr/psr-7/) actions and middlewares
+3. [PSR-11](http://www.php-fig.org/psr/psr-11/) compatible container
 
 ## APIs
 
