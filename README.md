@@ -1,7 +1,6 @@
 # Шоу Кремова и Хрусталёва
 
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/morozov/kih/badges/quality-score.png)](https://scrutinizer-ci.com/g/morozov/kih/)
-[![Code Coverage](https://scrutinizer-ci.com/g/morozov/kih/badges/coverage.png)](https://scrutinizer-ci.com/g/morozov/kih/)
+[![Code Coverage](https://coveralls.io/repos/github/morozov/kih/badge.svg?branch=master)](https://coveralls.io/github/morozov/kih?branch=master)
 [![Build Status](https://travis-ci.org/morozov/kih.png)](https://travis-ci.org/morozov/kih)
 
 A pet project. Takes a public OneDrive or Яндекс.Диск share as input and produces a podcast RSS feed. First of all, it works. Second, it's a playground for trying modern development tools for and approaches to development in PHP.
@@ -33,7 +32,7 @@ A pet project. Takes a public OneDrive or Яндекс.Диск share as input a
 ## Continuous Integration
 
 1. [Travis CI](https://travis-ci.org/morozov/kih)
-2. [Scrutinizer](https://scrutinizer-ci.com/g/morozov/kih/)
+2. [Coveralls](https://coveralls.io/github/morozov/kih)
 
 
 ## Deployment
