@@ -22,7 +22,6 @@
     "infection/infection": "^0.16",
     "phan/phan": "^2.6",
     "phpunit/phpunit": "^9.1",
-    "slevomat/coding-standard": "^6.1.5",
     "vimeo/psalm": "^3.11"
   },
   "config": {
