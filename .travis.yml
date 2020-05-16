@@ -29,9 +29,10 @@ jobs:
         env: PHPUnit
         php: 7.4
         script:
-          - vendor/bin/phpunit --coverage-clover=coverage.clover
-          - wget https://scrutinizer-ci.com/ocular.phar
-          - php ocular.phar code-coverage:upload --format=php-clover coverage.clover
+          - vendor/bin/phpunit --coverage-clover=build/logs/clover.xml
+        after_success:
+          - wget https://github.com/php-coveralls/php-coveralls/releases/download/v2.2.0/php-coveralls.phar
+          - php php-coveralls.phar
 
       - stage: Mutation Testing
         env: Infection

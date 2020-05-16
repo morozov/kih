@@ -1,7 +1,6 @@
 /.gitignore
 /.phan
 /.phpstorm.meta.php
-/.scrutinizer.yml
 /.travis.yml
 /Makefile
 /README.md
