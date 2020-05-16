@@ -26,7 +26,7 @@ A pet project. Takes a public OneDrive or Яндекс.Диск share as input a
 
 ## Static code analysis
 
-1. [PHPStan](https://github.com/phpstan/phpstan)
+1. ~~[PHPStan](https://github.com/phpstan/phpstan)~~
 2. [Vimeo Psalm](https://getpsalm.org/)
 3. [Phan](https://github.com/phan/phan)
 

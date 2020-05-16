@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "577cc08d9fa2b35e0852c7474d4072b9",
+    "content-hash": "51fdae7253c38505c7aafdec36f9b5bb",
     "packages": [
         {
             "name": "fig/http-message-util",
@@ -2448,101 +2448,6 @@
             "time": "2020-01-25T20:42:48+00:00"
         },
         {
-            "name": "phpstan/phpstan",
-            "version": "0.12.15",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/phpstan/phpstan.git",
-                "reference": "3928a303954338eb8ed201cfe69134950318b470"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/3928a303954338eb8ed201cfe69134950318b470",
-                "reference": "3928a303954338eb8ed201cfe69134950318b470",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^7.1"
-            },
-            "bin": [
-                "phpstan",
-                "phpstan.phar"
-            ],
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "0.12-dev"
-                }
-            },
-            "autoload": {
-                "files": [
-                    "bootstrap.php"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "description": "PHPStan - PHP Static Analysis Tool",
-            "time": "2020-03-16T15:27:38+00:00"
-        },
-        {
-            "name": "phpstan/phpstan-phpunit",
-            "version": "0.12.5",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/phpstan/phpstan-phpunit.git",
-                "reference": "fe49777a04d8dafcfb3958e3441d9c982a1e40ae"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan-phpunit/zipball/fe49777a04d8dafcfb3958e3441d9c982a1e40ae",
-                "reference": "fe49777a04d8dafcfb3958e3441d9c982a1e40ae",
-                "shasum": ""
-            },
-            "require": {
-                "php": "~7.1",
-                "phpstan/phpstan": "^0.12.3"
-            },
-            "conflict": {
-                "phpunit/phpunit": "<7.0"
-            },
-            "require-dev": {
-                "consistence/coding-standard": "^3.5",
-                "dealerdirect/phpcodesniffer-composer-installer": "^0.4.4",
-                "ergebnis/composer-normalize": "^2.0.2",
-                "jakub-onderka/php-parallel-lint": "^1.0",
-                "phing/phing": "^2.16.0",
-                "phpstan/phpstan-strict-rules": "^0.12",
-                "phpunit/phpunit": "^7.0",
-                "satooshi/php-coveralls": "^1.0",
-                "slevomat/coding-standard": "^4.7.2"
-            },
-            "type": "phpstan-extension",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "0.12-dev"
-                },
-                "phpstan": {
-                    "includes": [
-                        "extension.neon",
-                        "rules.neon"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "PHPStan\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "description": "PHPUnit extensions and rules for PHPStan",
-            "time": "2020-01-03T10:04:21+00:00"
-        },
-        {
             "name": "phpunit/php-code-coverage",
             "version": "8.0.1",
             "source": {
@@ -4745,5 +4650,6 @@
     "platform-dev": [],
     "platform-overrides": {
         "php": "7.4.0"
-    }
+    },
+    "plugin-api-version": "1.1.0"
 }
