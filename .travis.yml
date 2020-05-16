@@ -12,13 +12,9 @@ install:
 jobs:
     include:
       - stage: Static Analysis
-        env: PHPStan
-        php: 7.4
-        script: vendor/bin/phpstan a
-      - stage: Static Analysis
         env: Psalm
         php: 7.4
-        script: vendor/bin/psalm
+        script: vendor/bin/psalm --shepherd
       - stage: Static Analysis
         env: Phan
         php: 7.4

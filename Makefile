@@ -5,7 +5,6 @@ serve:
 test:
 	vendor/bin/phpcs
 	vendor/bin/phpunit
-	vendor/bin/phpstan analyse
 	vendor/bin/psalm
 	vendor/bin/phan --progress-bar --color
 	if php -m | grep -i xdebug ; then vendor/bin/infection --min-msi=100 ; fi

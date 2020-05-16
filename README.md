@@ -2,6 +2,7 @@
 
 [![PHP Version](https://img.shields.io/badge/php-%5E7.4-blue.svg)](https://packagist.org/packages/morozov/kih)
 [![Code Coverage](https://coveralls.io/repos/github/morozov/kih/badge.svg?branch=master)](https://coveralls.io/github/morozov/kih?branch=master)
+[![Type coverage](https://shepherd.dev/github/morozov/kih/coverage.svg)](https://shepherd.dev/github/morozov/kih)
 [![Build Status](https://travis-ci.org/morozov/kih.png)](https://travis-ci.org/morozov/kih)
 
 A pet project. Takes a public OneDrive or Яндекс.Диск share as input and produces a podcast RSS feed. First of all, it works. Second, it's a playground for trying modern development tools for and approaches to development in PHP.
@@ -25,7 +26,7 @@ A pet project. Takes a public OneDrive or Яндекс.Диск share as input a
 
 ## Static code analysis
 
-1. [PHPStan](https://github.com/phpstan/phpstan)
+1. ~~[PHPStan](https://github.com/phpstan/phpstan)~~
 2. [Vimeo Psalm](https://getpsalm.org/)
 3. [Phan](https://github.com/phan/phan)
 
