@@ -20,7 +20,7 @@
   "require-dev": {
     "doctrine/coding-standard": "^7.0.2",
     "infection/infection": "^0.16",
-    "phan/phan": "^2.6",
+    "phan/phan": "^3.0",
     "phpunit/phpunit": "^9.1",
     "vimeo/psalm": "^3.11"
   },
