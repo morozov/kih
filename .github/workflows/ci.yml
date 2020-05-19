@@ -1,4 +1,4 @@
-name: Continuous Integration
+name: CI
 on:
   push:
     branches:
@@ -9,12 +9,95 @@ jobs:
   coding-standards:
     name: Coding Standards
     runs-on: ubuntu-18.04
+    strategy:
+      matrix:
+        php-version:
+          - "7.4"
+
     steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
       - name: Install PHP
-        uses: shivammathur/setup-php@v1
+        uses: shivammathur/setup-php@v2
         with:
-          php-version: '7.4'
-          extensions: curl, dom, fileinfo, gd, iconv, intl, json, mbstring, xml, zip
-      - uses: actions/checkout@master
-      - run: composer install --no-progress
-      - run: vendor/bin/phpcs --no-colors
+          coverage: none
+          php-version: "${{ matrix.php-version }}"
+          tools: cs2pr
+
+      - name: Cache dependencies installed with composer
+        uses: actions/cache@v1
+        with:
+          path: ~/.composer/cache
+          key: "php-${{ matrix.php-version }}-composer-${{ hashFiles('composer.lock') }}"
+          restore-keys: "php-${{ matrix.php-version }}-composer-"
+
+      - name: Install dependencies with composer
+        run: composer install --no-interaction --no-progress --no-suggest
+
+      - name: Run PHP_CodeSniffer
+        run: vendor/bin/phpcs -q --no-colors --report=checkstyle | cs2pr
+
+  psalm:
+    name: Psalm
+    runs-on: ubuntu-18.04
+
+    strategy:
+      matrix:
+        php-version:
+          - "7.4"
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Install PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          coverage: none
+          php-version: "${{ matrix.php-version }}"
+
+      - name: Cache dependencies installed with composer
+        uses: actions/cache@v1
+        with:
+          path: ~/.composer/cache
+          key: "php-${{ matrix.php-version }}-composer-${{ hashFiles('composer.lock') }}"
+          restore-keys: "php-${{ matrix.php-version }}-composer-"
+
+      - name: Install dependencies with composer
+        run: composer install --no-interaction --no-progress --no-suggest
+
+      - name: Run Psalm
+        run: vendor/bin/psalm --shepherd --output-format=github --threads=4
+
+  infection:
+    name: Infection
+    runs-on: ubuntu-18.04
+
+    strategy:
+      matrix:
+        php-version:
+          - "7.4"
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Install PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          coverage: pcov
+          php-version: "${{ matrix.php-version }}"
+
+      - name: Cache dependencies installed with composer
+        uses: actions/cache@v1
+        with:
+          path: ~/.composer/cache
+          key: "php-${{ matrix.php-version }}-composer-${{ hashFiles('composer.lock') }}"
+          restore-keys: "php-${{ matrix.php-version }}-composer-"
+
+      - name: Install dependencies with composer
+        run: composer install --no-interaction --no-progress --no-suggest
+
+      - name: Run Infection
+        run: vendor/bin/infection --min-msi=100

@@ -11,26 +11,15 @@ install:
 
 jobs:
     include:
-      - stage: Static Analysis
-        env: Psalm
-        php: 7.4
-        script: vendor/bin/psalm --shepherd
-      - stage: Static Analysis
-        env: Phan
+      - env: Phan
         php: 7.4
         before_install: pecl install ast
         script: vendor/bin/phan --progress-bar --color
 
-      - stage: Testing
-        env: PHPUnit
+      - env: PHPUnit
         php: 7.4
         script:
           - vendor/bin/phpunit --coverage-clover=build/logs/clover.xml
         after_success:
           - wget https://github.com/php-coveralls/php-coveralls/releases/download/v2.2.0/php-coveralls.phar
           - php php-coveralls.phar
-
-      - stage: Mutation Testing
-        env: Infection
-        php: 7.4
-        script: vendor/bin/infection --min-msi=100
