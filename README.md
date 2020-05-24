@@ -1,8 +1,8 @@
 # Шоу Кремова и Хрусталёва
 
 [![PHP Version](https://img.shields.io/badge/php-%5E7.4-blue.svg)](https://packagist.org/packages/morozov/kih)
-[![Code Coverage](https://coveralls.io/repos/github/morozov/kih/badge.svg?branch=master)](https://coveralls.io/github/morozov/kih?branch=master)
-[![Type coverage](https://shepherd.dev/github/morozov/kih/coverage.svg)](https://shepherd.dev/github/morozov/kih)
+[![Code Coverage](https://codecov.io/gh/morozov/kih/branch/master/graph/badge.svg)](https://codecov.io/gh/morozov/kih)
+[![Type Coverage](https://shepherd.dev/github/morozov/kih/coverage.svg)](https://shepherd.dev/github/morozov/kih)
 [![Build Status](https://travis-ci.org/morozov/kih.png)](https://travis-ci.org/morozov/kih)
 
 A pet project. Takes a public OneDrive or Яндекс.Диск share as input and produces a podcast RSS feed. First of all, it works. Second, it's a playground for trying modern development tools for and approaches to development in PHP.
@@ -33,8 +33,8 @@ A pet project. Takes a public OneDrive or Яндекс.Диск share as input a
 ## Continuous Integration
 
 1. [Travis CI](https://travis-ci.org/morozov/kih)
-2. [Coveralls](https://coveralls.io/github/morozov/kih)
-
+2. [Codecov](https://codecov.io/gh/morozov/kih)
 
 ## Deployment
+
 [Heroku](https://devcenter.heroku.com/categories/php)
