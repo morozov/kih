@@ -19,7 +19,6 @@ jobs:
       - env: PHPUnit
         php: 7.4
         script:
-          - vendor/bin/phpunit --coverage-clover=build/logs/clover.xml
+          - vendor/bin/phpunit --coverage-clover=coverage.xml
         after_success:
-          - wget https://github.com/php-coveralls/php-coveralls/releases/download/v2.2.0/php-coveralls.phar
-          - php php-coveralls.phar
+          - bash <(curl -s https://codecov.io/bash)
