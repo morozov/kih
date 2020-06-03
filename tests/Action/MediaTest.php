@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace KiH\Tests\Action;
 
@@ -15,7 +17,7 @@ class MediaTest extends TestCase
     /**
      * @test
      */
-    public function invoke() : void
+    public function invoke(): void
     {
         /** @var Request&MockObject $request */
         $request = $this->getMockBuilder(Request::class)

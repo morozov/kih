@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace KiH\Tests\Generator;
 
@@ -9,6 +11,7 @@ use KiH\Generator\Rss;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\UriInterface;
 use Slim\Interfaces\RouteParserInterface;
+
 use function array_merge;
 use function http_build_query;
 
@@ -17,7 +20,7 @@ class RssTest extends TestCase
     /**
      * @test
      */
-    public function generate() : void
+    public function generate(): void
     {
         $router = $this->createMock(RouteParserInterface::class);
         $router->expects(

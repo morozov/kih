@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace KiH\Providers\Vk;
 
@@ -10,6 +12,7 @@ use KiH\Entity\Item;
 use KiH\Entity\Media;
 use KiH\Exception;
 use Psr\Http\Message\StreamInterface;
+
 use function array_filter;
 use function array_map;
 use function array_merge;
@@ -19,6 +22,7 @@ use function json_last_error;
 use function json_last_error_msg;
 use function rawurlencode;
 use function sprintf;
+
 use const JSON_ERROR_NONE;
 
 /**
@@ -47,7 +51,7 @@ final class Client implements ClientInterface
         $this->accessToken = $accessToken;
     }
 
-    public function getFeed() : Feed
+    public function getFeed(): Feed
     {
         /** @psalm-var FeedData $data */
         $data = $this->decode(
@@ -62,7 +66,7 @@ final class Client implements ClientInterface
         return $this->createFeed($data);
     }
 
-    public function getMedia(string $id) : Media
+    public function getMedia(string $id): Media
     {
         /** @psalm-var MediaData $data */
         $data = $this->decode(
@@ -77,7 +81,7 @@ final class Client implements ClientInterface
     /**
      * @param mixed[] $params Query parameters
      */
-    private function call(string $method, array $params) : StreamInterface
+    private function call(string $method, array $params): StreamInterface
     {
         $url = sprintf(
             '%s/method/%s?%s',
@@ -101,7 +105,7 @@ final class Client implements ClientInterface
      *
      * @throws Exception
      */
-    private function decode(StreamInterface $response) : array
+    private function decode(StreamInterface $response): array
     {
         /** @var array<string, mixed> $data */
         $data = json_decode((string) $response, true);
@@ -118,7 +122,7 @@ final class Client implements ClientInterface
      *
      * @psalm-param ItemStruct $item
      */
-    private function createItem(array $item) : ?Item
+    private function createItem(array $item): ?Item
     {
         if (! isset($item['attachments'])) {
             return null;
@@ -150,7 +154,7 @@ final class Client implements ClientInterface
      *
      * @psalm-param FeedData $data
      */
-    private function createFeed(array $data) : Feed
+    private function createFeed(array $data): Feed
     {
         if (! isset($data['response']['items'])) {
             throw new Exception('The response does not contain the "response.items" element');
@@ -158,7 +162,7 @@ final class Client implements ClientInterface
 
         return new Feed(
             array_filter(
-                array_map(function (array $file) : ?Item {
+                array_map(function (array $file): ?Item {
                     return $this->createItem($file);
                 }, $data['response']['items'])
             )
@@ -172,7 +176,7 @@ final class Client implements ClientInterface
      *
      * @psalm-param MediaData $data
      */
-    private function createMedia(array $data) : Media
+    private function createMedia(array $data): Media
     {
         if (! isset($data['response'][0]['url'])) {
             throw new Exception('The response does not contain the "response.0.url" element');
@@ -190,7 +194,7 @@ final class Client implements ClientInterface
      * @psalm-param 'audio' $type
      * @psalm-return Audio|null
      */
-    private function findAttachment(array $data, string $type) : ?array
+    private function findAttachment(array $data, string $type): ?array
     {
         foreach ($data as $attachment) {
             if ($attachment['type'] === $type) {

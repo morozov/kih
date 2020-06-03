@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace KiH;
 
@@ -10,10 +12,10 @@ interface Client
     /**
      * @throws Exception
      */
-    public function getFeed() : Feed;
+    public function getFeed(): Feed;
 
     /**
      * @throws Exception
      */
-    public function getMedia(string $id) : Media;
+    public function getMedia(string $id): Media;
 }

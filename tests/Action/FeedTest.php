@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace KiH\Tests\Action;
 
@@ -15,6 +17,7 @@ use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\UriInterface;
+
 use const PHP_EOL;
 
 class FeedTest extends TestCase
@@ -22,7 +25,7 @@ class FeedTest extends TestCase
     /**
      * @test
      */
-    public function invoke() : void
+    public function invoke(): void
     {
         $request = $this->createMock(Request::class);
         $request->method('getUri')

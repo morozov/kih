@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace KiH\Tests\Action;
 
@@ -13,7 +15,7 @@ class IndexTest extends TestCase
     /**
      * @test
      */
-    public function invoke() : void
+    public function invoke(): void
     {
         $router = $this->createMock(RouteParserInterface::class);
         $router->expects(

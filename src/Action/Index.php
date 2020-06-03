@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace KiH\Action;
 
@@ -18,7 +20,7 @@ class Index
         $this->redirectTo  = $redirectTo;
     }
 
-    public function __invoke(Request $request, Response $response) : Response
+    public function __invoke(Request $request, Response $response): Response
     {
         return $response->withHeader(
             'Location',
