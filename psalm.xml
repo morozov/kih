@@ -7,16 +7,4 @@
     <projectFiles>
         <directory name="src"/>
     </projectFiles>
-    <issueHandlers>
-        <ImplementedReturnTypeMismatch>
-            <errorLevel type="suppress">
-                <file name="src/Entity/Feed.php"/>
-            </errorLevel>
-        </ImplementedReturnTypeMismatch>
-        <MismatchingDocblockReturnType>
-            <errorLevel type="suppress">
-                <file name="src/Entity/Feed.php"/>
-            </errorLevel>
-        </MismatchingDocblockReturnType>
-    </issueHandlers>
 </psalm>
