@@ -19,7 +19,7 @@ class MediaTest extends TestCase
     {
         /** @var Request|MockObject $request */
         $request = $this->getMockBuilder(Request::class)
-            ->setMethods(['getAttribute'])
+            ->onlyMethods(['getAttribute'])
             ->getMockForAbstractClass();
         $request->expects(
             $this->once()
@@ -29,7 +29,7 @@ class MediaTest extends TestCase
 
         /** @var Client|MockObject $client */
         $client = $this->getMockBuilder(Client::class)
-            ->setMethods(['getMedia'])
+            ->onlyMethods(['getMedia'])
             ->getMockForAbstractClass();
         $client->expects(
             $this->once()

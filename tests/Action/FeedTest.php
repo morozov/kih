@@ -52,7 +52,7 @@ class FeedTest extends TestCase
 
         /** @var Client|MockObject $client */
         $client = $this->getMockBuilder(Client::class)
-            ->setMethods(['getFeed'])
+            ->onlyMethods(['getFeed'])
             ->getMockForAbstractClass();
         $client->expects(
             $this->once()
@@ -61,7 +61,7 @@ class FeedTest extends TestCase
 
         /** @var Generator|MockObject $generator */
         $generator = $this->getMockBuilder(Generator::class)
-            ->setMethods(['generate'])
+            ->onlyMethods(['generate'])
             ->getMockForAbstractClass();
         $generator->expects(
             $this->once()
