@@ -16,7 +16,6 @@ class IndexTest extends TestCase
      */
     public function invoke() : void
     {
-        /** @var RouteParserInterface|MockObject $router */
         $router = $this->createMock(RouteParserInterface::class);
         $router->expects(
             $this->once()

@@ -20,7 +20,6 @@ class RssTest extends TestCase
      */
     public function generate() : void
     {
-        /** @var RouteParserInterface|MockObject $router */
         $router = $this->createMock(RouteParserInterface::class);
         $router->expects(
             $this->any()
