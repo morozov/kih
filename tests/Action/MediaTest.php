@@ -17,7 +17,7 @@ class MediaTest extends TestCase
      */
     public function invoke() : void
     {
-        /** @var Request|MockObject $request */
+        /** @var Request&MockObject $request */
         $request = $this->getMockBuilder(Request::class)
             ->onlyMethods(['getAttribute'])
             ->getMockForAbstractClass();
@@ -27,7 +27,7 @@ class MediaTest extends TestCase
             ->with('id')
             ->willReturn('B6C46FF0A72F8DB!703491');
 
-        /** @var Client|MockObject $client */
+        /** @var Client&MockObject $client */
         $client = $this->getMockBuilder(Client::class)
             ->onlyMethods(['getMedia'])
             ->getMockForAbstractClass();

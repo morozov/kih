@@ -56,7 +56,7 @@ EOF
      */
     public function feedParseFailure(string $fixture) : void
     {
-        /** @var HttpClient|MockObject $httpClient */
+        /** @var HttpClient&MockObject $httpClient */
         $httpClient = $this->createHttpClientMockFromFixture('failure/folder/' . $fixture);
 
         $this->expectException(Exception::class);
@@ -84,7 +84,7 @@ EOF
      */
     public function noAudio(string $fixture) : void
     {
-        /** @var HttpClient|MockObject $httpClient */
+        /** @var HttpClient&MockObject $httpClient */
         $httpClient = $this->createHttpClientMockFromFixture('failure/folder/' . $fixture);
 
         $this->assertEquals(new Feed([]), $this->getClient($httpClient)->getFeed());
@@ -130,7 +130,7 @@ EOF
      */
     public function mediaParseFailure(string $fixture) : void
     {
-        /** @var HttpClient|MockObject $httpClient */
+        /** @var HttpClient&MockObject $httpClient */
         $httpClient = $this->createHttpClientMockFromFixture('failure/media/' . $fixture);
 
         $this->expectException(Exception::class);

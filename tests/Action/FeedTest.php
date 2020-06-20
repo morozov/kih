@@ -50,7 +50,7 @@ class FeedTest extends TestCase
         ]);
         $document = new DOMDocument();
 
-        /** @var Client|MockObject $client */
+        /** @var Client&MockObject $client */
         $client = $this->getMockBuilder(Client::class)
             ->onlyMethods(['getFeed'])
             ->getMockForAbstractClass();
@@ -59,7 +59,7 @@ class FeedTest extends TestCase
         )->method('getFeed')
             ->willReturn($entity);
 
-        /** @var Generator|MockObject $generator */
+        /** @var Generator&MockObject $generator */
         $generator = $this->getMockBuilder(Generator::class)
             ->onlyMethods(['generate'])
             ->getMockForAbstractClass();

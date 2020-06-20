@@ -4,7 +4,6 @@ namespace KiH\Tests\Action;
 
 use GuzzleHttp\Psr7\Response;
 use KiH\Action\Index;
-use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Slim\Interfaces\RouteParserInterface;

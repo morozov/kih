@@ -6,5 +6,18 @@
 >
     <projectFiles>
         <directory name="src"/>
+        <directory name="tests"/>
     </projectFiles>
+    <issueHandlers>
+        <InternalMethod>
+            <errorLevel type="suppress">
+                <directory name="tests"/>
+            </errorLevel>
+        </InternalMethod>
+        <PropertyNotSetInConstructor>
+            <errorLevel type="suppress">
+                <directory name="tests"/>
+            </errorLevel>
+        </PropertyNotSetInConstructor>
+    </issueHandlers>
 </psalm>

@@ -6,7 +6,6 @@ use DateTimeImmutable;
 use KiH\Entity\Feed;
 use KiH\Entity\Item;
 use KiH\Generator\Rss;
-use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\UriInterface;
 use Slim\Interfaces\RouteParserInterface;
