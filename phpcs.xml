@@ -25,10 +25,4 @@
     <rule ref="SlevomatCodingStandard.PHP.RequireExplicitAssertion.RequiredExplicitAssertion">
         <exclude-pattern>tests/</exclude-pattern>
     </rule>
-
-    <rule ref="SlevomatCodingStandard.TypeHints.DeclareStrictTypes">
-        <properties>
-            <property name="newlinesCountBetweenOpenTagAndDeclare" value="0"/>
-        </properties>
-    </rule>
 </ruleset>

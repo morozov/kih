@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace KiH\Generator;
 
@@ -28,7 +30,7 @@ final class Rss implements Generator
         $this->settings    = $settings;
     }
 
-    public function generate(Feed $feed, UriInterface $requestUri) : DOMDocument
+    public function generate(Feed $feed, UriInterface $requestUri): DOMDocument
     {
         $document = new DOMDocument('1.0', 'UTF-8');
         $rss      = $document->createElement('rss');
@@ -70,7 +72,7 @@ final class Rss implements Generator
         return $document;
     }
 
-    private function generateItem(DOMDocument $document, Item $item, UriInterface $requestUri) : DOMElement
+    private function generateItem(DOMDocument $document, Item $item, UriInterface $requestUri): DOMElement
     {
         $element = $document->createElement('item');
 

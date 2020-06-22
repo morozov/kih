@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace KiH\Tests\Providers\Vk;
 
@@ -14,6 +16,7 @@ use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\MessageInterface;
 use Psr\Http\Message\StreamInterface;
+
 use function assert;
 use function file_get_contents;
 use function is_string;
@@ -23,7 +26,7 @@ class ClientTest extends TestCase
     /**
      * @test
      */
-    public function getFeed() : void
+    public function getFeed(): void
     {
 // @codingStandardsIgnoreStart
         $httpClient = $this->createHttpClientMock(
@@ -54,7 +57,7 @@ EOF
      * @test
      * @dataProvider feedFailureProvider
      */
-    public function feedParseFailure(string $fixture) : void
+    public function feedParseFailure(string $fixture): void
     {
         /** @var HttpClient&MockObject $httpClient */
         $httpClient = $this->createHttpClientMockFromFixture('failure/folder/' . $fixture);
@@ -66,7 +69,7 @@ EOF
     /**
      * @return mixed[][]
      */
-    public static function feedFailureProvider() : iterable
+    public static function feedFailureProvider(): iterable
     {
         return [
             'invalid-syntax' => [
@@ -82,7 +85,7 @@ EOF
      * @test
      * @dataProvider noAudioProvider
      */
-    public function noAudio(string $fixture) : void
+    public function noAudio(string $fixture): void
     {
         /** @var HttpClient&MockObject $httpClient */
         $httpClient = $this->createHttpClientMockFromFixture('failure/folder/' . $fixture);
@@ -93,7 +96,7 @@ EOF
     /**
      * @return mixed[][]
      */
-    public static function noAudioProvider() : iterable
+    public static function noAudioProvider(): iterable
     {
         return [
             'no-attachments' => [
@@ -108,7 +111,7 @@ EOF
     /**
      * @test
      */
-    public function getMedia() : void
+    public function getMedia(): void
     {
 // @codingStandardsIgnoreStart
         $httpClient = $this->createHttpClientMock(
@@ -128,7 +131,7 @@ EOF
      * @test
      * @dataProvider mediaFailureProvider
      */
-    public function mediaParseFailure(string $fixture) : void
+    public function mediaParseFailure(string $fixture): void
     {
         /** @var HttpClient&MockObject $httpClient */
         $httpClient = $this->createHttpClientMockFromFixture('failure/media/' . $fixture);
@@ -140,7 +143,7 @@ EOF
     /**
      * @return mixed[][]
      */
-    public static function mediaFailureProvider() : iterable
+    public static function mediaFailureProvider(): iterable
     {
         return [
             'no-value' => [
@@ -149,12 +152,12 @@ EOF
         ];
     }
 
-    private function getClient(HttpClient $httpClient) : Client
+    private function getClient(HttpClient $httpClient): Client
     {
         return new Client($httpClient, 'kremhrust', 'the-token');
     }
 
-    private function createHttpClientMock(string $method, string $url, string $response) : HttpClient
+    private function createHttpClientMock(string $method, string $url, string $response): HttpClient
     {
         $httpClient = $this->createMock(HttpClient::class);
         $mocker     = $httpClient->expects(
@@ -167,7 +170,7 @@ EOF
         return $httpClient;
     }
 
-    private function createHttpClientMockFromFixture(string $fixture) : HttpClient
+    private function createHttpClientMockFromFixture(string $fixture): HttpClient
     {
         $httpClient = $this->createMock(HttpClient::class);
         $mocker     = $httpClient->expects(
@@ -179,12 +182,12 @@ EOF
         return $httpClient;
     }
 
-    private function expectRequest(InvocationMocker $mocker, string $method, string $url) : InvocationMocker
+    private function expectRequest(InvocationMocker $mocker, string $method, string $url): InvocationMocker
     {
         return $mocker->with($method, $url);
     }
 
-    private function expectResponse(InvocationMocker $mocker, string $response) : InvocationMocker
+    private function expectResponse(InvocationMocker $mocker, string $response): InvocationMocker
     {
         return $mocker->willReturn($this->createConfiguredMock(MessageInterface::class, [
             'getBody' => $this->createConfiguredMock(StreamInterface::class, [
@@ -193,7 +196,7 @@ EOF
         ]));
     }
 
-    private function getFixture(string $file) : string
+    private function getFixture(string $file): string
     {
         $fixture = file_get_contents(__DIR__ . '/Client/fixtures/' . $file);
         assert(is_string($fixture));

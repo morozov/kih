@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace KiH\Entity;
 
@@ -27,7 +29,7 @@ final class Feed implements IteratorAggregate
     /**
      * @return ArrayIterator<int,Item>
      */
-    public function getIterator() : Iterator
+    public function getIterator(): Iterator
     {
         return new ArrayIterator($this->files);
     }
