@@ -6,7 +6,6 @@ test:
 	vendor/bin/phpcs
 	vendor/bin/phpunit
 	vendor/bin/psalm
-	vendor/bin/phan --progress-bar --color
 	if php -m | grep -i xdebug ; then vendor/bin/infection --min-msi=100 ; fi
 coverage:
 	$(eval TMPDIR=$(shell mktemp -d))

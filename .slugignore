@@ -1,5 +1,4 @@
 /.gitignore
-/.phan
 /.phpstorm.meta.php
 /.travis.yml
 /Makefile
