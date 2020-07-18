@@ -14,7 +14,7 @@ use KiH\Providers\Vk\Client;
 use PHPUnit\Framework\MockObject\Builder\InvocationMocker;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
-use Psr\Http\Message\MessageInterface;
+use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\StreamInterface;
 
 use function assert;
@@ -189,7 +189,7 @@ EOF
 
     private function expectResponse(InvocationMocker $mocker, string $response): InvocationMocker
     {
-        return $mocker->willReturn($this->createConfiguredMock(MessageInterface::class, [
+        return $mocker->willReturn($this->createConfiguredMock(ResponseInterface::class, [
             'getBody' => $this->createConfiguredMock(StreamInterface::class, [
                 '__toString' => $response,
             ]),
