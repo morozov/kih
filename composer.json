@@ -21,7 +21,7 @@
     "doctrine/coding-standard": "^8.1.0",
     "infection/infection": "^0.16",
     "phpunit/phpunit": "^9.2",
-    "vimeo/psalm": "^3.13"
+    "vimeo/psalm": "^3.14"
   },
   "config": {
     "platform": {
