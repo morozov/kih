@@ -50,7 +50,10 @@ class RssTest extends TestCase
 
         $this->assertXmlStringEqualsXmlFile(
             __DIR__ . '/fixtures/rss.xml',
-            $rss->generate($folder, $this->createMock(UriInterface::class))
+            $rss->generate(
+                $folder,
+                $this->createMock(UriInterface::class)
+            )->saveXML()
         );
     }
 }
