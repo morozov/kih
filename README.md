@@ -3,6 +3,7 @@
 [![PHP Version](https://img.shields.io/badge/php-%5E7.4-blue.svg)](https://packagist.org/packages/morozov/kih)
 [![Code Coverage](https://codecov.io/gh/morozov/kih/branch/master/graph/badge.svg)](https://codecov.io/gh/morozov/kih)
 [![Type Coverage](https://shepherd.dev/github/morozov/kih/coverage.svg)](https://shepherd.dev/github/morozov/kih)
+![Infection MSI](https://badge.stryker-mutator.io/github.com/morozov/kih/master)
 [![Build Status](https://travis-ci.org/morozov/kih.png)](https://travis-ci.org/morozov/kih)
 
 A pet project. Takes a public OneDrive or Яндекс.Диск share as input and produces a podcast RSS feed. First of all, it works. Second, it's a playground for trying modern development tools for and approaches to development in PHP.
