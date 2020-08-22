@@ -136,6 +136,8 @@ final class Client implements ClientInterface
 
         $id = sprintf('%d_%d', $audio['owner_id'], $audio['id']);
 
+        $podcast = $this->findAttachment($item['attachments'], 'podcast');
+
         return new Item(
             $id,
             $audio['title'],
@@ -143,7 +145,7 @@ final class Client implements ClientInterface
             $id,
             $audio['duration'],
             'audio/mpeg',
-            $item['text']
+            $podcast['podcast_info']['description'] ?? $item['text']
         );
     }
 
