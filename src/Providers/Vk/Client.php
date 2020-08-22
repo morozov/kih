@@ -27,7 +27,8 @@ use const JSON_ERROR_NONE;
 
 /**
  * @psalm-type Audio = array{id: int, owner_id: int, title: string, duration: int, url: string}
- * @psalm-type Attachment = array{type: string, audio: Audio}
+ * @psalm-type Podcast = array{podcast_info: array{description: string}}
+ * @psalm-type Attachment = array{type: string, audio?: Audio, podcast?: Podcast}
  * @psalm-type ItemStruct = array{date: string, text:string, attachments: list<Attachment>}
  * @psalm-type FeedData = array{response: array{items: list<ItemStruct>}}
  * @psalm-type MediaData = array{response: list<Audio>}
@@ -128,13 +129,15 @@ final class Client implements ClientInterface
             return null;
         }
 
-        $audio = $this->findAttachment($item['attachments'], 'audio');
+        $audio = $this->findAudio($item['attachments']);
 
         if (! $audio) {
             return null;
         }
 
         $id = sprintf('%d_%d', $audio['owner_id'], $audio['id']);
+
+        $podcast = $this->findPodcast($item['attachments']);
 
         return new Item(
             $id,
@@ -143,7 +146,7 @@ final class Client implements ClientInterface
             $id,
             $audio['duration'],
             'audio/mpeg',
-            $item['text']
+            $podcast['podcast_info']['description'] ?? $item['text']
         );
     }
 
@@ -191,14 +194,32 @@ final class Client implements ClientInterface
      * @return array<string,mixed>|null
      *
      * @psalm-param list<Attachment> $data
-     * @psalm-param 'audio' $type
      * @psalm-return Audio|null
      */
-    private function findAttachment(array $data, string $type): ?array
+    private function findAudio(array $data): ?array
     {
         foreach ($data as $attachment) {
-            if ($attachment['type'] === $type) {
-                return $attachment[$type];
+            if ($attachment['type'] === 'audio' && isset($attachment['audio'])) {
+                return $attachment['audio'];
+            }
+        }
+
+        return null;
+    }
+
+    /**
+     * @param mixed[] $data
+     *
+     * @return array<string,mixed>|null
+     *
+     * @psalm-param list<Attachment> $data
+     * @psalm-return Podcast|null
+     */
+    private function findPodcast(array $data): ?array
+    {
+        foreach ($data as $attachment) {
+            if ($attachment['type'] === 'podcast' && isset($attachment['podcast'])) {
+                return $attachment['podcast'];
             }
         }
 

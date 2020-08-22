@@ -135,4 +135,4 @@ jobs:
         run: composer install --no-interaction --no-progress --no-suggest
 
       - name: Run Infection
-        run: vendor/bin/infection --min-msi=100
+        run: vendor/bin/infection
