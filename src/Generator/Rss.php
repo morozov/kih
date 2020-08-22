@@ -12,6 +12,8 @@ use KiH\Generator;
 use Psr\Http\Message\UriInterface;
 use Slim\Interfaces\RouteParserInterface;
 
+use function nl2br;
+
 final class Rss implements Generator
 {
     private RouteParserInterface $routeParser;
@@ -33,7 +35,11 @@ final class Rss implements Generator
     public function generate(Feed $feed, UriInterface $requestUri): DOMDocument
     {
         $document = new DOMDocument('1.0', 'UTF-8');
-        $rss      = $document->createElement('rss');
+
+        $xslt = $document->createProcessingInstruction('xml-stylesheet', 'href="stylesheet.xsl" type="text/xsl"');
+        $document->appendChild($xslt);
+
+        $rss = $document->createElement('rss');
         $rss->setAttribute('version', '2.0');
         $document->appendChild($rss);
 
@@ -109,7 +115,7 @@ final class Rss implements Generator
 
         $description = $document->createElement('description');
         $description->appendChild(
-            $document->createTextNode($item->description)
+            $document->createTextNode(nl2br($item->description))
         );
         $element->appendChild($description);
 
