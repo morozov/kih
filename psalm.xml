@@ -9,6 +9,12 @@
         <directory name="tests"/>
     </projectFiles>
     <issueHandlers>
+        <DeprecatedMethod>
+            <errorLevel type="suppress">
+                <!-- See https://github.com/vimeo/psalm/issues/4400 -->
+                <file name="tests/Providers/Vk/ClientTest.php"/>
+            </errorLevel>
+        </DeprecatedMethod>
         <InternalMethod>
             <errorLevel type="suppress">
                 <directory name="tests"/>
