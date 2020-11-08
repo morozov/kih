@@ -49,6 +49,8 @@ class ClientTest extends TestCase
  
 Архив аудиозаписей с возможностью загрузки: https://vk.cc/6X3JkI
 EOF
+                ,
+                'https://sun9-6.userapi.com/H9nzY9Il5-QMSM-mOCVGhH4TfIvqEaYrrjXuHA/BYJM6zFL6r4.jpg'
             ),
         ]), $this->getClient($httpClient)->getFeed());
     }

@@ -102,11 +102,15 @@ final class Rss implements Generator
             'id' => $item->id,
         ]);
 
+        if ($item->photo !== null) {
+            $image = $document->createElement('itunes:image');
+            $image->setAttribute('href', $item->photo);
+            $element->appendChild($image);
+        }
+
         $enclosure = $document->createElement('enclosure');
         $enclosure->setAttribute('url', $url);
-
         $enclosure->setAttribute('length', (string) $item->duration);
-
         $enclosure->setAttribute('type', $item->mimeType);
         $element->appendChild($enclosure);
 

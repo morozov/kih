@@ -39,7 +39,8 @@ class FeedTest extends TestCase
                 '',
                 0,
                 '',
-                ''
+                '',
+                null
             ),
             new Item(
                 '',
@@ -48,7 +49,8 @@ class FeedTest extends TestCase
                 '',
                 0,
                 '',
-                ''
+                '',
+                null
             ),
         ]);
         $document = new DOMDocument();

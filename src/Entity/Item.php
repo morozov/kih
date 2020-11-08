@@ -25,6 +25,8 @@ final class Item
 
     public string $description;
 
+    public ?string $photo;
+
     public function __construct(
         string $id,
         string $title,
@@ -32,7 +34,8 @@ final class Item
         string $guid,
         int $duration,
         string $mimeType,
-        string $description
+        string $description,
+        ?string $photo
     ) {
         $this->id          = $id;
         $this->title       = $title;
@@ -41,5 +44,6 @@ final class Item
         $this->duration    = $duration;
         $this->mimeType    = $mimeType;
         $this->description = $description;
+        $this->photo       = $photo;
     }
 }

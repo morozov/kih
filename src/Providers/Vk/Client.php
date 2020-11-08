@@ -16,6 +16,7 @@ use Psr\Http\Message\StreamInterface;
 use function array_filter;
 use function array_map;
 use function array_merge;
+use function assert;
 use function http_build_query;
 use function json_decode;
 use function json_last_error;
@@ -28,6 +29,7 @@ use const JSON_ERROR_NONE;
 /**
  * @psalm-type Audio = array{id: int, owner_id: int, title: string, duration: int, url: string}
  * @psalm-type Podcast = array{podcast_info: array{description: string}}
+ * @psalm-type Photo = array{photo_604: string}
  * @psalm-type Attachment = array{type: string, audio?: Audio, podcast?: Podcast}
  * @psalm-type ItemStruct = array{date: string, text:string, attachments: list<Attachment>}
  * @psalm-type FeedData = array{response: array{items: list<ItemStruct>}}
@@ -137,6 +139,7 @@ final class Client implements ClientInterface
         $id = sprintf('%d_%d', $audio['owner_id'], $audio['id']);
 
         $podcast = $this->findPodcast($item['attachments']);
+        $photo   = $this->findPhoto($item['attachments']);
 
         return new Item(
             $id,
@@ -145,7 +148,8 @@ final class Client implements ClientInterface
             $id,
             $audio['duration'],
             'audio/mpeg',
-            $podcast['podcast_info']['description'] ?? $item['text']
+            $podcast['podcast_info']['description'] ?? $item['text'],
+            $photo ? $photo['photo_604'] : null
         );
     }
 
@@ -215,6 +219,27 @@ final class Client implements ClientInterface
         foreach ($data as $attachment) {
             if ($attachment['type'] === 'podcast' && isset($attachment['podcast'])) {
                 return $attachment['podcast'];
+            }
+        }
+
+        return null;
+    }
+
+    /**
+     * @param mixed[] $data
+     *
+     * @return array<string,mixed>|null
+     *
+     * @psalm-param list<Attachment> $data
+     * @psalm-return Photo|null
+     */
+    private function findPhoto(array $data): ?array
+    {
+        foreach ($data as $attachment) {
+            if ($attachment['type'] === 'photo') {
+                assert(isset($attachment['photo']));
+
+                return $attachment['photo'];
             }
         }
 

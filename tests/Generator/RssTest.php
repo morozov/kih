@@ -39,7 +39,8 @@ class RssTest extends TestCase
                 'https://1drv.ms/u/s!Atv4cgr_RmwLqvgDHXuWoLPkN7ccQQ',
                 3379032,
                 'audio/mpeg',
-                'Hello, <b>world</b>!'
+                'Hello, <b>world</b>!',
+                'https://example.com/photo.jpg',
             ),
         ]);
 

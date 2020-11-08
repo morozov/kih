@@ -99,6 +99,11 @@
                             <h2>
                                 <xsl:value-of select="title"/>
                             </h2>
+                            <xsl:if test="itunes:image">
+                                <p>
+                                    <xsl:value-of select="itunes:image"/>
+                                </p>
+                            </xsl:if>
                             <xsl:if test="description">
                                 <p>
                                     <xsl:value-of select="description" disable-output-escaping="yes"/>
