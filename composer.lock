@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "5c10cfe20ccd0bb47274b501810559ef",
+    "content-hash": "47f9e556ae2241a6f52b7c5dbc55d0ab",
     "packages": [
         {
             "name": "fig/http-message-util",
@@ -326,27 +326,22 @@
         },
         {
             "name": "psr/container",
-            "version": "1.0.0",
+            "version": "1.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-fig/container.git",
-                "reference": "b7ce3b176482dbbc1245ebf52b181af44c2cf55f"
+                "reference": "8622567409010282b7aeebe4bb841fe98b58dcaf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-fig/container/zipball/b7ce3b176482dbbc1245ebf52b181af44c2cf55f",
-                "reference": "b7ce3b176482dbbc1245ebf52b181af44c2cf55f",
+                "url": "https://api.github.com/repos/php-fig/container/zipball/8622567409010282b7aeebe4bb841fe98b58dcaf",
+                "reference": "8622567409010282b7aeebe4bb841fe98b58dcaf",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3.0"
+                "php": ">=7.2.0"
             },
             "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.0.x-dev"
-                }
-            },
             "autoload": {
                 "psr-4": {
                     "Psr\\Container\\": "src/"
@@ -359,7 +354,7 @@
             "authors": [
                 {
                     "name": "PHP-FIG",
-                    "homepage": "http://www.php-fig.org/"
+                    "homepage": "https://www.php-fig.org/"
                 }
             ],
             "description": "Common Container Interface (PHP FIG PSR-11)",
@@ -371,7 +366,7 @@
                 "container-interop",
                 "psr"
             ],
-            "time": "2017-02-14T16:28:37+00:00"
+            "time": "2021-03-05T17:36:06+00:00"
         },
         {
             "name": "psr/http-client",
@@ -980,26 +975,26 @@
         },
         {
             "name": "ultra-lite/container",
-            "version": "6.2.0",
+            "version": "7.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ultra-lite/container.git",
-                "reference": "448ecffdd3e751969e6c240541ff82aca7ee3112"
+                "reference": "f9f9cde070a3c1478cd794bac50e76472965a029"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ultra-lite/container/zipball/448ecffdd3e751969e6c240541ff82aca7ee3112",
-                "reference": "448ecffdd3e751969e6c240541ff82aca7ee3112",
+                "url": "https://api.github.com/repos/ultra-lite/container/zipball/f9f9cde070a3c1478cd794bac50e76472965a029",
+                "reference": "f9f9cde070a3c1478cd794bac50e76472965a029",
                 "shasum": ""
             },
             "require": {
-                "php": "^7.0",
+                "php": "^7.4 || ^8.0",
                 "psr/container": "^1.0"
             },
             "require-dev": {
-                "behat/behat": "^3.3",
-                "phpspec/phpspec": "^3.2",
-                "phpunit/phpunit": "^6.0"
+                "behat/behat": "^3.8",
+                "phpspec/phpspec": "^7.0",
+                "phpunit/phpunit": "^9.5"
             },
             "type": "library",
             "autoload": {
@@ -1011,7 +1006,7 @@
             "license": [
                 "MIT"
             ],
-            "time": "2018-01-02T16:27:56+00:00"
+            "time": "2021-03-10T11:28:47+00:00"
         }
     ],
     "packages-dev": [
