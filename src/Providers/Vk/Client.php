@@ -120,7 +120,6 @@ final class Client implements ClientInterface
 
     /**
      * @param mixed[] $item
-     *
      * @psalm-param ItemStruct $item
      */
     private function createItem(array $item): ?Item
@@ -152,10 +151,9 @@ final class Client implements ClientInterface
 
     /**
      * @param mixed[] $data
+     * @psalm-param FeedData $data
      *
      * @throws Exception
-     *
-     * @psalm-param FeedData $data
      */
     private function createFeed(array $data): Feed
     {
@@ -174,10 +172,9 @@ final class Client implements ClientInterface
 
     /**
      * @param mixed[] $data
+     * @psalm-param MediaData $data
      *
      * @throws Exception
-     *
-     * @psalm-param MediaData $data
      */
     private function createMedia(array $data): Media
     {
@@ -190,10 +187,9 @@ final class Client implements ClientInterface
 
     /**
      * @param mixed[] $data
+     * @psalm-param list<Attachment> $data
      *
      * @return array<string,mixed>|null
-     *
-     * @psalm-param list<Attachment> $data
      * @psalm-return Audio|null
      */
     private function findAudio(array $data): ?array
@@ -209,10 +205,9 @@ final class Client implements ClientInterface
 
     /**
      * @param mixed[] $data
+     * @psalm-param list<Attachment> $data
      *
      * @return array<string,mixed>|null
-     *
-     * @psalm-param list<Attachment> $data
      * @psalm-return Podcast|null
      */
     private function findPodcast(array $data): ?array
