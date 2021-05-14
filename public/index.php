@@ -8,7 +8,7 @@ use Slim\App;
 if (PHP_SAPI === 'cli-server') {
     $info = parse_url($_SERVER['REQUEST_URI']);
 
-    if (file_exists(__DIR__ . $info['path'])) {
+    if (is_file(__DIR__ . $info['path'])) {
         return false;
     }
 }
