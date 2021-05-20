@@ -976,16 +976,16 @@
         },
         {
             "name": "ultra-lite/container",
-            "version": "7.0.1",
+            "version": "7.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ultra-lite/container.git",
-                "reference": "52312a3e02f867c2d6ae175aa03e5a3e6312a058"
+                "reference": "4a27e1637790effcf5e2482180692d94dcf2371f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ultra-lite/container/zipball/52312a3e02f867c2d6ae175aa03e5a3e6312a058",
-                "reference": "52312a3e02f867c2d6ae175aa03e5a3e6312a058",
+                "url": "https://api.github.com/repos/ultra-lite/container/zipball/4a27e1637790effcf5e2482180692d94dcf2371f",
+                "reference": "4a27e1637790effcf5e2482180692d94dcf2371f",
                 "shasum": ""
             },
             "require": {
@@ -1007,7 +1007,7 @@
             "license": [
                 "MIT"
             ],
-            "time": "2021-03-10T12:19:43+00:00"
+            "time": "2021-05-09T15:53:55+00:00"
         }
     ],
     "packages-dev": [
