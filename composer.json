@@ -14,7 +14,7 @@
     "ext-json": "*",
     "guzzlehttp/guzzle": "^7.3",
     "slim/psr7": "^1.5",
-    "slim/slim": "^4.8",
+    "slim/slim": "^4.9",
     "ultra-lite/container": "^7.0"
   },
   "require-dev": {
