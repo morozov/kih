@@ -105,12 +105,17 @@
                                 </p>
                             </xsl:if>
                             <p class="episode_meta">
+                                <audio controls="controls" preload="none">
+                                    <xsl:attribute name="src">
+                                        <xsl:value-of select="enclosure/@url"/>
+                                    </xsl:attribute>
                                     <a>
                                         <xsl:attribute name="href">
                                             <xsl:value-of select="enclosure/@url"/>
                                         </xsl:attribute>
                                         Play episode
                                     </a>
+                                </audio>
                             </p>
                         </div>
                     </xsl:for-each>
