@@ -43,10 +43,7 @@ class RssTest extends TestCase
             ),
         ]);
 
-        $rss = new Rss($router, [
-            'title' => 'Test Title',
-            'logo' => 'http://example.com/logo.png',
-        ]);
+        $rss = new Rss($router, 'Test Title', 'http://example.com/logo.png');
 
         $this->assertXmlStringEqualsXmlFile(
             __DIR__ . '/fixtures/rss.xml',

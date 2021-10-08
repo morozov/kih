@@ -14,24 +14,21 @@ use Slim\App;
 use Slim\Psr7\Factory\ResponseFactory;
 use UltraLite\Container\Container;
 
-$settings = require __DIR__ . '/../etc/config.php';
-
 return new Container([
-    Client::class => static function () use ($settings): Client {
-        $settings = $settings['vk'];
-
+    Client::class => static function (): Client {
         return new VkClient(
             new HttpClient(),
-            $settings['group'],
-            $settings['access_token']
+            'kremhrust',
+            getenv('VK_ACCESS_TOKEN') ?: ''
         );
     },
-    Generator::class => static function (Container $container) use ($settings): Generator {
+    Generator::class => static function (Container $container): Generator {
         $app = $container->get(App::class);
 
         return new Rss(
             $app->getRouteCollector()->getRouteParser(),
-            $settings['feed']
+            'Кремов и Хрусталёв',
+            'http://www.radiorecord.ru/i/img/rr-logo-podcast.png'
         );
     },
     Index::class => static function (Container $container): Index {

@@ -18,18 +18,15 @@ final class Rss implements Generator
 {
     private RouteParserInterface $routeParser;
 
-    /**
-     * @var string[]
-     */
-    private array $settings;
+    private string $title;
 
-    /**
-     * @param string[] $settings
-     */
-    public function __construct(RouteParserInterface $routeParser, array $settings)
+    private string $logo;
+
+    public function __construct(RouteParserInterface $routeParser, string $title, string $logo)
     {
         $this->routeParser = $routeParser;
-        $this->settings    = $settings;
+        $this->title       = $title;
+        $this->logo        = $logo;
     }
 
     public function generate(Feed $feed, UriInterface $requestUri): DOMDocument
@@ -53,7 +50,7 @@ final class Rss implements Generator
 
         $title = $document->createElement('title');
         $title->appendChild(
-            $document->createTextNode($this->settings['title'])
+            $document->createTextNode($this->title)
         );
         $channel->appendChild($title);
 
@@ -66,7 +63,7 @@ final class Rss implements Generator
         $channel->appendChild($link);
 
         $image = $document->createElement('itunes:image');
-        $image->setAttribute('href', $this->settings['logo']);
+        $image->setAttribute('href', $this->logo);
         $channel->appendChild($image);
 
         foreach ($feed as $file) {
