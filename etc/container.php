@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use Dotenv\Dotenv;
 use GuzzleHttp\Client as HttpClient;
 use KiH\Action\Feed;
 use KiH\Action\Index;
@@ -14,12 +15,17 @@ use Slim\App;
 use Slim\Psr7\Factory\ResponseFactory;
 use UltraLite\Container\Container;
 
+if (class_exists(Dotenv::class)) {
+    Dotenv::createImmutable(dirname(__DIR__))
+        ->safeLoad();
+}
+
 return new Container([
     Client::class => static function (): Client {
         return new VkClient(
             new HttpClient(),
             'kremhrust',
-            getenv('VK_ACCESS_TOKEN') ?: ''
+            $_ENV['VK_ACCESS_TOKEN'] ?? ''
         );
     },
     Generator::class => static function (Container $container): Generator {
