@@ -1,6 +1,6 @@
 # Шоу Кремова и Хрусталёва
 
-[![PHP Version](https://img.shields.io/badge/php-%5E7.4-blue.svg)](https://packagist.org/packages/morozov/kih)
+[![PHP Version](https://img.shields.io/badge/php-%5E8.0-blue.svg)](https://packagist.org/packages/morozov/kih)
 [![Code Coverage](https://codecov.io/gh/morozov/kih/branch/master/graph/badge.svg)](https://codecov.io/gh/morozov/kih)
 [![Type Coverage](https://shepherd.dev/github/morozov/kih/coverage.svg)](https://shepherd.dev/github/morozov/kih)
 ![Infection MSI](https://badge.stryker-mutator.io/github.com/morozov/kih/master)
