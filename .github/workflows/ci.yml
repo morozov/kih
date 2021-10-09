@@ -136,3 +136,20 @@ jobs:
 
       - name: Run Infection
         run: vendor/bin/infection
+
+  heroku:
+    name: Deploy to Heroku
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/master'
+    needs:
+      - coding-standards
+      - psalm
+      - phpunit
+      - infection
+    steps:
+      - uses: actions/checkout@v2
+      - uses: akhileshns/heroku-deploy@v3.12.12
+        with:
+          heroku_app_name: kremhrust
+          heroku_email: ${{secrets.HEROKU_EMAIL}}
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
