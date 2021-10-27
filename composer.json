@@ -21,7 +21,7 @@
     "doctrine/coding-standard": "^9.0.0",
     "infection/infection": "^0.25",
     "phpunit/phpunit": "^9.5",
-    "vimeo/psalm": "^4.10",
+    "vimeo/psalm": "^4.11",
     "vlucas/phpdotenv": "^5.3"
   },
   "config": {
