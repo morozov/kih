@@ -20,7 +20,7 @@
   "require-dev": {
     "doctrine/coding-standard": "^9.0.0",
     "infection/infection": "^0.25",
-    "phpunit/phpunit": "^9.5",
+    "phpunit/phpunit": "^9.5.11",
     "vimeo/psalm": "^4.16",
     "vlucas/phpdotenv": "^5.4"
   },
