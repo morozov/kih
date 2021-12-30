@@ -29,7 +29,9 @@
       "php": "8.0.0"
     },
     "allow-plugins": {
-      "dealerdirect/phpcodesniffer-composer-installer": true
+      "composer/package-versions-deprecated": false,
+      "dealerdirect/phpcodesniffer-composer-installer": true,
+      "infection/extension-installer": false
     },
     "sort-packages": true
   },
